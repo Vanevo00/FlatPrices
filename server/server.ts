@@ -11,14 +11,12 @@ connectDB()
 // middleware
 // @ts-ignore
 app.use(express.json({ extended: false })) // to accept body data
-
 app.use(cors()) // enable CORS
 
 // define routes
-// app.use('/api/auth', require('./routes/auth'))
-// app.use('/api/users', require('./routes/users'))
-// app.use('/api/clubs', require('./routes/clubs'))
-// app.use('/api/players', require('./routes/players'))
+app.use('/api/cities', require('./routes/cities'))
+// app.use('/api/neighbourhoods', require('./routes/neighbourhoods'))
+// app.use('/api/flats', require('./routes/flats'))
 
 app.get('/', (req: Request, res: Response) => res.send('Welcome to flat prices API'))
 
