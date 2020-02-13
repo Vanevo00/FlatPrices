@@ -5,20 +5,44 @@ const router = express.Router()
 
 const Neighbourhood = require('../models/Neighbourhood')
 
-// @route  GET api/areas
-// @desc   Get all areas
+// @route  GET api/neighbourhoods
+// @desc   Get all neighbourhoods
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const allAreas = await Neighbourhood.find({})
-    res.json(allAreas)
+    const allNeighbourhoods = await Neighbourhood.find({})
+    res.json(allNeighbourhoods)
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
   }
 })
 
-// @route  POST  api/areas
-// @desc   Add new area
+// @route  GET api/neighbourhoods/:_id
+// @desc   Get neighbourhood by id
+router.get('/:_id', async (req: Request, res: Response) => {
+  try {
+    const neighbourhood = await Neighbourhood.find({ _id: req.params._id })
+    res.json(neighbourhood)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
+// @route  GET api/neighbourhoods/byCity/:_id
+// @desc   Get all neighbourhoods in the city
+router.get('/byCity/:_id', async (req: Request, res: Response) => {
+  try {
+    const neighbourhoodsByCity = await Neighbourhood.find({ city: req.params._id })
+    res.json(neighbourhoodsByCity)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
+// @route  POST  api/neighbourhoods
+// @desc   Add new neighbourhood
 router.post('/', [
   check('name', 'city name is required').not().isEmpty(),
   check('city', 'city id is required').not().isEmpty()
@@ -31,22 +55,22 @@ router.post('/', [
   const { name, city } = req.body
 
   try {
-    const newArea = new Neighbourhood({
+    const newNeighbourhood = new Neighbourhood({
       name,
       city
     })
 
-    const area = await newArea.save()
+    const neighbourhood = await newNeighbourhood.save()
 
-    res.json(area)
+    res.json(neighbourhood)
   } catch (err) {
     console.error(err)
     res.status(500).send('an error has occurred')
   }
 })
 
-// @route  DELETE api/areas
-// @desc   Delete area
+// @route  DELETE api/neighbourhoods
+// @desc   Delete neighbourhood
 router.delete('/:_id', async (req: Request, res: Response) => {
   try {
     await Neighbourhood.deleteOne({ _id: req.params._id })
