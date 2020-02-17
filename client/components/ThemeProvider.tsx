@@ -1,6 +1,6 @@
 const theme = {
   colors: {
-    main: '#00700c',
+    main: '#062770',
     mainLighter: '#00a00c',
     mainDarker: '#00440c',
     danger: '#aa0507',
@@ -8,11 +8,7 @@ const theme = {
     mainBackground: '#fff',
     formBackground: '#fff',
     mainText: '#000',
-    black: '#000',
-    formBorder: '#a6a6a6',
-    buttonText: '#fff',
-    menuText: '#fff',
-
+    lightText: '#fff',
     error: '#ce0006'
   },
   fontSizes: {

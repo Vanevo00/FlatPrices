@@ -1,4 +1,4 @@
-import {createGlobalStyle, ThemeProps} from 'styled-components'
+import { createGlobalStyle, ThemeProps } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle<ThemeProps<any>>`
   * {

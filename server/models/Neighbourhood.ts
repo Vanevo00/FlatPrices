@@ -8,7 +8,7 @@ const NeighbourhoodSchema = mongoose.Schema({
   },
   city: {
     type: mongoose.Schema.Types.ObjectID,
-    ref: 'cities',
+    ref: 'city',
     required: true
   }
 })

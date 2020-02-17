@@ -6,7 +6,7 @@
   "scripts": {
     "start:api": "nodemon",
     "start:client": "npm run dev --prefix client",
-    "start:watch": "concurrently \"npm run start:api\" \"npm run start:client\"",
+    "start:watch": "concurrently \"kill $(lsof -t -i:4000)\" \"npm run start:api\" \"npm run start:client\"",
     "build": "rm -rf ./build && tsc",
     "eslint": "eslint \"./**\"",
     "eslint:fix": "eslint --fix \"./**\""
@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
+    "isomorphic-unfetch": "^3.0.0",
     "mongoose": "^5.8.7"
   },
   "devDependencies": {

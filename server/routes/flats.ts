@@ -18,11 +18,29 @@ router.get('/', async (req: Request, res: Response) => {
   }
 })
 
-// @route  GET api/flats/:_id
-// @desc   Get one flat by id
-router.get('/:_id', async (req: Request, res: Response) => {
+// @route  GET api/flats/new/:limit
+// @desc   Get newest flats
+router.get('/new/:limit?', async (req: Request, res: Response) => {
   try {
-    const flat = await Flat.find({ _id: req.params._id })
+    const limit = parseInt(req.params.limit) || 10
+    const newFlats = await Flat
+      .find({})
+      .populate('city')
+      .populate('neighbourhood')
+      .sort('-createdAt')
+      .limit(limit)
+    res.json(newFlats)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
+// @route  GET api/flats/search/:_id
+// @desc   Get one flat by id
+router.get('/search/:_id', async (req: Request, res: Response) => {
+  try {
+    const flat = await Flat.findById(req.params._id)
     res.json(flat)
   } catch (err) {
     console.error(err.message)

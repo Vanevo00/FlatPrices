@@ -37,12 +37,12 @@ const FlatSchema = mongoose.Schema({
   },
   neighbourhood: {
     type: mongoose.Schema.Types.ObjectID,
-    ref: 'neighbourhoods',
+    ref: 'neighbourhood',
     required: true
   },
   city: {
     type: mongoose.Schema.Types.ObjectID,
-    ref: 'cities',
+    ref: 'city',
     required: true
   },
   createdAt: {
