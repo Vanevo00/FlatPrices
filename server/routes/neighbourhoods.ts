@@ -41,6 +41,18 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
   }
 })
 
+// @route  GET api/neighbourhoods/byName/:name
+// @desc   Search neighbourhoods by name
+router.get('/byName/:name', async (req: Request, res: Response) => {
+  try {
+    const neighbourhoodsByName = await Neighbourhood.find({ 'name': new RegExp(req.params.name, 'i') })
+    res.json(neighbourhoodsByName)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  POST  api/neighbourhoods
 // @desc   Add new neighbourhood
 router.post('/', [

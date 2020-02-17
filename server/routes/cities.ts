@@ -17,6 +17,18 @@ router.get('/', async (req: Request, res: Response) => {
   }
 })
 
+// @route  GET api/cities/byName/:name
+// @desc   Search cities by name
+router.get('/byName/:name', async (req: Request, res: Response) => {
+  try {
+    const citiesByName = await City.find({ 'name': new RegExp(req.params.name, 'i') })
+    res.json(citiesByName)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  POST  api/cities
 // @desc   Add new city
 router.post('/', [

@@ -1,8 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment } from 'react'
 import Head from 'next/head'
 import GlobalStyle from './GlobalStyle'
 import { ThemeProvider } from 'styled-components'
 import theme from './ThemeProvider'
+import Navbar from './Navbar/Navbar'
 
 const Layout = (props: any) => {
   return (
@@ -13,6 +14,7 @@ const Layout = (props: any) => {
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle/>
+        <Navbar/>
         {props.children}
         <script src="https://kit.fontawesome.com/3bca9cb446.js" crossOrigin="anonymous"></script>
       </ThemeProvider>

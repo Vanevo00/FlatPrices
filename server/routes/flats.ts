@@ -61,11 +61,23 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
 })
 
 // @route  GET api/flats/byNeighbourhood/:_id
-// @desc   Get flats by city
+// @desc   Get flats by neighbourhood
 router.get('/byNeighbourhood/:_id', async (req: Request, res: Response) => {
   try {
     const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id })
     res.json(flatsByNeighbourhood)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
+// @route  GET api/flats/byAddress/:address
+// @desc   Search flats by address
+router.get('/byAddress/:address', async (req: Request, res: Response) => {
+  try {
+    const flatsByAddress = await Flat.find({ 'address': new RegExp(req.params.address, 'i') })
+    res.json(flatsByAddress)
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
