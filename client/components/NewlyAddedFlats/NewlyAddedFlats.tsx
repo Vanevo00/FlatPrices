@@ -27,8 +27,6 @@ const NewlyAddedFlats = () => {
     setNewFlats(flats.data)
   }
 
-  console.log(newFlats)
-
   useEffect(() => {
     fetchFlats()
   }, [])

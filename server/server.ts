@@ -11,12 +11,14 @@ connectDB()
 // middleware
 // @ts-ignore
 app.use(express.json({ extended: false })) // to accept body data
+app.options('/', cors()) // CORS pre-flight
 app.use(cors()) // enable CORS
 
 // define routes
 app.use('/api/cities', require('./routes/cities'))
 app.use('/api/neighbourhoods', require('./routes/neighbourhoods'))
 app.use('/api/flats', require('./routes/flats'))
+app.use('/api/search', require('./routes/search'))
 
 app.get('/', (req: Request, res: Response) => res.send('Welcome to flat prices API'))
 

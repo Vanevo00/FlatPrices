@@ -45,7 +45,7 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
 // @desc   Search neighbourhoods by name
 router.get('/byName/:name', async (req: Request, res: Response) => {
   try {
-    const neighbourhoodsByName = await Neighbourhood.find({ 'name': new RegExp(req.params.name, 'i') })
+    const neighbourhoodsByName = await Neighbourhood.find({ name: new RegExp(req.params.name, 'i') })
     res.json(neighbourhoodsByName)
   } catch (err) {
     console.error(err.message)
