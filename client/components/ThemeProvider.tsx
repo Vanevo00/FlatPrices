@@ -7,6 +7,7 @@ const theme = {
     dangerLighter: '#d80507',
     mainBackground: '#fff',
     formBackground: '#fff',
+    lighGray: '#bfbfbf',
     mainText: '#000',
     lightText: '#fff',
     error: '#ce0006'

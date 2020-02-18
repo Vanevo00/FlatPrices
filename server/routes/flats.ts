@@ -76,7 +76,7 @@ router.get('/byNeighbourhood/:_id', async (req: Request, res: Response) => {
 // @desc   Search flats by address
 router.get('/byAddress/:address', async (req: Request, res: Response) => {
   try {
-    const flatsByAddress = await Flat.find({ 'address': new RegExp(req.params.address, 'i') })
+    const flatsByAddress = await Flat.find({ address: new RegExp(req.params.address, 'i') })
     res.json(flatsByAddress)
   } catch (err) {
     console.error(err.message)

@@ -5,8 +5,8 @@ import Search from './Search'
 const Navbar = () => {
   return (
     <NavbarContainer>
+      <div>test1</div>
       <Search/>
-      <div>test2</div>
       <div>test3</div>
     </NavbarContainer>
   )

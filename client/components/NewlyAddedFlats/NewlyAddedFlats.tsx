@@ -7,10 +7,11 @@ import {
   TableRow,
   TableRowHeader
 } from '../Table/StyledTable'
-import { Header1 } from '../StyledHeaders'
+import { Heading1 } from '../StyledHeadings'
 import Spinner from '../Spinner/Spinner'
 
 interface Flat {
+  _id: string
   address: string
   priceCZK: number
   squareMeters: number
@@ -33,7 +34,7 @@ const NewlyAddedFlats = () => {
 
   return (
     <>
-      <Header1>Newest Flats</Header1>
+      <Heading1>Newest Flats</Heading1>
       <TableContainer>
         <TableRowHeader>
           <TableItemHeader width={25}>
@@ -64,7 +65,7 @@ const NewlyAddedFlats = () => {
             ? <Spinner/>
             : newFlats.map((flat: Flat) => {
               return (
-                <TableRow>
+                <TableRow key={flat._id}>
                   <TableItem width={25}>
                     {flat.address}
                   </TableItem>
