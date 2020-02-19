@@ -4,7 +4,7 @@ const { check, validationResult } = require('express-validator')
 const router = express.Router()
 
 const Flat = require('../models/Flat')
-const NeighBourhood = require('../models/Neighbourhood')
+const Neighbourhood = require('../models/Neighbourhood')
 
 // @route  GET api/flats
 // @desc   Get all flats
@@ -84,6 +84,40 @@ router.get('/byAddress/:address', async (req: Request, res: Response) => {
   }
 })
 
+// @route  GET api/flats/avgPriceNeighbourhood/:_id
+// @desc   Get average flat price by neighbourhood
+router.get('/avgPriceNeighbourhood/:_id', async (req: Request, res: Response) => {
+  try {
+    const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id })
+    const flatPrices: any[] = []
+    flatsByNeighbourhood.map((flat: any) => {
+      flatPrices.push(flat.pricePerMeter)
+    })
+    const avgPrice = (flatPrices.reduce((a, b) => a + b, 0) / flatPrices.length).toFixed(2)
+    res.json({avgPrice})
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
+// @route  GET api/flats/avgPriceCity/:_id
+// @desc   Get average flat price by city
+router.get('/avgPriceCity/:_id', async (req: Request, res: Response) => {
+  try {
+    const flatsByCity = await Flat.find({ city: req.params._id })
+    const flatPrices: any[] = []
+    flatsByCity.map((flat: any) => {
+      flatPrices.push(flat.pricePerMeter)
+    })
+    const avgPrice = (flatPrices.reduce((a, b) => a + b, 0) / flatPrices.length).toFixed(2)
+    res.json({avgPrice})
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  POST  api/flats
 // @desc   Add new flat
 router.post('/', [
@@ -108,7 +142,7 @@ router.post('/', [
     neighbourhood
   } = req.body
 
-  const flatNeighbourhoood = await NeighBourhood.find({ _id: neighbourhood })
+  const flatNeighbourhoood = await Neighbourhood.find({ _id: neighbourhood })
 
   const city = flatNeighbourhoood[0].city
 
