@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import axios from 'axios'
 import Spinner from '../Spinner/Spinner'
 import {
@@ -14,6 +15,7 @@ import {
 const searchLimit = 3
 
 const Search = () => {
+  const router = useRouter()
   const [searchInput, setSearchInput] = useState('')
   const [searchResults, setSearchResults] = useState<any>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -24,11 +26,11 @@ const Search = () => {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    console.log(searchResults)
+    router.push(`/search/${searchInput}`)
   }
 
   useEffect(() => {
-    if (searchInput) {
+    if (searchInput.length > 2) {
       fetchSearchResults()
     }
   }, [searchInput])
@@ -47,8 +49,6 @@ const Search = () => {
     flats
   } = searchResults
 
-  console.log(neighbourhoods)
-
   return (
     <MainContainer>
       <form onSubmit={onSubmit}>
@@ -59,7 +59,7 @@ const Search = () => {
       </form>
 
       {
-        searchInput &&
+        searchInput.length > 2 &&
         <ResultsContainer>
           {isLoading && <Spinner/>}
           {
@@ -71,7 +71,7 @@ const Search = () => {
           {
             neighbourhoods && neighbourhoods.map((neighbourhood: any) => {
               return (
-                <ResultItem>
+                <ResultItem key={neighbourhood._id}>
                   <p><strong>{neighbourhood.name}</strong></p>
                   <p>neighbourhood</p>
                 </ResultItem>
@@ -82,7 +82,7 @@ const Search = () => {
           {
             cities && cities.map((city: any) => {
               return (
-                <ResultItem>
+                <ResultItem key={city._id}>
                   <p><strong>{city.name}</strong></p>
                   <p>city</p>
                 </ResultItem>
@@ -93,7 +93,7 @@ const Search = () => {
           {
             flats && flats.map((flat: any) => {
               return (
-                <ResultItem>
+                <ResultItem key={flat._id}>
                   <p><strong>{flat.address}</strong></p>
                   <p>flat</p>
                 </ResultItem>

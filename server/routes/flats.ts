@@ -94,7 +94,7 @@ router.get('/avgPriceNeighbourhood/:_id', async (req: Request, res: Response) =>
       flatPrices.push(flat.pricePerMeter)
     })
     const avgPrice = (flatPrices.reduce((a, b) => a + b, 0) / flatPrices.length).toFixed(2)
-    res.json({avgPrice})
+    res.json({ avgPrice })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
@@ -111,7 +111,7 @@ router.get('/avgPriceCity/:_id', async (req: Request, res: Response) => {
       flatPrices.push(flat.pricePerMeter)
     })
     const avgPrice = (flatPrices.reduce((a, b) => a + b, 0) / flatPrices.length).toFixed(2)
-    res.json({avgPrice})
+    res.json({ avgPrice })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
