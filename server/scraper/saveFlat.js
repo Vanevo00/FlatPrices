@@ -38,7 +38,6 @@ const saveFlat = async (flat) => {
   } catch (err) {
     console.error(err)
   }
-  // console.log(flat)
 }
 
 exports.saveFlat = saveFlat

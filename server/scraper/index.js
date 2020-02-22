@@ -1,3 +1,9 @@
 const nextReality = require('./NextReality')
+const svobodaWilliams = require('./SvobodaWilliams')
 
-nextReality()
+const fetchFlats = async () => {
+  await nextReality()
+  await svobodaWilliams()
+}
+
+fetchFlats()

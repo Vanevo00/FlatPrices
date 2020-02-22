@@ -10,6 +10,8 @@ const fetchData = async () => {
 }
 
 const fetchNextReality = async () => {
+  console.log('Scraping Next Reality..')
+
   const $ = await fetchData()
 
   const getPages = () => {
@@ -19,7 +21,8 @@ const fetchNextReality = async () => {
       pages.push(href)
     })
     pages.pop() // get rid of the last href - the arrow
-    return (pages)
+    console.log(`${pages.length} pages successfully loaded, getting links..`)
+    return pages
   }
 
   const getLinks = async () => {
@@ -32,6 +35,7 @@ const fetchNextReality = async () => {
         links.push(href)
       })
     }
+    console.log(`${links.length} links successfully loaded, getting flat information..`)
     return links
   }
 
