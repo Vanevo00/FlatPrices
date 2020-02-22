@@ -57,6 +57,8 @@ const fetchNextReality = async () => {
 
     flat.pricePerMeter = parseFloat((flat.priceCZK / flat.squareMeters).toFixed(2))
 
+    flat.mainImage = $('.main img').attr('src')
+
     saveFlat.saveFlat(flat)
   }
 }

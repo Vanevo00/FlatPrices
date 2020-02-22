@@ -25,6 +25,7 @@ const saveFlat = async (flat) => {
         city: '5e43147b633dd95fac66332a',
         name: flat.neighbourhood
       })
+      console.log(`New neighbourhood created: ${neighbourhood.data.name}!`)
     }
 
     const newFlat = await axios.post('http://localhost:4000/api/flats/', {

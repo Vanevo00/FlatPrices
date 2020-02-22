@@ -21,6 +21,9 @@ const FlatSchema = mongoose.Schema({
   link: {
     type: String
   },
+  mainImage: {
+    type: String
+  },
   floor: {
     type: Number
   },
