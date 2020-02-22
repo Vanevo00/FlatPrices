@@ -48,6 +48,30 @@ router.get('/search/:_id', async (req: Request, res: Response) => {
   }
 })
 
+// @route  POST api/flats/searchByParameters
+// @desc   Get one flat by address, squareMeters, priceCZK and agency
+router.post('/searchByParameters', async (req: Request, res: Response) => {
+  try {
+    const {
+      address,
+      squareMeters,
+      priceCZK,
+      agency
+    } = req.body
+
+    const flat = await Flat.find({
+      address,
+      squareMeters,
+      priceCZK,
+      agency
+    })
+    res.json(flat)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  GET api/flats/byCity/:_id
 // @desc   Get flats by city
 router.get('/byCity/:_id', async (req: Request, res: Response) => {
@@ -134,6 +158,7 @@ router.post('/', [
     address,
     squareMeters,
     priceCZK,
+    agency,
     link,
     floor,
     lift,
@@ -153,6 +178,7 @@ router.post('/', [
       address,
       squareMeters,
       priceCZK,
+      agency,
       pricePerMeter,
       link,
       floor,

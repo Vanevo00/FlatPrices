@@ -35,6 +35,9 @@ const FlatSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
+  agency: {
+    type: String
+  },
   neighbourhood: {
     type: mongoose.Schema.Types.ObjectID,
     ref: 'neighbourhood',
