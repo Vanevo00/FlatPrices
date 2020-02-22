@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {
+  StyledLink,
   TableContainer,
   TableItem, TableItemButton,
   TableItemHeader,
@@ -16,6 +17,7 @@ interface Flat {
   priceCZK: number
   squareMeters: number
   pricePerMeter: number
+  link?: string
   city: any
   neighbourhood: any
 }
@@ -37,7 +39,7 @@ const NewlyAddedFlats = () => {
       <Heading1>Newest Flats</Heading1>
       <TableContainer>
         <TableRowHeader>
-          <TableItemHeader width={25}>
+          <TableItemHeader width={22}>
             Address
           </TableItemHeader>
           <TableItemHeader width={12}>
@@ -55,8 +57,11 @@ const NewlyAddedFlats = () => {
           <TableItemHeader width={16}>
             Price/m<sup>2</sup>
           </TableItemHeader>
-          <TableItemHeader width={10} last={true}>
+          <TableItemHeader width={10}>
             Detail
+          </TableItemHeader>
+          <TableItemHeader width={3} last={true}>
+            <i className="fas fa-globe-europe"/>
           </TableItemHeader>
         </TableRowHeader>
 
@@ -66,7 +71,7 @@ const NewlyAddedFlats = () => {
             : newFlats.map((flat: Flat) => {
               return (
                 <TableRow key={flat._id}>
-                  <TableItem width={25}>
+                  <TableItem width={22}>
                     {flat.address}
                   </TableItem>
                   <TableItem width={12}>
@@ -84,8 +89,13 @@ const NewlyAddedFlats = () => {
                   <TableItem width={16}>
                     {flat.pricePerMeter.toLocaleString()} CZK
                   </TableItem>
-                  <TableItemButton width={10} last={true}>
+                  <TableItemButton width={10}>
                   Detail
+                  </TableItemButton>
+                  <TableItemButton width={3} last={true}>
+                    <StyledLink href={flat.link} target='_blank'>
+                      <i className="fas fa-globe-europe"/>
+                    </StyledLink>
                   </TableItemButton>
                 </TableRow>
               )

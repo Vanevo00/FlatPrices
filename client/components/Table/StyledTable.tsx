@@ -48,3 +48,7 @@ export const TableItemButton = styled(TableItem)`
     color: ${props => props.theme.colors.lightText};
   }
 `
+
+export const StyledLink = styled.a`
+  color: inherit;
+`
