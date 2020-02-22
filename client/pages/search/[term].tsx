@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Header, ResultItem, ResultsContainer, ResultsTable } from './StyledSearchResults'
 import Spinner from '../../components/Spinner/Spinner'
 
-const Search = ({term}: any) => {
+const Search = ({ term }: any) => {
   const [searchResults, setSearchResults] = useState()
   const [isLoading, setIsLoading] = useState(false)
 

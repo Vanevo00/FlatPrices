@@ -1,20 +1,20 @@
-const axios = require("axios")
+const axios = require('axios')
 
 const saveFlat = async (flat) => {
   try {
-    //eliminate flats that are without price (typically reserved)
+    // eliminate flats that are without price (typically reserved)
     if (!flat.priceCZK) {
       return console.log(`skipping, flat price: ${flat.priceCZK}`)
     }
 
-    //eliminate duplicit flats
+    // eliminate duplicit flats
     const duplicitFlat = await axios.post('http://localhost:4000/api/flats/searchByParameters', {
       address: flat.address,
       squareMeters: flat.squareMeters,
       priceCZK: flat.priceCZK,
       agency: flat.agency
     })
-    if(duplicitFlat.data.length > 0) {
+    if (duplicitFlat.data.length > 0) {
       return console.log(`Duplicit flat found: ${flat.address}. Not saved.`)
     }
 
@@ -34,7 +34,7 @@ const saveFlat = async (flat) => {
     })
 
     console.log(newFlat.data)
-  } catch(err) {
+  } catch (err) {
     console.error(err)
   }
   // console.log(flat)

@@ -1,13 +1,13 @@
 const saveFlat = require('./saveFlat')
-const axios = require("axios")
-const cheerio = require("cheerio")
+const axios = require('axios')
+const cheerio = require('cheerio')
 
-const siteUrl = "https://www.nextreality.cz/reality?listing_filter%5Btyp_nemovitosti%5D%5B0%5D=4&listing_filter%5Btyp_nabidky%5D%5B0%5D=1&listing_filter%5Bdispozice_bytu%5D%5B0%5D=2&listing_filter%5Bdispozice_bytu%5D%5B1%5D=9&listing_filter%5Bdispozice_bytu%5D%5B2%5D=3&listing_filter%5Bdispozice_bytu%5D%5B3%5D=10&listing_filter%5Bdispozice_bytu%5D%5B4%5D=4&listing_filter%5Bdispozice_bytu%5D%5B5%5D=11&listing_filter%5Bdispozice_bytu%5D%5B6%5D=5&listing_filter%5Bdispozice_bytu%5D%5B7%5D=12&listing_filter%5Bdispozice_bytu%5D%5B8%5D=6&listing_filter%5Bdispozice_bytu%5D%5B9%5D=13&listing_filter%5Bdispozice_bytu%5D%5B10%5D=7&listing_filter%5Bdispozice_bytu%5D%5B11%5D=14&listing_filter%5Bdispozice_bytu%5D%5B12%5D=8&listing_filter%5Bdispozice_bytu%5D%5B13%5D=15&listing_filter%5Bdispozice_bytu%5D%5B14%5D=16&listing_filter%5Blokalita%5D%5B0%5D=19&listing_filter%5Bkraj_19%5D%5B0%5D=19&listing_filter%5Bkraj_19%5D%5B1%5D=27&listing_filter%5Bkraj_19%5D%5B2%5D=35&listing_filter%5Bkraj_19%5D%5B3%5D=51&listing_filter%5Bkraj_19%5D%5B4%5D=60&listing_filter%5Bkraj_19%5D%5B5%5D=78&listing_filter%5Bkraj_19%5D%5B6%5D=86&listing_filter%5Bcena_od%5D=&listing_filter%5Bcena_do%5D=&listing_filter%5Bklicova_slova%5D=&listing_filter%5Bplocha_od%5D=&listing_filter%5Bplocha_do%5D=&listing_filter%5Bstari_nemovitosti%5D=&page=1"
+const siteUrl = 'https://www.nextreality.cz/reality?listing_filter%5Btyp_nemovitosti%5D%5B0%5D=4&listing_filter%5Btyp_nabidky%5D%5B0%5D=1&listing_filter%5Bdispozice_bytu%5D%5B0%5D=2&listing_filter%5Bdispozice_bytu%5D%5B1%5D=9&listing_filter%5Bdispozice_bytu%5D%5B2%5D=3&listing_filter%5Bdispozice_bytu%5D%5B3%5D=10&listing_filter%5Bdispozice_bytu%5D%5B4%5D=4&listing_filter%5Bdispozice_bytu%5D%5B5%5D=11&listing_filter%5Bdispozice_bytu%5D%5B6%5D=5&listing_filter%5Bdispozice_bytu%5D%5B7%5D=12&listing_filter%5Bdispozice_bytu%5D%5B8%5D=6&listing_filter%5Bdispozice_bytu%5D%5B9%5D=13&listing_filter%5Bdispozice_bytu%5D%5B10%5D=7&listing_filter%5Bdispozice_bytu%5D%5B11%5D=14&listing_filter%5Bdispozice_bytu%5D%5B12%5D=8&listing_filter%5Bdispozice_bytu%5D%5B13%5D=15&listing_filter%5Bdispozice_bytu%5D%5B14%5D=16&listing_filter%5Blokalita%5D%5B0%5D=19&listing_filter%5Bkraj_19%5D%5B0%5D=19&listing_filter%5Bkraj_19%5D%5B1%5D=27&listing_filter%5Bkraj_19%5D%5B2%5D=35&listing_filter%5Bkraj_19%5D%5B3%5D=51&listing_filter%5Bkraj_19%5D%5B4%5D=60&listing_filter%5Bkraj_19%5D%5B5%5D=78&listing_filter%5Bkraj_19%5D%5B6%5D=86&listing_filter%5Bcena_od%5D=&listing_filter%5Bcena_do%5D=&listing_filter%5Bklicova_slova%5D=&listing_filter%5Bplocha_od%5D=&listing_filter%5Bplocha_do%5D=&listing_filter%5Bstari_nemovitosti%5D=&page=1'
 
 const fetchData = async () => {
   const result = await axios.get(siteUrl)
   return cheerio.load(result.data)
-};
+}
 
 const fetchNextReality = async () => {
   const $ = await fetchData()
@@ -18,8 +18,8 @@ const fetchNextReality = async () => {
       const href = `https://www.nextreality.cz${$(el).attr('href').trim()}`
       pages.push(href)
     })
-    pages.pop() //get rid of the last href - the arrow
-    return(pages)
+    pages.pop() // get rid of the last href - the arrow
+    return (pages)
   }
 
   const getLinks = async () => {
