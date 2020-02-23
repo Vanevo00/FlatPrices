@@ -10,17 +10,7 @@ import {
 } from '../Table/StyledTable'
 import { Heading1 } from '../StyledHeadings'
 import Spinner from '../Spinner/Spinner'
-
-interface Flat {
-  _id: string
-  address: string
-  priceCZK: number
-  squareMeters: number
-  pricePerMeter: number
-  link?: string
-  city: any
-  neighbourhood: any
-}
+import { Flat } from '../Types/Flat'
 
 const NewlyAddedFlats = () => {
   const [newFlats, setNewFlats] = useState()

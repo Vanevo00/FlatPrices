@@ -12,6 +12,8 @@ import {
 import Spinner from '../../components/Spinner/Spinner'
 import { City } from '../../components/Types/City'
 import { Neighbourhood } from '../../components/Types/Neighbourhood'
+import { Flat } from '../../components/Types/Flat'
+import { TableItem } from '../../components/Table/StyledTable'
 
 interface Props {
   term: string
@@ -62,6 +64,16 @@ const Search = ({ term }: Props) => {
         <ResultsTable>
           <Header>Flats {searchResults && `(${searchResults.flats.length} results)`}</Header>
           {isLoading && <Spinner/>}
+          {searchResults && searchResults.flats.length > 0 && searchResults.flats.map((flat: Flat) =>
+            <ResultItem key={flat._id}>
+              <div>
+                {flat.address}&nbsp;<GreySmallText>{flat.neighbourhood.name}&nbsp;({flat.city.name})</GreySmallText>
+              </div>
+              <div>
+                <GreySmallText>{flat.squareMeters}m2 | {flat.priceCZK.toLocaleString()} CZK | {flat.agency}</GreySmallText>
+              </div>
+            </ResultItem>
+          )}
         </ResultsTable>
       </ResultsContainer>
     </Layout>

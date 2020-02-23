@@ -26,17 +26,22 @@ export const Header = styled.div`
 
 export const ResultItem = styled.div`
   width: 100%;
-  height: 30px;
+  min-height: 30px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   border-bottom: solid 1px ${props => props.theme.colors.lightGray};
   color: ${props => props.theme.colors.main};
-  padding: 0 .5rem;
+  padding: 0.25rem .5rem;
   cursor: pointer;
   
   &:hover {
     background-color: ${props => props.theme.colors.main};
     color: ${props => props.theme.colors.lightText};
+  }
+  
+  div {
+    width: 100%;
   }
 `
 
