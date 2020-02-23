@@ -9,7 +9,7 @@ export const ResultsContainer = styled.div`
 
 export const ResultsTable = styled.div`
   width: 30%;
-  min-height: 100px;
+  min-height: 90px;
   border: solid 2px ${props => props.theme.colors.main};
   border-radius: 8px;
 `
@@ -38,4 +38,10 @@ export const ResultItem = styled.div`
     background-color: ${props => props.theme.colors.main};
     color: ${props => props.theme.colors.lightText};
   }
+`
+
+
+export const GreySmallText = styled.span`
+  color: ${props => props.theme.colors.lightGray};
+  font-size: ${props => props.theme.fontSizes.xs};
 `

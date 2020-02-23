@@ -13,7 +13,7 @@ const theme = {
     error: '#ce0006'
   },
   fontSizes: {
-    xs: '.9rem',
+    xs: '.8rem',
     s: '1rem',
     m: '1.2rem',
     l: '1.6rem',

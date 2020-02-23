@@ -7,11 +7,11 @@ const Flat = require('../models/Flat')
 
 router.get('/all/:name/:limit?', async (req: Request, res: Response) => {
   try {
-    const limit = parseInt(req.params.limit) || 20
+    const limit = parseInt(req.params.limit) || 100
     const [neighbourhoodsByName, citiesByName, flatsByAddress] = await Promise.all([
-      Neighbourhood.find({ name: new RegExp(req.params.name, 'i') }).limit(limit),
+      Neighbourhood.find({ name: new RegExp(req.params.name, 'i') }).populate('city').limit(limit),
       City.find({ name: new RegExp(req.params.name, 'i') }).limit(limit),
-      Flat.find({ address: new RegExp(req.params.name, 'i') }).limit(limit)
+      Flat.find({ address: new RegExp(req.params.name, 'i') }).populate('city').populate('neighbourhood').limit(limit)
     ])
 
     res.json({

@@ -2,10 +2,22 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import { Heading1 } from '../../components/StyledHeadings'
 import axios from 'axios'
-import { Header, ResultItem, ResultsContainer, ResultsTable } from './StyledSearchResults'
+import {
+  GreySmallText,
+  Header,
+  ResultItem,
+  ResultsContainer,
+  ResultsTable
+} from './StyledSearchResults'
 import Spinner from '../../components/Spinner/Spinner'
+import { City } from '../../components/Types/City'
+import { Neighbourhood } from '../../components/Types/Neighbourhood'
 
-const Search = ({ term }: any) => {
+interface Props {
+  term: string
+}
+
+const Search = ({ term }: Props) => {
   const [searchResults, setSearchResults] = useState()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -16,6 +28,7 @@ const Search = ({ term }: any) => {
     setIsLoading(false)
   }
 
+  //to be deleted
   useEffect(() => {
     console.log(searchResults)
   }, [searchResults])
@@ -31,12 +44,19 @@ const Search = ({ term }: any) => {
         <ResultsTable>
           <Header>Cities {searchResults && `(${searchResults.cities.length} results)`}</Header>
           {isLoading && <Spinner/>}
-          <ResultItem>Test</ResultItem>
+          {searchResults && searchResults.cities.length > 0 && searchResults.cities.map((city: City) =>
+            <ResultItem key={city._id}>{city.name}&nbsp;<GreySmallText>{city.country}</GreySmallText></ResultItem>
+          )}
         </ResultsTable>
 
         <ResultsTable>
           <Header>Neighbourhoods {searchResults && `(${searchResults.neighbourhoods.length} results)`}</Header>
           {isLoading && <Spinner/>}
+          {searchResults && searchResults.neighbourhoods.length > 0 && searchResults.neighbourhoods.map((neighbourhood: Neighbourhood) =>
+            <ResultItem key={neighbourhood._id}>
+              {neighbourhood.name}&nbsp;<GreySmallText>{neighbourhood.city.name}</GreySmallText>
+            </ResultItem>
+          )}
         </ResultsTable>
 
         <ResultsTable>
