@@ -21,7 +21,7 @@ router.get('/', async (req: Request, res: Response) => {
 // @desc   Get neighbourhood by id
 router.get('/:_id', async (req: Request, res: Response) => {
   try {
-    const neighbourhood = await Neighbourhood.find({ _id: req.params._id })
+    const neighbourhood = await Neighbourhood.findOne({ _id: req.params._id }).populate('city')
     res.json(neighbourhood)
   } catch (err) {
     console.error(err.message)

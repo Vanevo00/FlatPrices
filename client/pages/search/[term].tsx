@@ -30,11 +30,6 @@ const Search = ({ term }: Props) => {
     setIsLoading(false)
   }
 
-  //to be deleted
-  useEffect(() => {
-    console.log(searchResults)
-  }, [searchResults])
-
   useEffect(() => {
     fetchSearchData()
   }, [])
