@@ -18,11 +18,21 @@ const saveFlat = async (flat) => {
       return console.log(`Duplicit flat found: ${flat.address}. Not saved.`)
     }
 
-    let neighbourhood = await axios.get(`http://localhost:4000/api/neighbourhoods/byExactName/${flat.neighbourhood}`)
+    // fetch city or create it if it doesn't exist
+    let city = await axios.get(`http://localhost:4000/api/cities/byExactName/${flat.city}`)
+    if (!city.data) {
+      city = await axios.post('http://localhost:4000/api/cities/', {
+        name: flat.city,
+        country: 'Czech Republic'
+      })
+      console.log(`New city created: ${city.data.name}!`)
+    }
 
+    // fetch neighbourhood or create it if it doesn't exist
+    let neighbourhood = await axios.get(`http://localhost:4000/api/neighbourhoods/byExactName/${flat.neighbourhood}`)
     if (!neighbourhood.data) {
       neighbourhood = await axios.post('http://localhost:4000/api/neighbourhoods/', {
-        city: '5e43147b633dd95fac66332a',
+        city: city.data._id,
         name: flat.neighbourhood
       })
       console.log(`New neighbourhood created: ${neighbourhood.data.name}!`)

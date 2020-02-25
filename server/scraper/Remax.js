@@ -38,7 +38,8 @@ const fetchRemax = async () => {
     try {
       const flat = {
         agency: 'Remax',
-        link: flatUrl
+        link: flatUrl,
+        city: 'Praha'
       }
 
       const result = await axios.get(flatUrl)

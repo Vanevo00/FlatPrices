@@ -42,7 +42,8 @@ const fetchNextReality = async () => {
   for (const flatUrl of await getLinks()) {
     const flat = {
       agency: 'Next Reality',
-      link: flatUrl
+      link: flatUrl,
+      city: 'Praha'
     }
     const result = await axios.get(flatUrl)
     const $ = await cheerio.load(result.data)

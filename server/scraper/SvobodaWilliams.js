@@ -40,7 +40,8 @@ const fetchSvobodaWilliams = async () => {
   for (const flatUrl of await getLinks()) {
     const flat = {
       agency: 'Svoboda & Williams',
-      link: flatUrl
+      link: flatUrl,
+      city: 'Praha'
     }
 
     const result = await axios.get(flatUrl)

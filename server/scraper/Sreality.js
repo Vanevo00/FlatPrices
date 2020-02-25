@@ -1,36 +1,95 @@
 const saveFlat = require('./saveFlat')
+const cheerio = require('cheerio')
 const puppeteer = require('puppeteer')
 
 const siteUrl = 'https://www.sreality.cz/hledani/prodej/byty/praha-8,praha-7,praha-6,praha-5,praha-1,praha-2,praha-3?stavba=cihlova&vlastnictvi=osobni&patro-od=2&patro-do=100&plocha-od=85&plocha-do=10000000000&cena-od=0&cena-do=15000000'
 
 const fetchSreality = async () => {
-  try {
-    const browser = await puppeteer.launch()
-    const page = await browser.newPage()
+  console.log('Scraping Sreality..')
 
+  const browser = await puppeteer.launch()
+  const page = await browser.newPage()
+  page.setDefaultNavigationTimeout(0)
 
-    await page.goto(siteUrl, { waitUntil: 'networkidle2'})
-    const data = await page.evaluate(() => {
-      const title = document.querySelector('.page-title').innerText
+  const getLinks = async () => {
+    console.log('Fetching flat links..')
+    let currPage = 1
+    const links = []
+    let numberLinks = 0
+    while (true) {
+      try {
+        console.log(`fetching page no. ${currPage}`)
+        await page.goto(`${siteUrl}&strana=${currPage}`)
+        const content = await page.content()
+        const $ = await cheerio.load(content)
+        $('.basic a').each((i, el) => {
+          links.push(`https://www.sreality.cz${el.attribs.href}`)
+        })
 
-      return {
-        title
+        if (numberLinks === links.length) {
+          break
+        } else {
+          currPage++
+          numberLinks = links.length
+        }
+      } catch (err) {
+        console.log(err)
+        break
       }
-    })
-
-    console.log(data)
-
-    // await browser.close()
-  } catch (err) {
-    console.log(err)
+    }
+    console.log(`Fetched ${links.length} flat links, getting flat information..`)
+    return links
   }
 
+  for (const flatUrl of await getLinks()) {
+    try {
+      const flat = {
+        link: flatUrl,
+        city: 'Praha'
+      }
 
-  // const fetchedPage = await axios.get(siteUrl)
-  // console.log(fetchedPage.data)
-  // const $ = await cheerio.load(fetchedPage.data)
-  // const title = $('.ng-scope > h1').text()
-  // console.log(title)
+      await page.goto(flatUrl)
+      const content = await page.content()
+      const $ = await cheerio.load(content)
+
+      const location = $('.location-text').text()
+      const splitLocation = location.split(',')
+      let neighbourhood = ''
+      if (splitLocation[1]) {
+        neighbourhood = splitLocation[1].split('-')[0]
+        address = splitLocation[0]
+      } else {
+        neighbourhood = splitLocation[0].split('-')[0]
+        address = 'unknown address'
+      }
+      neighbourhood = neighbourhood.trim()
+      flat.neighbourhood = neighbourhood
+      flat.address = address
+
+      const size = $('label:contains("Užitná plocha:")').next().text().trim()
+      flat.squareMeters = parseInt(size.split(' ')[0])
+
+      const price = $('.norm-price').text()
+      let priceNo = price.split(/\s{1}/)
+      priceNo.pop()
+      flat.priceCZK = parseInt(priceNo.join(''))
+
+      pricePerMeter = (flat.price / flat.squareMeters).toFixed(2)
+      flat.pricePerMeter = parseFloat(pricePerMeter)
+
+      let agencyName = $('li.line.name').text()
+      if (!agencyName) {
+        agencyName = "unknown"
+      }
+      flat.agency = agencyName
+
+      saveFlat.saveFlat(flat)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  await browser.close()
 }
 
 module.exports = fetchSreality

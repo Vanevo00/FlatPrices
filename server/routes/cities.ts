@@ -29,6 +29,18 @@ router.get('/byName/:name', async (req: Request, res: Response) => {
   }
 })
 
+// @route  GET api/cities/byExactName/:name
+// @desc   Get city by exact name
+router.get('/byExactName/:name', async (req: Request, res: Response) => {
+  try {
+    const cityByName = await City.findOne({ name: req.params.name })
+    res.json(cityByName)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  POST  api/cities
 // @desc   Add new city
 router.post('/', [
