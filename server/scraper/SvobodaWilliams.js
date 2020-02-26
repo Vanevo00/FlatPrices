@@ -62,6 +62,10 @@ const fetchSvobodaWilliams = async () => {
 
     flat.pricePerMeter = parseFloat((flat.priceCZK / flat.squareMeters).toFixed(2))
 
+    const roomInfo = $('.header--landing__left > h1').text()
+    flat.rooms = roomInfo.substr(4, (roomInfo.indexOf('P') - 4))
+    flat.neighbourhoodPart = roomInfo.split(',')[1].trim()
+
     saveFlat.saveFlat(flat)
   }
 }

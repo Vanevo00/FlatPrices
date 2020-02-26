@@ -51,6 +51,8 @@ const fetchNextReality = async () => {
     const location = $('.info > div:contains("Adresa:") > .col-xs-7').text()
     const address = location.split(',')[0]
     const neighbourhood = location.split(',')[2].trim()
+    const neighbourhoodPart = location.split(',')[1].trim()
+    flat.neighbourhoodPart = neighbourhoodPart
     flat.address = address
     flat.neighbourhood = neighbourhood
 
@@ -59,6 +61,8 @@ const fetchNextReality = async () => {
 
     const price = $('.info div:contains("Cena:") > .col-xs-7').text()
     flat.priceCZK = parseInt(price.split(',')[0].split(' ').join(''))
+
+    flat.rooms = $('.info div:contains("Dispozice") > .col-xs-7').text()
 
     flat.pricePerMeter = parseFloat((flat.priceCZK / flat.squareMeters).toFixed(2))
 

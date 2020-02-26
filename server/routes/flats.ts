@@ -199,7 +199,9 @@ router.post('/', [
     lift,
     contacted,
     visited,
-    neighbourhood
+    neighbourhood,
+    neighbourhoodPart,
+    rooms
   } = req.body
 
   const flatNeighbourhoood = await Neighbourhood.find({ _id: neighbourhood })
@@ -222,7 +224,9 @@ router.post('/', [
       contacted,
       visited,
       neighbourhood,
-      city
+      city,
+      neighbourhoodPart,
+      rooms
     })
 
     const flat = await newFlat.save()

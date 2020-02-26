@@ -41,6 +41,12 @@ const FlatSchema = mongoose.Schema({
   agency: {
     type: String
   },
+  neighbourhoodPart: {
+    type: String
+  },
+  rooms: {
+    type: String
+  },
   neighbourhood: {
     type: mongoose.Schema.Types.ObjectID,
     ref: 'neighbourhood',
