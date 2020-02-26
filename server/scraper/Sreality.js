@@ -70,7 +70,7 @@ const fetchSreality = async () => {
       flat.squareMeters = parseInt(size.split(' ')[0])
 
       const price = $('.norm-price').text()
-      let priceNo = price.split(/\s{1}/)
+      const priceNo = price.split(/\s{1}/)
       priceNo.pop()
       flat.priceCZK = parseInt(priceNo.join(''))
 
@@ -79,7 +79,7 @@ const fetchSreality = async () => {
 
       let agencyName = $('li.line.name').text()
       if (!agencyName) {
-        agencyName = "unknown"
+        agencyName = 'unknown'
       }
       flat.agency = agencyName
 

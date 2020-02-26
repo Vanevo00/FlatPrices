@@ -1,10 +1,12 @@
 import express, { Request, Response } from 'express'
+import { Flat } from '../../client/components/Types/Flat'
 
 const { check, validationResult } = require('express-validator')
 const router = express.Router()
 
 const Flat = require('../models/Flat')
 const Neighbourhood = require('../models/Neighbourhood')
+const sortHighestToLowest = require('../utils/sortHighestToLowest')
 
 // @route  GET api/flats
 // @desc   Get all flats
@@ -109,16 +111,48 @@ router.get('/byAddress/:address', async (req: Request, res: Response) => {
 })
 
 // @route  GET api/flats/avgPriceNeighbourhood/:_id
-// @desc   Get average flat price by neighbourhood
+// @desc   Get average and median flat price per meter by neighbourhood, median below and above 60m2
 router.get('/avgPriceNeighbourhood/:_id', async (req: Request, res: Response) => {
   try {
     const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id })
-    const flatPrices: any[] = []
-    flatsByNeighbourhood.map((flat: any) => {
+    let flatPrices: number[] = []
+    flatsByNeighbourhood.map((flat: Flat) => {
       flatPrices.push(flat.pricePerMeter)
     })
-    const avgPrice = (flatPrices.reduce((a, b) => a + b, 0) / flatPrices.length).toFixed(2)
-    res.json({ avgPrice })
+    flatPrices = sortHighestToLowest(flatPrices)
+
+    const medianPrice = flatPrices[Math.ceil(flatPrices.length / 2) - 1]
+    const avgPrice = parseInt((flatPrices.reduce((a, b) => a + b, 0) / flatPrices.length).toFixed(2))
+
+    const medianFlatsBySize = () => {
+      const smallFlats = flatsByNeighbourhood.filter((flat: Flat) => flat.squareMeters <= 60)
+      const largeFlats = flatsByNeighbourhood.filter((flat: Flat) => flat.squareMeters > 60)
+
+      let smallFlatPrices: number[] = []
+      let largeFlatPrices: number[] = []
+      smallFlats.map((smallFlat: Flat) => {
+        smallFlatPrices.push(smallFlat.pricePerMeter)
+      })
+      largeFlats.map((largeFlat: Flat) => {
+        largeFlatPrices.push(largeFlat.pricePerMeter)
+      })
+      smallFlatPrices = sortHighestToLowest(smallFlatPrices)
+      largeFlatPrices = sortHighestToLowest(largeFlatPrices)
+
+      return {
+        smallFlatPricesMedian: smallFlatPrices[Math.ceil(smallFlatPrices.length / 2) - 1],
+        largeFlatPricesMedian: largeFlatPrices[Math.ceil(largeFlatPrices.length / 2) - 1],
+        smallFlatPrices,
+        largeFlatPrices,
+        flatPrices
+      }
+    }
+
+    res.json({
+      avgPrice,
+      medianPrice,
+      ...medianFlatsBySize()
+    })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')

@@ -45,7 +45,6 @@ export const ResultItem = styled.div`
   }
 `
 
-
 export const GreySmallText = styled.span`
   color: ${props => props.theme.colors.lightGray};
   font-size: ${props => props.theme.fontSizes.xs};

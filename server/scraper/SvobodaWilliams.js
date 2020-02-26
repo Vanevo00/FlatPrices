@@ -4,14 +4,13 @@ const cheerio = require('cheerio')
 
 const siteUrl = 'https://www.svoboda-williams.com/nabidka-nemovitosti/vyhledavani/sale/1/1?cities=9%2C13%2C32%2C5%2C6%2C22%2C8&specials=&minrooms=-1&sizefrom=-1&pricepermeter=0&sort=order&page='
 
-
 const fetchSvobodaWilliams = async () => {
   console.log('Scraping Svoboda & Williams..')
 
   const getPages = async () => {
     const pages = []
     let pageNo = 1
-    while(true) {
+    while (true) {
       try {
         await axios.get(siteUrl + pageNo)
         pages.push(siteUrl + pageNo)
@@ -47,7 +46,7 @@ const fetchSvobodaWilliams = async () => {
     const result = await axios.get(flatUrl)
     const $ = await cheerio.load(result.data)
 
-    let interior = ($('.header--landing__left small').text().trim().split(',')[0].split(/\s{1}/))
+    const interior = ($('.header--landing__left small').text().trim().split(',')[0].split(/\s{1}/))
     interior.pop()
     interior.shift()
     flat.squareMeters = parseInt(interior.join(''))

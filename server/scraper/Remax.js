@@ -67,7 +67,7 @@ const fetchRemax = async () => {
 
       saveFlat.saveFlat(flat)
     } catch {
-      console.log("skip due to error")
+      console.log('skip due to error')
     }
   }
 }
