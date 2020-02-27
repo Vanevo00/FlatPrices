@@ -54,7 +54,7 @@ const fetchSvobodaWilliams = async () => {
     let location = $('.page-detail__header-link__map').text()
     location = location.split(',')
     flat.address = location[location.length - 1].trim()
-    flat.neighbourhood = location[0]
+    flat.neighbourhoodNumber = location[0]
 
     const price = $('.header--landing__right--button h2').text().trim()
     const priceStr = price.split(' ')[0]
@@ -67,9 +67,14 @@ const fetchSvobodaWilliams = async () => {
     if (rooms.match(/^\d/)) {
       flat.rooms = rooms
     } else {
-      flat.rooms = 'not available'
+      flat.rooms = 'Unknown'
     }
-    flat.neighbourhoodPart = roomInfo.split(',')[1].trim()
+    const  neighbourhood = roomInfo.split(',')[1]
+    if (neighbourhood) {
+      flat.neighbourhood = neighbourhood.trim()
+    } else {
+      flat.neighbourhood = 'Unknown'
+    }
 
     saveFlat.saveFlat(flat)
   }

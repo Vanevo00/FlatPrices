@@ -50,11 +50,10 @@ const fetchNextReality = async () => {
 
     const location = $('.info > div:contains("Adresa:") > .col-xs-7').text()
     const address = location.split(',')[0]
-    const neighbourhood = location.split(',')[2].trim()
-    const neighbourhoodPart = location.split(',')[1].trim()
-    flat.neighbourhoodPart = neighbourhoodPart
+    const neighbourhoodNumber = location.split(',')[2].trim()
+    flat.neighbourhood = location.split(',')[1].trim()
     flat.address = address
-    flat.neighbourhood = neighbourhood
+    flat.neighbourhoodNumber = neighbourhoodNumber
 
     const size = $('.info div:contains("Užitná plocha") > .col-xs-7').text()
     flat.squareMeters = parseInt(size.split(' ')[0])

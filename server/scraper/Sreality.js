@@ -13,7 +13,7 @@ const fetchSreality = async () => {
 
   const getLinks = async () => {
     console.log('Fetching flat links..')
-    let currPage = 18
+    let currPage = 1
     const links = []
     let numberLinks = 0
     while (true) {
@@ -54,23 +54,23 @@ const fetchSreality = async () => {
 
       const location = $('.location-text').text()
       const splitLocation = location.split(',')
-      let neighbourhood = ''
+      let neighbourhoodNumber = ''
       if (splitLocation[1]) {
-        neighbourhood = splitLocation[1].split('-')[0]
+        neighbourhoodNumber = splitLocation[1].split('-')[0]
         address = splitLocation[0]
       } else {
-        neighbourhood = splitLocation[0].split('-')[0]
-        address = 'unknown address'
+        neighbourhoodNumber = splitLocation[0].split('-')[0]
+        address = 'Unknownd'
       }
-      neighbourhood = neighbourhood.trim()
-      const neighbourhoodPart = location.split('-')[1]
-      if (neighbourhoodPart) {
-        flat.neighbourhoodPart = (neighbourhoodPart.trim())
+      neighbourhoodNumber = neighbourhoodNumber.trim()
+      const neighbourhood = location.split('-')[1]
+      if (neighbourhood) {
+        flat.neighbourhood = (neighbourhood.trim())
       } else {
-        flat.neighbourhoodPart = 'not available'
+        flat.neighbourhood = 'Unknown'
       }
 
-      flat.neighbourhood = neighbourhood
+      flat.neighbourhoodNumber = neighbourhoodNumber
       flat.address = address
 
       const size = $('label:contains("Užitná plocha:")').next().text().trim()
@@ -86,14 +86,14 @@ const fetchSreality = async () => {
 
       let agencyName = $('li.line.name').text()
       if (!agencyName) {
-        agencyName = 'unknown'
+        agencyName = 'Unknown'
       }
       flat.agency = agencyName
 
       const roomsText = $('.name.ng-binding').text()
       const rooms = roomsText.split(' ')[2]
       if (!rooms) {
-        flat.rooms = 'not available'
+        flat.rooms = 'Unknown'
       } else {
         flat.rooms = rooms.split(/\s{1}/)[0]
       }

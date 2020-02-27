@@ -41,7 +41,7 @@ const FlatSchema = mongoose.Schema({
   agency: {
     type: String
   },
-  neighbourhoodPart: {
+  neighbourhoodNumber: {
     type: String
   },
   rooms: {

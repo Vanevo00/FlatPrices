@@ -29,7 +29,7 @@ const saveFlat = async (flat) => {
     }
 
     // fetch neighbourhood or create it if it doesn't exist
-    let neighbourhood = await axios.get(`http://localhost:4000/api/neighbourhoods/byExactName/${flat.neighbourhood}`)
+    let neighbourhood = await axios.get(`http://localhost:4000/api/neighbourhoods/byExactName/${encodeURIComponent(flat.neighbourhood)}`)
     if (!neighbourhood.data) {
       neighbourhood = await axios.post('http://localhost:4000/api/neighbourhoods/', {
         city: city.data._id,
