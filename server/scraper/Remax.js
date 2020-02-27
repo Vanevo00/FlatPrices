@@ -47,12 +47,17 @@ const fetchRemax = async () => {
 
       const location = $('.pd-header__address').text().trim()
       const [street, area] = location.split(',')
+      const neighbourhoodName = location.split('–')[1].trim()
+      let neighbourhoodPart = neighbourhoodName.split(' ')
+      neighbourhoodPart.pop()
+      neighbourhoodPart = neighbourhoodPart.join(' ')
       const pragueNumber = area.trim().split(' ')[1].substring(0, 2)
       const streetArr = street.split(' ')
       streetArr.shift()
       const address = streetArr.join(' ')
       flat.neighbourhood = `Praha ${pragueNumber.trim()}`
       flat.address = address
+      flat.neighbourhoodPart = neighbourhoodPart
 
       const size = $('.pd-detail-info__row > div:contains("Celková plocha:")').next().text()
       flat.squareMeters = parseInt(size.split(' ')[0])
@@ -64,6 +69,13 @@ const fetchRemax = async () => {
       flat.pricePerMeter = parseFloat((flat.priceCZK / flat.squareMeters).toFixed(2))
 
       flat.mainImage = $('.gallery__main-img-inner > img').attr('src')
+
+      const rooms = $('.pd-detail-info__row > div:contains("Dispozice:")').next().text()
+      if (!rooms) {
+        flat.rooms = 'not available'
+      } else {
+        flat.rooms = rooms
+      }
 
       saveFlat.saveFlat(flat)
     } catch {
