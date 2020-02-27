@@ -13,7 +13,7 @@ const fetchSreality = async () => {
 
   const getLinks = async () => {
     console.log('Fetching flat links..')
-    let currPage = 1
+    let currPage = 18
     const links = []
     let numberLinks = 0
     while (true) {
@@ -63,6 +63,13 @@ const fetchSreality = async () => {
         address = 'unknown address'
       }
       neighbourhood = neighbourhood.trim()
+      const neighbourhoodPart = location.split('-')[1]
+      if (neighbourhoodPart) {
+        flat.neighbourhoodPart = (neighbourhoodPart.trim())
+      } else {
+        flat.neighbourhoodPart = 'not available'
+      }
+
       flat.neighbourhood = neighbourhood
       flat.address = address
 
@@ -82,6 +89,14 @@ const fetchSreality = async () => {
         agencyName = 'unknown'
       }
       flat.agency = agencyName
+
+      const roomsText = $('.name.ng-binding').text()
+      const rooms = roomsText.split(' ')[2]
+      if (!rooms) {
+        flat.rooms = 'not available'
+      } else {
+        flat.rooms = rooms.split(/\s{1}/)[0]
+      }
 
       saveFlat.saveFlat(flat)
     } catch (err) {
