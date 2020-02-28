@@ -69,7 +69,7 @@ const fetchSvobodaWilliams = async () => {
     } else {
       flat.rooms = 'Unknown'
     }
-    const  neighbourhood = roomInfo.split(',')[1]
+    const neighbourhood = roomInfo.split(',')[1]
     if (neighbourhood) {
       flat.neighbourhood = neighbourhood.trim()
     } else {

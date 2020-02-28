@@ -17,4 +17,6 @@ export interface Flat {
   city: City
   floor?: number
   lift?: boolean
+  rooms?: string
+  neighboourhoodNumber?: string
 }

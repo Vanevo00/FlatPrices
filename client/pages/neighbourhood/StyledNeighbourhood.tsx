@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface Props {
+  last?: boolean
+}
+
 export const NeighbourhoodContainer = styled.div`
   padding: 1rem;
 `
@@ -11,16 +15,16 @@ export const AvgPriceTable = styled.div`
   border: solid 1px ${props => props.theme.colors.main};
 `
 
-export const PriceDescription = styled.div`
+export const PriceDescription = styled.div<Props>`
   width: 50%;
   padding: .5rem;
   background-color: ${props => props.theme.colors.main};
   color: ${props => props.theme.colors.lightText};
-  border-bottom: solid 1px ${props => props.theme.colors.lightText};
+  border-bottom: ${props => props.last ? 'none' : `solid 1px ${props.theme.colors.lightText}`};
 `
 
-export const PriceNumber = styled.div`
+export const PriceNumber = styled.div<Props>`
   width: 50%;
   padding: .5rem;
-  border-bottom: solid 1px ${props => props.theme.colors.main};
+  border-bottom: ${props => props.last ? 'none' : `solid 1px ${props.theme.colors.main}`};
 `

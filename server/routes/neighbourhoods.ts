@@ -9,7 +9,7 @@ const Neighbourhood = require('../models/Neighbourhood')
 // @desc   Get all neighbourhoods
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const allNeighbourhoods = await Neighbourhood.find({})
+    const allNeighbourhoods = await Neighbourhood.find({}).sort('name')
     res.json(allNeighbourhoods)
   } catch (err) {
     console.error(err.message)

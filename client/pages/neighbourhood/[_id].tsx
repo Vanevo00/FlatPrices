@@ -3,7 +3,8 @@ import Layout from '../../components/Layout'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
 import { AvgPriceTable, NeighbourhoodContainer, PriceDescription, PriceNumber } from './StyledNeighbourhood'
-import { Heading2 } from '../../components/StyledHeadings'
+import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
+import NeighbourhoodTable from '../../components/Table/NeighbourhoodTable'
 
 interface Props {
   _id: string
@@ -54,10 +55,17 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
               <PriceDescription>Median price</PriceDescription>
               <PriceNumber>{avgPrice.medianPrice.toLocaleString()} CZK per m<sup>2</sup></PriceNumber>
               <PriceDescription>Median price above 60 m<sup>2</sup></PriceDescription>
-              <PriceNumber>{avgPrice.largeFlatPricesMedian.toLocaleString()} CZK per m<sup>2</sup></PriceNumber>
-              <PriceDescription>Median price below 60 m<sup>2</sup></PriceDescription>
-              <PriceNumber>{avgPrice.smallFlatPricesMedian.toLocaleString()} CZK per m<sup>2</sup></PriceNumber>
+              <PriceNumber>{avgPrice.largeFlatPricesMedian ? avgPrice.largeFlatPricesMedian.toLocaleString() : 'N/A'} CZK per m<sup>2</sup></PriceNumber>
+              <PriceDescription last={true}>Median price below 60 m<sup>2</sup></PriceDescription>
+              <PriceNumber last={true}>{avgPrice.smallFlatPricesMedian > 0 ? avgPrice.smallFlatPricesMedian.toLocaleString() : 'N/A'} CZK per m<sup>2</sup></PriceNumber>
             </AvgPriceTable>
+        }
+        {
+          neighbourhood && neighbourhoodFlats && avgPrice &&
+            <>
+              <Heading2Centered>{neighbourhoodFlats.length} Flats in {neighbourhood.name}</Heading2Centered>
+              <NeighbourhoodTable flats={neighbourhoodFlats} medianPrice={avgPrice.medianPrice}/>
+            </>
         }
       </NeighbourhoodContainer>
     </Layout>

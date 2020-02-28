@@ -1,8 +1,7 @@
 const theme = {
   colors: {
     main: '#062770',
-    mainLighter: '#00a00c',
-    mainDarker: '#00440c',
+    success: '#00a00c',
     danger: '#aa0507',
     dangerLighter: '#d80507',
     mainBackground: '#fff',

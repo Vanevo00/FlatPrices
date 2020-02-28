@@ -60,7 +60,7 @@ const fetchSreality = async () => {
         address = splitLocation[0]
       } else {
         neighbourhoodNumber = splitLocation[0].split('-')[0]
-        address = 'Unknownd'
+        address = 'Unknown'
       }
       neighbourhoodNumber = neighbourhoodNumber.trim()
       const neighbourhood = location.split('-')[1]

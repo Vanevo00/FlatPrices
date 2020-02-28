@@ -15,6 +15,10 @@ export const TableContainer = styled.div`
   flex-direction: column;
 `
 
+export const TableContainerFull = styled(TableContainer)`
+  width: 100%;
+`
+
 export const TableRow = styled.div`
   width: 100%;
   min-height: 40px;
@@ -33,6 +37,7 @@ export const TableItem = styled.div<TableItemProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `
 
 export const TableItemHeader = styled(TableItem)`
@@ -51,4 +56,16 @@ export const TableItemButton = styled(TableItem)`
 
 export const StyledLink = styled.a`
   color: inherit;
+`
+
+export const ArrowUp = styled.i`
+  color: ${props => props.theme.colors.danger};
+  position: absolute;
+  left: 0.8rem;
+`
+
+export const ArrowDown = styled.i`
+  color: ${props => props.theme.colors.success};
+  position: absolute;
+  left: 0.8rem;
 `
