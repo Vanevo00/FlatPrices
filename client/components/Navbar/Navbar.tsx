@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { NavbarContainer, NavLink } from './StyledNavbar'
 import Search from './Search'
+import AddNew from './AddNew'
 
 const Navbar = () => {
   return (
@@ -16,7 +17,7 @@ const Navbar = () => {
       </div>
 
       <Search/>
-      <div>test3</div>
+      <AddNew/>
     </NavbarContainer>
   )
 }
