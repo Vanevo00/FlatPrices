@@ -10,7 +10,8 @@
     "build": "rm -rf ./build && tsc",
     "eslint": "eslint \"./**\"",
     "eslint:fix": "eslint --fix \"./**\"",
-    "scrape": "node server/scraper/index.js"
+    "scrape": "node server/scraper/index.js",
+    "scrape:bezrealitky": "node server/scraper/BezRealitky.js"
   },
   "keywords": [],
   "author": "Vojtech Vanek",
