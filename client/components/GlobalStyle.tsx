@@ -9,6 +9,10 @@ const GlobalStyle = createGlobalStyle<ThemeProps<any>>`
     font-family: 'Roboto', sans-serif;
   }
   
+  input {
+    font-family: 'Roboto', sans-serif;
+  }
+  
   body {
     margin: 0;
     padding: 0;

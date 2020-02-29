@@ -82,8 +82,8 @@ const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
               </TableItem>
               <TableItem width={10}>
                 {priceComparison > 0
-                ? <ArrowUp className="fas fa-long-arrow-alt-up"/>
-                : <ArrowDown className="fas fa-long-arrow-alt-down"/>}
+                  ? <ArrowUp className="fas fa-long-arrow-alt-up"/>
+                  : <ArrowDown className="fas fa-long-arrow-alt-down"/>}
                 {priceComparison.toLocaleString()} CZK
               </TableItem>
               <TableItem width={10}>

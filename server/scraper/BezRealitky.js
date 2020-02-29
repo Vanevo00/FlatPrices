@@ -13,18 +13,18 @@ const fetchBezRealitky = async () => {
       '--headless',
       '--disable-gpu',
       '--window-size=1920x1080'
-    ]})
+    ]
+  })
   const page = await browser.newPage()
   page.setDefaultNavigationTimeout(0)
 
-
   const getLinks = async () => {
     await page.goto(siteUrl, {
-      waitUntil: 'networkidle2',
+      waitUntil: 'networkidle2'
     })
 
     try {
-      await page.screenshot({path: './server/scraper/testBefore.png', fullPage: true})
+      await page.screenshot({ path: './server/scraper/testBefore.png', fullPage: true })
       for (let i = 0; i < 1; i++) {
         await page.evaluate(() => {
           try {
@@ -66,7 +66,7 @@ const fetchBezRealitky = async () => {
       const location = $('.heading__perex').text()
       const locationTrim = location.trim()
       const area = locationTrim.split('-')[1]
-      let neighbourhood = area.trim().split(' ')
+      const neighbourhood = area.trim().split(' ')
       console.log(neighbourhood)
       // flat.neighbourhood = neighbourhood.trim()
       // console.log(flat.neighbourhood)
