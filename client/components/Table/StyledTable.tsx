@@ -65,7 +65,7 @@ export const ArrowUp = styled.i`
 `
 
 export const ArrowDown = styled.i`
-  color: ${props => props.theme.colors.success};
+  color: ${props => props.theme.colors.successText};
   position: absolute;
   left: 0.8rem;
 `

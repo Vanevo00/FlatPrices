@@ -204,8 +204,6 @@ router.post('/', [
     rooms
   } = req.body
 
-  console.log('neighbourhood', neighbourhood)
-
   const flatNeighbourhoood = await Neighbourhood.findOne({ _id: neighbourhood })
 
   const city = flatNeighbourhoood.city
