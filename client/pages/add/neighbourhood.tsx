@@ -6,12 +6,12 @@ import Layout from '../../components/Layout'
 import { Neighbourhood } from '../../components/Types/Neighbourhood'
 import NeighbourhoodForm from '../../components/Forms/NeighbourhoodForm'
 
-const AddCity = () => {
+const AddNeighbourhood = () => {
   const [successMessage, setSuccessMessage] = useState('')
 
   const sendAddNeighbourhood = async (neighbourhood: Neighbourhood) => {
     try {
-      const data = await axios.post('http://localhost:4000/api/neighbourhoods/', {
+      const data = await axios.post('http://localhost:4000/api/neighbourhoods\/', {
         ...neighbourhood
       })
       setSuccessMessage(`${data.data.name} successfully added`)
@@ -33,4 +33,4 @@ const AddCity = () => {
   )
 }
 
-export default AddCity
+export default AddNeighbourhood

@@ -28,8 +28,7 @@ const Cities = () => {
 
   const renderCitiesAndNeighbourhoods = (city: City) => {
     const cityNeighbourhoods = neighbourhoods.filter((neighbourhood: Neighbourhood) => {
-      // @ts-ignore
-      return neighbourhood.city === city._id
+      return neighbourhood.city._id === city._id
     })
 
     const neighbourhoodItems = cityNeighbourhoods.map((cityNeighbourhood: Neighbourhood) => {

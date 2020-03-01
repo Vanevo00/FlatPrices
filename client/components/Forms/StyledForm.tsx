@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 interface Props {
   full?: boolean
+  last?: boolean
 }
 
 export const FormContainer = styled.div`
@@ -18,13 +19,14 @@ export const FormContainer = styled.div`
 export const FormRow = styled.div`
   width: 100%;
   margin-bottom: 1rem;
+  color: ${props => props.theme.colors.main};
 `
 
 export const FormInput = styled.input<Props>`
   border: none;
   border-bottom: 1px solid ${props => props.theme.colors.lightGray};
-  width: ${props => props.full ? '100%' : '45%'};
-  margin-right: ${props => props.full ? '0' : '1rem'};
+  width: ${props => props.full ? '100%' : '48%'};
+  margin-right: ${props => props.full ? '0' : props.last ? '0' : '1rem'};
   font-size: ${props => props.theme.fontSizes.s};
   color: ${props => props.theme.colors.main};
   

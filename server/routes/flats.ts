@@ -204,9 +204,11 @@ router.post('/', [
     rooms
   } = req.body
 
-  const flatNeighbourhoood = await Neighbourhood.find({ _id: neighbourhood })
+  console.log('neighbourhood', neighbourhood)
 
-  const city = flatNeighbourhoood[0].city
+  const flatNeighbourhoood = await Neighbourhood.findOne({ _id: neighbourhood })
+
+  const city = flatNeighbourhoood.city
 
   const pricePerMeter = (priceCZK / squareMeters).toFixed(2)
 
