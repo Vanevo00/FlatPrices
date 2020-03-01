@@ -46,13 +46,21 @@ export const FormButton = styled.button`
 
 export const FormSuccessMessage = styled.div`
   width: 100%;
-  height: 30px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.theme.colors.success};
-  color: ${props => props.theme.colors.lightText};
+  background-color: ${props => props.theme.colors.successBackground};
+  color: ${props => props.theme.colors.successText};
+  border-color: ${props => props.theme.colors.successBorder}; 
+  border: 1px solid transparent;
   margin-top: 1rem;
   border-radius: 4px;
-  
+`
+
+export const FormSelect = styled.select`
+  width: 100%;
+  height: 30px;
+  font-size: ${props => props.theme.fontSizes.s};
+  color: ${props => props.theme.colors.main};
 `

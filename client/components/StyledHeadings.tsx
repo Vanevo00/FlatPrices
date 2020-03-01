@@ -6,7 +6,7 @@ export const Heading1 = styled.h1`
 
 export const Heading1Centered = styled.h1`
   text-align: center;
-  margin-top: 1rem;
+  margin: 1rem 0;
 `
 
 export const Heading2 = styled.h2`

@@ -1,7 +1,9 @@
 const theme = {
   colors: {
     main: '#062770',
-    success: '#00a00c',
+    successText: '#00a00c',
+    successBackground: '#d4edda',
+    successBorder: '#c3e6cb',
     danger: '#aa0507',
     dangerLighter: '#d80507',
     mainBackground: '#fff',

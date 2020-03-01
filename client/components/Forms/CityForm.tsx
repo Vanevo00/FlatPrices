@@ -33,10 +33,10 @@ const CityForm = ({ buttonText, onSubmit, successMessage }: Props) => {
     <form onSubmit={onSubmitForm}>
       <FormContainer>
         <FormRow>
-          <FormInput type='text' full={true} name='name' placeholder='City Name' value={inputValues.name} onChange={onChange}/>
+          <FormInput type='text' full={true} name='name' placeholder='City Name' value={inputValues.name} onChange={onChange} required/>
         </FormRow>
         <FormRow>
-          <FormInput type='text' full={true} name='country' placeholder='Country' value={inputValues.country} onChange={onChange}/>
+          <FormInput type='text' full={true} name='country' placeholder='Country' value={inputValues.country} onChange={onChange} required/>
         </FormRow>
         <FormButton type='submit'>{buttonText}</FormButton>
         {

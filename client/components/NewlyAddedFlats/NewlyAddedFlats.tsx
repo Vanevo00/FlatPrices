@@ -8,7 +8,7 @@ import {
   TableRow,
   TableRowHeader
 } from '../Table/StyledTable'
-import { Heading1 } from '../StyledHeadings'
+import { Heading1Centered } from '../StyledHeadings'
 import Spinner from '../Spinner/Spinner'
 import { Flat } from '../Types/Flat'
 
@@ -26,7 +26,7 @@ const NewlyAddedFlats = () => {
 
   return (
     <>
-      <Heading1>Newest Flats</Heading1>
+      <Heading1Centered>Newest Flats</Heading1Centered>
       <TableContainer>
         <TableRowHeader>
           <TableItemHeader width={22}>

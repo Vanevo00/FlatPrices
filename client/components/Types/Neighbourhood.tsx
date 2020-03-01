@@ -3,5 +3,5 @@ import { City } from './City'
 export interface Neighbourhood {
   _id: string
   name: string
-  city: City
+  city: string | City
 }
