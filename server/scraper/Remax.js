@@ -13,11 +13,11 @@ const kolinUrl = 'https://www.remax-czech.cz/reality/vyhledavani/?desc_text=Kol%
 const fetchRemax = async (searchedCity) => {
   let siteUrl
 
-  switch(searchedCity) {
-    case('Praha'):
+  switch (searchedCity) {
+    case ('Praha'):
       siteUrl = pragueUrl
       break
-    case('Kolín'):
+    case ('Kolín'):
       siteUrl = kolinUrl
       break
     default:
@@ -103,7 +103,7 @@ const fetchRemax = async (searchedCity) => {
   }
 }
 
-readline.question(`Select a city to scrape: Praha, Kolín: `, (userInput) => {
+readline.question('Select a city to scrape: Praha, Kolín: ', (userInput) => {
   fetchRemax(userInput)
   readline.close()
 })

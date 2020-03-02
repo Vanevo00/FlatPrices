@@ -5,6 +5,10 @@ interface TableItemProps {
   last?: boolean
 }
 
+interface ConfirmDeleteProps {
+  selected?: boolean
+}
+
 export const TableContainer = styled.div`
   margin: 0 auto;
   width: 90%;
@@ -52,6 +56,43 @@ export const TableItemButton = styled(TableItem)`
     background-color: ${props => props.theme.colors.main};
     color: ${props => props.theme.colors.lightText};
   }
+`
+
+export const TableItemDeleteButton = styled(TableItemButton)`
+  position: relative;
+  
+  &:hover {
+    background-color: ${props => props.theme.colors.danger};
+  }
+`
+
+export const ConfirmDeleteContainer = styled.div<ConfirmDeleteProps>`
+  background-color: ${props => props.theme.colors.formBackground};
+  color: ${props => props.theme.colors.mainText};
+  display: flex;
+  transition: .75s;
+  border-left: solid 1px ${props => props.theme.colors.mainText};
+  padding: 0 .5rem;
+  z-index: 2;
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: ${props => props.selected ? '250px' : '0'};
+  opacity: ${props => props.selected ? '1' : '0'};
+  align-items: center;
+  height: 100%;
+  box-shadow: 0px 2px 16px rgba(45, 45, 45, 0.188374);
+`
+
+export const ConfirmButton = styled.button`
+  color: ${props => props.theme.colors.lightText};
+  background-color: ${props => props.theme.colors.danger};
+  font-size: ${props => props.theme.fontSizes.xs};
+  padding: .25rem;
+  margin-left: .5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 `
 
 export const StyledLink = styled.a`

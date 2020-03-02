@@ -11,7 +11,6 @@ const AddFlat = () => {
 
   const sendAddFlat = async (flat: Flat) => {
     try {
-      console.log("sent flat", flat)
       const data = await axios.post('http://localhost:4000/api/flats/', {
         ...flat
       })

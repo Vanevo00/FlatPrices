@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 import { Flat } from '../Types/Flat'
 import {
   ArrowDown,
@@ -6,11 +7,12 @@ import {
   StyledLink,
   TableContainerFull,
   TableItem,
-  TableItemButton,
+  TableItemButton, TableItemDeleteButton,
   TableItemHeader,
   TableRow,
   TableRowHeader
 } from './StyledTable'
+import ConfirmDelete from './ConfirmDelete'
 
 interface Props {
   flats: Flat[]
@@ -18,6 +20,22 @@ interface Props {
 }
 
 const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
+  const [selectedForDelete, setSelectedForDelete] = useState()
+
+  const handleDeleteClick = (_id: string) => {
+      if (_id === selectedForDelete) {
+        setSelectedForDelete(null)
+      } else {
+        setSelectedForDelete(_id)
+      }
+  }
+
+  const confirmDelete = async (_id: string) => {
+    await axios.delete(`http://localhost:4000/api/flats/${_id}`)
+    location.reload()
+  }
+
+
   return (
     <TableContainerFull>
       <TableRowHeader>
@@ -46,11 +64,14 @@ const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
         <TableItemHeader width={10}>
           Date Added
         </TableItemHeader>
-        <TableItemHeader width={10}>
+        <TableItemHeader width={7}>
           Detail
         </TableItemHeader>
-        <TableItemHeader width={3} last={true}>
+        <TableItemHeader width={3}>
           <i className="fas fa-globe-europe"/>
+        </TableItemHeader>
+        <TableItemHeader width={3} last={true}>
+          <i className="fas fa-trash"/>
         </TableItemHeader>
       </TableRowHeader>
 
@@ -89,14 +110,18 @@ const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
               <TableItem width={10}>
                 {date}
               </TableItem>
-              <TableItemButton width={10}>
+              <TableItemButton width={7}>
                   Detail
               </TableItemButton>
-              <TableItemButton width={3} last={true}>
+              <TableItemButton width={3}>
                 <StyledLink href={flat.link} target='_blank'>
                   <i className="fas fa-globe-europe"/>
                 </StyledLink>
               </TableItemButton>
+              <TableItemDeleteButton width={3} last={true} onClick={() => handleDeleteClick(flat._id)}>
+                <i className="fas fa-trash"/>
+                <ConfirmDelete address={flat.address} flatId={flat._id} selected={flat._id === selectedForDelete} confirmDelete={confirmDelete}/>
+              </TableItemDeleteButton>
             </TableRow>
           )
         })
