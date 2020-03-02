@@ -11,7 +11,8 @@
     "eslint": "eslint \"./**\"",
     "eslint:fix": "eslint --fix \"./**\"",
     "scrape": "node server/scraper/index.js",
-    "scrape:bezrealitky": "node server/scraper/BezRealitky.js"
+    "scrape:bezrealitky": "node server/scraper/BezRealitky.js",
+    "scrape:remax": "node server/scraper/Remax.js"
   },
   "keywords": [],
   "author": "Vojtech Vanek",

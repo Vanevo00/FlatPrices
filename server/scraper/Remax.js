@@ -1,14 +1,33 @@
 const saveFlat = require('./saveFlat')
 const axios = require('axios')
 const cheerio = require('cheerio')
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
 
-const siteUrl = 'https://www.remax-czech.cz/reality/vyhledavani/?regions%5B19%5D%5B19%5D=on&regions%5B19%5D%5B27%5D=on&regions%5B19%5D%5B35%5D=on&regions%5B19%5D%5B51%5D=on&regions%5B19%5D%5B60%5D=on&regions%5B19%5D%5B78%5D=on&regions%5B19%5D%5B86%5D=on&sale=1&types%5B4%5D=on'
+const pragueUrl = 'https://www.remax-czech.cz/reality/vyhledavani/?regions%5B19%5D%5B19%5D=on&regions%5B19%5D%5B27%5D=on&regions%5B19%5D%5B35%5D=on&regions%5B19%5D%5B51%5D=on&regions%5B19%5D%5B60%5D=on&regions%5B19%5D%5B78%5D=on&regions%5B19%5D%5B86%5D=on&sale=1&types%5B4%5D=on'
 
-const fetchRemax = async () => {
-  console.log('Scraping Remax..')
+const kolinUrl = 'https://www.remax-czech.cz/reality/vyhledavani/?desc_text=Kol%C3%ADn&regions%5B27%5D%5B3204%5D=on&sale=1&types%5B4%5D=on'
+
+const fetchRemax = async (searchedCity) => {
+  let siteUrl
+
+  switch(searchedCity) {
+    case('Praha'):
+      siteUrl = pragueUrl
+      break
+    case('Kolín'):
+      siteUrl = kolinUrl
+      break
+    default:
+      return console.log('Invalid city name, try again')
+  }
+
+  console.log(`Scraping ${searchedCity} flats listed by Remax..`)
 
   const getPages = async () => {
-    let lastPage = 0
+    let lastPage = 1
     const fetchedPage = await axios.get(siteUrl)
     const $ = await cheerio.load(fetchedPage.data)
     $('.pagination li a').each((i, el) => {
@@ -39,7 +58,7 @@ const fetchRemax = async () => {
       const flat = {
         agency: 'Remax',
         link: flatUrl,
-        city: 'Praha'
+        city: searchedCity
       }
 
       const result = await axios.get(flatUrl)
@@ -84,4 +103,7 @@ const fetchRemax = async () => {
   }
 }
 
-module.exports = fetchRemax
+readline.question(`Select a city to scrape: Praha, Kolín: `, (userInput) => {
+  fetchRemax(userInput)
+  readline.close()
+})
