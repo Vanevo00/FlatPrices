@@ -13,7 +13,7 @@ import Spinner from '../../components/Spinner/Spinner'
 import { City } from '../../components/Types/City'
 import { Neighbourhood } from '../../components/Types/Neighbourhood'
 import { Flat } from '../../components/Types/Flat'
-import { TableItem } from '../../components/Table/StyledTable'
+import Link from 'next/link'
 
 interface Props {
   term: string
@@ -50,9 +50,12 @@ const Search = ({ term }: Props) => {
           <Header>Neighbourhoods {searchResults && `(${searchResults.neighbourhoods.length} results)`}</Header>
           {isLoading && <Spinner/>}
           {searchResults && searchResults.neighbourhoods.length > 0 && searchResults.neighbourhoods.map((neighbourhood: Neighbourhood) =>
-            <ResultItem key={neighbourhood._id}>
-              {neighbourhood.name}&nbsp;<GreySmallText>{neighbourhood.city.name}</GreySmallText>
-            </ResultItem>
+            <Link href={`/neighbourhood/${neighbourhood._id}`}>
+              <ResultItem key={neighbourhood._id}>
+                {neighbourhood.name}&nbsp;<GreySmallText>{neighbourhood.city.name}</GreySmallText>
+              </ResultItem>
+            </Link>
+
           )}
         </ResultsTable>
 

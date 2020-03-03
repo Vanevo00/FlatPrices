@@ -11,6 +11,7 @@ import {
   SearchContainer,
   StyledInput
 } from './StyledSearch'
+import Link from 'next/link'
 
 const searchLimit = 3
 
@@ -71,11 +72,12 @@ const Search = () => {
           {
             neighbourhoods && neighbourhoods.map((neighbourhood: any) => {
               return (
-                <ResultItem key={neighbourhood._id}>
-                  <p><strong>{neighbourhood.name}</strong></p>
-                  <p>neighbourhood</p>
-                </ResultItem>
-
+                <Link href={`/neighbourhood/${neighbourhood._id}`}>
+                  <ResultItem key={neighbourhood._id}>
+                    <p><strong>{neighbourhood.name}</strong></p>
+                    <p>neighbourhood</p>
+                  </ResultItem>
+                </Link>
               )
             })
           }
