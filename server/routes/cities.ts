@@ -17,6 +17,18 @@ router.get('/', async (req: Request, res: Response) => {
   }
 })
 
+// @route  GET api/cities/:_id
+// @desc   Get city by id
+router.get('/:_id', async (req: Request, res: Response) => {
+  try {
+    const city = await City.findOne({ _id: req.params._id })
+    res.json(city)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  GET api/cities/byName/:name
 // @desc   Search cities by name
 router.get('/byName/:name', async (req: Request, res: Response) => {

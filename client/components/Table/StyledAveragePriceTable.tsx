@@ -4,10 +4,6 @@ interface Props {
   last?: boolean
 }
 
-export const NeighbourhoodContainer = styled.div`
-  padding: 1rem;
-`
-
 export const AvgPriceTable = styled.div`
   width: 500px;
   display: flex;

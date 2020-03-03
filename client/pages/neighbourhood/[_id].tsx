@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
-import { AvgPriceTable, NeighbourhoodContainer, PriceDescription, PriceNumber } from './StyledNeighbourhood'
+import { AvgPriceTable, PriceDescription, PriceNumber } from '../../components/Table/StyledAveragePriceTable'
 import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
 import NeighbourhoodTable from '../../components/Table/NeighbourhoodTable'
+import { GeneralContainer } from '../../components/StyledContainers'
 
 interface Props {
   _id: string
@@ -30,18 +31,12 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
   }
 
   useEffect(() => {
-    console.log('neighbourhood', neighbourhood)
-    console.log('neighbourhoodFlats', neighbourhoodFlats)
-    console.log('avgPrice', avgPrice)
-  }, [neighbourhood, neighbourhoodFlats, avgPrice])
-
-  useEffect(() => {
     fetchData()
   }, [])
 
   return (
     <Layout>
-      <NeighbourhoodContainer>
+      <GeneralContainer>
         {isLoading && <Spinner/>}
         {
           neighbourhood &&
@@ -67,7 +62,7 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
               <NeighbourhoodTable flats={neighbourhoodFlats} medianPrice={avgPrice.medianPrice}/>
             </>
         }
-      </NeighbourhoodContainer>
+      </GeneralContainer>
     </Layout>
   )
 }
