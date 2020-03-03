@@ -29,7 +29,7 @@ const NewlyAddedFlats = () => {
       <Heading1Centered>Newest Flats</Heading1Centered>
       <TableContainer>
         <TableRowHeader>
-          <TableItemHeader width={22}>
+          <TableItemHeader width={16}>
             Address
           </TableItemHeader>
           <TableItemHeader width={12}>
@@ -38,7 +38,7 @@ const NewlyAddedFlats = () => {
           <TableItemHeader width={12}>
             Neighbourhood
           </TableItemHeader>
-          <TableItemHeader width={10}>
+          <TableItemHeader width={6}>
             m<sup>2</sup>
           </TableItemHeader>
           <TableItemHeader width={16}>
@@ -46,6 +46,9 @@ const NewlyAddedFlats = () => {
           </TableItemHeader>
           <TableItemHeader width={16}>
             Price/m<sup>2</sup>
+          </TableItemHeader>
+          <TableItemHeader width={10}>
+            Added at
           </TableItemHeader>
           <TableItemHeader width={10}>
             Detail
@@ -59,9 +62,12 @@ const NewlyAddedFlats = () => {
           !newFlats
             ? <Spinner/>
             : newFlats.map((flat: Flat) => {
+              const createdAt = new Date(flat.createdAt)
+              const date = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}`
+
               return (
                 <TableRow key={flat._id}>
-                  <TableItem width={22}>
+                  <TableItem width={16}>
                     {flat.address}
                   </TableItem>
                   <TableItem width={12}>
@@ -70,7 +76,7 @@ const NewlyAddedFlats = () => {
                   <TableItem width={12}>
                     {flat.neighbourhood.name}
                   </TableItem>
-                  <TableItem width={10}>
+                  <TableItem width={6}>
                     {flat.squareMeters}
                   </TableItem>
                   <TableItem width={16}>
@@ -78,6 +84,9 @@ const NewlyAddedFlats = () => {
                   </TableItem>
                   <TableItem width={16}>
                     {flat.pricePerMeter.toLocaleString()} CZK
+                  </TableItem>
+                  <TableItem width={10}>
+                    {date}
                   </TableItem>
                   <TableItemButton width={10}>
                   Detail
