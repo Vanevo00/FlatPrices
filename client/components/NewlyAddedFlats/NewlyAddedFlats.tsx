@@ -71,16 +71,16 @@ const NewlyAddedFlats = () => {
                   <TableItem width={16}>
                     {flat.address}
                   </TableItem>
-                  <TableItem width={12}>
+                  <TableItemButton width={12}>
                     <Link href={`/city/${flat.city._id}`}>
                       {flat.city.name}
                     </Link>
-                  </TableItem>
-                  <TableItem width={12}>
+                  </TableItemButton>
+                  <TableItemButton width={12}>
                     <Link href={`/neighbourhood/${flat.neighbourhood._id}`}>
                       {flat.neighbourhood.name}
                     </Link>
-                  </TableItem>
+                  </TableItemButton>
                   <TableItem width={6}>
                     {flat.squareMeters}
                   </TableItem>

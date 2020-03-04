@@ -56,6 +56,11 @@ export const TableItemButton = styled(TableItem)`
     background-color: ${props => props.theme.colors.main};
     color: ${props => props.theme.colors.lightText};
   }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `
 
 export const TableItemDeleteButton = styled(TableItemButton)`
