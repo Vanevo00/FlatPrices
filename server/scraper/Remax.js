@@ -10,6 +10,8 @@ const pragueUrl = 'https://www.remax-czech.cz/reality/vyhledavani/?regions%5B19%
 
 const kolinUrl = 'https://www.remax-czech.cz/reality/vyhledavani/?desc_text=Kol%C3%ADn&regions%5B27%5D%5B3204%5D=on&sale=1&types%5B4%5D=on'
 
+const kralupyUrl = ''
+
 const fetchRemax = async (searchedCity) => {
   let siteUrl
 

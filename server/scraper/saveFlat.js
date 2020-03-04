@@ -41,7 +41,7 @@ const saveFlat = async (flat) => {
     const newFlat = await axios.post('http://localhost:4000/api/flats/', {
       ...flat,
       neighbourhood: neighbourhood.data._id,
-      city: neighbourhood.data.city
+      city: city.data._id
     })
 
     console.log(newFlat.data)

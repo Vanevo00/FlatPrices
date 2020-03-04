@@ -11,6 +11,7 @@ import {
 import { Heading1Centered } from '../StyledHeadings'
 import Spinner from '../Spinner/Spinner'
 import { Flat } from '../Types/Flat'
+import Link from 'next/link'
 
 const NewlyAddedFlats = () => {
   const [newFlats, setNewFlats] = useState()
@@ -71,10 +72,14 @@ const NewlyAddedFlats = () => {
                     {flat.address}
                   </TableItem>
                   <TableItem width={12}>
-                    {flat.city.name}
+                    <Link href={`/city/${flat.city._id}`}>
+                      {flat.city.name}
+                    </Link>
                   </TableItem>
                   <TableItem width={12}>
-                    {flat.neighbourhood.name}
+                    <Link href={`/neighbourhood/${flat.neighbourhood._id}`}>
+                      {flat.neighbourhood.name}
+                    </Link>
                   </TableItem>
                   <TableItem width={6}>
                     {flat.squareMeters}
