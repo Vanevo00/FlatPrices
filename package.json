@@ -13,7 +13,8 @@
     "scrape": "node server/scraper/index.js",
     "scrape:bezrealitky": "node server/scraper/BezRealitky.js",
     "scrape:remax": "node server/scraper/Remax.js",
-    "scrape:sreality": "node server/scraper/Sreality.js"
+    "scrape:sreality": "node server/scraper/Sreality.js",
+    "scrape:rents": "node server/scraper/rents.js"
   },
   "keywords": [],
   "author": "Vojtech Vanek",
