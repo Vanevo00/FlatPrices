@@ -17,7 +17,7 @@ const NewlyAddedFlats = () => {
   const [newFlats, setNewFlats] = useState()
 
   const fetchFlats = async () => {
-    const flats = await axios.get('http://localhost:4000/api/flats/new')
+    const flats = await axios.get('http://localhost:4000/api/flats/new/30')
     setNewFlats(flats.data)
   }
 

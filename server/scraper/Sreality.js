@@ -12,6 +12,18 @@ const kolinUrl = 'https://www.sreality.cz/hledani/prodej/byty?region=obec%20Kol%
 
 const kralupyUrl = 'https://www.sreality.cz/hledani/prodej/byty?region=obec%20Kralupy%20nad%20Vltavou&region-id=3878&region-typ=municipality'
 
+const hraniceUrl = 'https://www.sreality.cz/hledani/prodej/byty/olomoucky-kraj?region=obec%20Hranice&region-id=104&region-typ=municipality'
+
+const ustiUrl = 'https://www.sreality.cz/hledani/prodej/byty/ustecky-kraj?region=obec%20%C3%9Ast%C3%AD%20nad%20Labem&region-id=1244&region-typ=municipality'
+
+const novyJicinUrl = 'https://www.sreality.cz/hledani/prodej/byty/moravskoslezsky-kraj?region=obec%20Nov%C3%BD%20Ji%C4%8D%C3%ADn&region-id=4612&region-typ=municipality'
+
+const valmezUrl = 'https://www.sreality.cz/hledani/prodej/byty/zlinsky-kraj?region=obec%20Vala%C5%A1sk%C3%A9%20Mezi%C5%99%C3%AD%C4%8D%C3%AD&region-id=610&region-typ=municipality'
+
+const olomoucUrl = 'https://www.sreality.cz/hledani/prodej/byty/olomoucky-kraj?region=obec%20Olomouc&region-id=1&region-typ=municipality'
+
+const mostUrl = 'https://www.sreality.cz/hledani/prodej/byty/ustecky-kraj?region=obec%20Most&region-id=2048&region-typ=municipality'
+
 const fetchSreality = async (searchedCity) => {
   let siteUrl
 
@@ -24,6 +36,24 @@ const fetchSreality = async (searchedCity) => {
       break
     case ('Kralupy nad Vltavou'):
       siteUrl = kralupyUrl
+      break
+    case ('Hranice'):
+      siteUrl = hraniceUrl
+      break
+    case ('Ústí nad Labem'):
+      siteUrl = ustiUrl
+      break
+    case ('Valašské Meziříčí'):
+      siteUrl = valmezUrl
+      break
+    case ('Nový Jičín'):
+      siteUrl = novyJicinUrl
+      break
+    case ('Olomouc'):
+      siteUrl = olomoucUrl
+      break
+    case ('Most'):
+      siteUrl = mostUrl
       break
     default:
       return console.log('Invalid city name, try again')
@@ -131,7 +161,7 @@ const fetchSreality = async (searchedCity) => {
   await browser.close()
 }
 
-readline.question('Select a city to scrape: Praha, Kolín, Kralupy nad Vltavou: ', (userInput) => {
+readline.question('Select a city to scrape: Praha, Kolín, Kralupy nad Vltavou, Hranice, Ústí nad Labem, Most, Olomouc, Nový Jičín, Valašské Meziříčí: ', (userInput) => {
   fetchSreality(userInput)
   readline.close()
 })

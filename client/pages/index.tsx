@@ -5,7 +5,6 @@ import NewlyAddedFlats from '../components/NewlyAddedFlats/NewlyAddedFlats'
 const Index = () => {
   return (
     <Layout>
-      Index
       <NewlyAddedFlats/>
     </Layout>
   )
