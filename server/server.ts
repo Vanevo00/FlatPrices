@@ -18,6 +18,7 @@ app.use(cors()) // enable CORS
 app.use('/api/cities', require('./routes/cities'))
 app.use('/api/neighbourhoods', require('./routes/neighbourhoods'))
 app.use('/api/flats', require('./routes/flats'))
+app.use('/api/rents', require('./routes/rents'))
 app.use('/api/search', require('./routes/search'))
 
 app.get('/', (req: Request, res: Response) => res.send('Welcome to flat prices API'))
