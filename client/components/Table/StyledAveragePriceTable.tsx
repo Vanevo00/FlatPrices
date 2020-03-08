@@ -4,7 +4,13 @@ interface Props {
   last?: boolean
 }
 
-export const AvgPriceTable = styled.div`
+export const AvgContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
+
+export const StyledAvgPriceTable = styled.div`
   width: 500px;
   display: flex;
   flex-wrap: wrap;
