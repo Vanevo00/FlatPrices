@@ -18,6 +18,10 @@ const hraniceUrl = 'https://www.sreality.cz/hledani/pronajem/byty?region=obec%20
 
 const valmezUrl = 'https://www.sreality.cz/hledani/pronajem/byty?region=obec%20Vala%C5%A1sk%C3%A9%20Mezi%C5%99%C3%AD%C4%8D%C3%AD&region-id=610&region-typ=municipality'
 
+const berounUrl = 'https://www.sreality.cz/hledani/pronajem/byty?region=obec%20Beroun&region-id=3579&region-typ=municipality'
+
+const pribramUrl = 'https://www.sreality.cz/hledani/pronajem/byty?region=obec%20P%C5%99%C3%ADbram&region-id=4306&region-typ=municipality'
+
 const fetchRents = async (searchedCity) => {
   let siteUrl
 
@@ -39,6 +43,12 @@ const fetchRents = async (searchedCity) => {
       break
     case ('Valašské Meziříčí'):
       siteUrl = valmezUrl
+      break
+    case ('Beroun'):
+      siteUrl = berounUrl
+      break
+    case ('Příbram'):
+      siteUrl = pribramUrl
       break
     default:
       return console.log('Invalid city name, try again')
@@ -137,7 +147,7 @@ const fetchRents = async (searchedCity) => {
   await browser.close()
 }
 
-readline.question('Select a city to scrape: Kolín, Kralupy nad Vltavou, Ústí nad Labem, Most, Valašské Meziříčí, Hranice: ', (userInput) => {
+readline.question('Select a city to scrape: Kolín, Kralupy nad Vltavou, Ústí nad Labem, Most, Valašské Meziříčí, Hranice, Beroun, Příbram: ', (userInput) => {
   fetchRents(userInput)
   readline.close()
 })

@@ -43,7 +43,7 @@ const CityDetail = ({ _id }: Props) => {
   }, [])
 
   return (
-    <Layout>
+    <Layout title={city && city.name}>
       <GeneralContainer>
         {isLoading && <Spinner/>}
         {
