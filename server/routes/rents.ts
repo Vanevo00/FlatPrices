@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator')
 const router = express.Router()
 const Neighbourhood = require('../models/Neighbourhood')
 const sortHighestToLowest = require('../utils/sortHighestToLowest')
+const getRentsAverageAndMedian = require('../utils/getRentsAverageAndMedian')
 
 const Rent = require('../models/Rent')
 
@@ -36,19 +37,13 @@ router.get('/avgRentCity/:_id', async (req: Request, res: Response) => {
     const avgRent = parseInt((rentPrices.reduce((a, b) => a + b, 0) / rentPrices.length).toFixed(2))
 
     const medianFlatsByDispositions = () => {
-      const rents1kk = rentsByCity.filter((rent: Rent) => rent.rooms === '1+kk')
-
-      let rents1kkAmounts: number[] = []
-
-      rents1kk.map((rent: Rent) => {
-        rents1kkAmounts.push(rent.rentCZK)
-      })
-
-      rents1kkAmounts = sortHighestToLowest(rents1kkAmounts)
-
       return {
-        rents1kkAmounts,
-        rents1kkMedian: rents1kkAmounts[Math.ceil(rents1kkAmounts.length / 2) - 1],
+        rents1kk: getRentsAverageAndMedian(rentsByCity.filter((rent: Rent) => rent.rooms === '1+kk')),
+        rents1plus1: getRentsAverageAndMedian(rentsByCity.filter((rent: Rent) => rent.rooms === '1+1')),
+        rents2kk: getRentsAverageAndMedian(rentsByCity.filter((rent: Rent) => rent.rooms === '2+kk')),
+        rents2plus1: getRentsAverageAndMedian(rentsByCity.filter((rent: Rent) => rent.rooms === '2+1')),
+        rents3kk: getRentsAverageAndMedian(rentsByCity.filter((rent: Rent) => rent.rooms === '3+kk')),
+        rents3plus1: getRentsAverageAndMedian(rentsByCity.filter((rent: Rent) => rent.rooms === '3+1')),
       }
     }
 
