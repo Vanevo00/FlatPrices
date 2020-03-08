@@ -6,7 +6,7 @@ const readline = require('readline').createInterface({
   output: process.stdout
 })
 
-const pragueUrl = 'https://www.sreality.cz/hledani/prodej/byty/praha-3,praha-2,praha-1,praha-5,praha-6,praha-7,praha-8,praha-10?stavba=cihlova&vlastnictvi=osobni&patro-od=2&patro-do=100&plocha-od=85&plocha-do=10000000000&cena-od=0&cena-do=18000000'
+const pragueUrl = 'https://www.sreality.cz/hledani/prodej/byty/praha-10,praha-8,praha-7,praha-6,praha-5,praha-1,praha-2,praha-3?stavba=cihlova,ostatni&vlastnictvi=osobni&patro-od=2&patro-do=100&plocha-od=85&plocha-do=10000000000&cena-od=0&cena-do=18000000'
 
 const kolinUrl = 'https://www.sreality.cz/hledani/prodej/byty?region=obec%20Kol%C3%ADn&region-id=3412&region-typ=municipality'
 

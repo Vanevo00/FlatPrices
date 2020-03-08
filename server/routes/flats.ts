@@ -78,7 +78,7 @@ router.post('/searchByParameters', async (req: Request, res: Response) => {
 // @desc   Get flats by city
 router.get('/byCity/:_id', async (req: Request, res: Response) => {
   try {
-    const flatsByCity = await Flat.find({ city: req.params._id }).populate('neighbourhood')
+    const flatsByCity = await Flat.find({ city: req.params._id }).populate('neighbourhood').sort('-createdAt')
     res.json(flatsByCity)
   } catch (err) {
     console.error(err.message)
@@ -90,7 +90,7 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
 // @desc   Get flats by neighbourhood
 router.get('/byNeighbourhood/:_id', async (req: Request, res: Response) => {
   try {
-    const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id })
+    const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id }).sort('-createdAt')
     res.json(flatsByNeighbourhood)
   } catch (err) {
     console.error(err.message)
