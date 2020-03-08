@@ -12,14 +12,14 @@ const saveRent = async (flat) => {
       return console.log(`skipping, dispositions: ${flat.rooms}`)
     }
 
-    // eliminate duplicit flats
-    const duplicitFlat = await axios.post('http://localhost:4000/api/flats/searchByParameters', {
+    // eliminate duplicit rents
+    const duplicitRent = await axios.post('http://localhost:4000/api/rents/searchByParameters', {
       address: flat.address,
       squareMeters: flat.squareMeters,
       rentCZK: flat.rentCZK,
       rooms: flat.rooms
     })
-    if (duplicitFlat.data.length > 0) {
+    if (duplicitRent.data.length > 0) {
       return console.log(`Duplicit rent found: ${flat.address}. Not saved.`)
     }
 

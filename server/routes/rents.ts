@@ -109,4 +109,28 @@ router.post('/', [
   }
 })
 
+// @route  POST api/rents/searchByParameters
+// @desc   Get one flat by address, squareMeters, rentCZK and rooms
+router.post('/searchByParameters', async (req: Request, res: Response) => {
+  try {
+    const {
+      address,
+      squareMeters,
+      rentCZK,
+      rooms
+    } = req.body
+
+    const rent = await Rent.find({
+      address,
+      squareMeters,
+      rentCZK,
+      rooms
+    })
+    res.json(rent)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 module.exports = router

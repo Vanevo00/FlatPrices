@@ -51,7 +51,7 @@ const RentPricesTable = ({rentPrices, avgPrice}: Props) => {
       <Row>
         <HeaderItem width={34} verticalLast={true}>All ({rentPrices.rentPrices.length} flats)</HeaderItem>
         <NormalItem width={33} verticalLast={true}>{rentPrices.medianRent || 'No Data'}</NormalItem>
-        <NormalItem width={33} verticalLast={true} last={true}>{rentPrices.medianRent || 'No Data'}</NormalItem>
+        <NormalItem width={33} verticalLast={true} last={true}>{rentPrices.avgRent || 'No Data'}</NormalItem>
       </Row>
 
     </StyledRentsContainer>

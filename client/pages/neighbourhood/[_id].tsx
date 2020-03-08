@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
-import { AvgPriceTable, PriceDescription, PriceNumber } from '../../components/Table/StyledAveragePriceTable'
+import { StyledAvgPriceTable, PriceDescription, PriceNumber } from '../../components/Table/StyledAveragePriceTable'
 import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
 import NeighbourhoodTable from '../../components/Table/NeighbourhoodTable'
 import { GeneralContainer } from '../../components/StyledContainers'
@@ -44,7 +44,7 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
         }
         {
           avgPrice &&
-            <AvgPriceTable>
+            <StyledAvgPriceTable>
               <PriceDescription>Average price</PriceDescription>
               <PriceNumber>{avgPrice.avgPrice.toLocaleString()} CZK per m<sup>2</sup></PriceNumber>
               <PriceDescription>Median price</PriceDescription>
@@ -53,7 +53,7 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
               <PriceNumber>{avgPrice.largeFlatPricesMedian ? avgPrice.largeFlatPricesMedian.toLocaleString() : 'N/A'} CZK per m<sup>2</sup></PriceNumber>
               <PriceDescription last={true}>Median price below 60 m<sup>2</sup></PriceDescription>
               <PriceNumber last={true}>{avgPrice.smallFlatPricesMedian > 0 ? avgPrice.smallFlatPricesMedian.toLocaleString() : 'N/A'} CZK per m<sup>2</sup></PriceNumber>
-            </AvgPriceTable>
+            </StyledAvgPriceTable>
         }
         {
           neighbourhood && neighbourhoodFlats && avgPrice &&
