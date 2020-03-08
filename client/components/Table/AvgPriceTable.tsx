@@ -7,8 +7,6 @@ interface Props {
 }
 
 const AvgPriceTable = ({avgPrice}: Props) => {
-  console.log("avgPrice:", avgPrice)
-
   return (
     <StyledAvgPriceTable>
       <PriceDescription>Average price</PriceDescription>

@@ -29,7 +29,7 @@ router.get('/avgRentCity/:_id', async (req: Request, res: Response) => {
     const rentsByCity = await Rent.find({ city: req.params._id })
     let rentPrices: number[] = []
     rentsByCity.map((rent: Rent) => {
-      rentPrices.push(rent.rentPerMeter)
+      rentPrices.push(rent.rentCZK)
     })
     rentPrices = sortHighestToLowest(rentPrices)
 

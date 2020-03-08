@@ -7,6 +7,7 @@ import { GeneralContainer } from '../../components/StyledContainers'
 import CityTable from '../../components/Table/CityTable'
 import AvgPriceTable from '../../components/Table/AvgPriceTable'
 import { AvgContainer } from '../../components/Table/StyledAveragePriceTable'
+import RentPricesTable from '../../components/Table/RentPricesTable'
 
 interface Props {
   _id: string
@@ -37,11 +38,6 @@ const CityDetail = ({ _id }: Props) => {
     setIsLoading(false)
   }
 
-  //debugging
-  useEffect(() => {
-    console.log(avgRents)
-  }, [avgRents])
-
   useEffect(() => {
     fetchData()
   }, [])
@@ -54,12 +50,16 @@ const CityDetail = ({ _id }: Props) => {
           city &&
           <Heading2>{city.name}</Heading2>
         }
+        <AvgContainer>
         {
-          avgPrice && avgRents &&
-            <AvgContainer>
+          avgPrice &&
               <AvgPriceTable avgPrice={avgPrice}/>
-            </AvgContainer>
         }
+        {
+          avgPrice && avgRents && avgRents.rentPrices.length > 0 &&
+          <RentPricesTable avgPrice={avgPrice} rentPrices={avgRents}/>
+        }
+        </AvgContainer>
         {
           city && cityFlats && avgPrice &&
           <>

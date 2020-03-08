@@ -8,6 +8,8 @@ export const AvgContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
 `
 
 export const StyledAvgPriceTable = styled.div`
