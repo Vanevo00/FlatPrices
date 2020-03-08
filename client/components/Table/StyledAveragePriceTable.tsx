@@ -17,6 +17,7 @@ export const StyledAvgPriceTable = styled.div`
   display: flex;
   flex-wrap: wrap;
   border: solid 1px ${props => props.theme.colors.main};
+  margin-bottom: 2rem;
 `
 
 export const PriceDescription = styled.div<Props>`

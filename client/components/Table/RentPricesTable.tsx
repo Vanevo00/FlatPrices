@@ -1,14 +1,12 @@
 import React from 'react'
 import { RentPrices } from '../Types/RentPrices'
-import { AvgPrice } from '../Types/AvgPrice'
 import { HeaderItem, NormalItem, Row, StyledRentsContainer } from './StyledRentPricesTable'
 
 interface Props {
   rentPrices: RentPrices
-  avgPrice: AvgPrice
 }
 
-const RentPricesTable = ({rentPrices, avgPrice}: Props) => {
+const RentPricesTable = ({rentPrices}: Props) => {
   console.log('rentPrices', rentPrices)
 
   return (

@@ -53,11 +53,11 @@ const CityDetail = ({ _id }: Props) => {
         <AvgContainer>
         {
           avgPrice &&
-              <AvgPriceTable avgPrice={avgPrice}/>
+              <AvgPriceTable avgPrice={avgPrice} rentPrices={avgRents}/>
         }
         {
           avgPrice && avgRents && avgRents.rentPrices.length > 0 &&
-          <RentPricesTable avgPrice={avgPrice} rentPrices={avgRents}/>
+          <RentPricesTable rentPrices={avgRents}/>
         }
         </AvgContainer>
         {
