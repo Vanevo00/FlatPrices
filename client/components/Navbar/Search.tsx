@@ -84,10 +84,12 @@ const Search = () => {
           {
             cities && cities.map((city: any) => {
               return (
-                <ResultItem key={city._id}>
-                  <p><strong>{city.name}</strong></p>
-                  <p>city</p>
-                </ResultItem>
+                <Link href={`/city/${city._id}`}>
+                  <ResultItem key={city._id}>
+                    <p><strong>{city.name}</strong></p>
+                    <p>city</p>
+                  </ResultItem>
+                </Link>
 
               )
             })
@@ -95,11 +97,12 @@ const Search = () => {
           {
             flats && flats.map((flat: any) => {
               return (
-                <ResultItem key={flat._id}>
-                  <p><strong>{flat.address}</strong></p>
-                  <p>flat</p>
-                </ResultItem>
-
+                <Link href={`/flat/${flat._id}`}>
+                  <ResultItem key={flat._id}>
+                    <p><strong>{flat.address}</strong></p>
+                    <p>flat</p>
+                  </ResultItem>
+                </Link>
               )
             })
           }

@@ -42,7 +42,9 @@ const Search = ({ term }: Props) => {
           <Header>Cities {searchResults && `(${searchResults.cities.length} results)`}</Header>
           {isLoading && <Spinner/>}
           {searchResults && searchResults.cities.length > 0 && searchResults.cities.map((city: City) =>
-            <ResultItem key={city._id}>{city.name}&nbsp;<GreySmallText>{city.country}</GreySmallText></ResultItem>
+            <Link href={`/city/${city._id}`}>
+              <ResultItem key={city._id}>{city.name}&nbsp;<GreySmallText>{city.country}</GreySmallText></ResultItem>
+            </Link>
           )}
         </ResultsTable>
 
@@ -63,14 +65,16 @@ const Search = ({ term }: Props) => {
           <Header>Flats {searchResults && `(${searchResults.flats.length} results)`}</Header>
           {isLoading && <Spinner/>}
           {searchResults && searchResults.flats.length > 0 && searchResults.flats.map((flat: Flat) =>
-            <ResultItem key={flat._id}>
-              <div>
-                {flat.address}&nbsp;<GreySmallText>{flat.neighbourhood.name}&nbsp;({flat.city.name})</GreySmallText>
-              </div>
-              <div>
-                <GreySmallText>{flat.squareMeters}m2 | {flat.priceCZK.toLocaleString()} CZK | {flat.agency}</GreySmallText>
-              </div>
-            </ResultItem>
+            <Link href={`/flat/${flat._id}`}>
+              <ResultItem key={flat._id}>
+                <div>
+                  {flat.address}&nbsp;<GreySmallText>{flat.neighbourhood.name}&nbsp;({flat.city.name})</GreySmallText>
+                </div>
+                <div>
+                  <GreySmallText>{flat.squareMeters}m2 | {flat.priceCZK.toLocaleString()} CZK | {flat.agency}</GreySmallText>
+                </div>
+              </ResultItem>
+            </Link>
           )}
         </ResultsTable>
       </ResultsContainer>
