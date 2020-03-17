@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { Flat } from '../../client/components/Types/Flat'
+import { Flat } from '../../Types/Flat'
 
 const { check, validationResult } = require('express-validator')
 const router = express.Router()

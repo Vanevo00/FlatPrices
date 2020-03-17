@@ -3,7 +3,7 @@ import axios from 'axios'
 import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
 import Layout from '../../components/Layout'
-import { Flat } from '../../components/Types/Flat'
+import { Flat } from '../../../Types/Flat'
 import FlatForm from '../../components/Forms/FlatForm'
 
 const AddFlat = () => {

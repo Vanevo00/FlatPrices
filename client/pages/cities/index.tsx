@@ -4,9 +4,9 @@ import Layout from '../../components/Layout'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
 import { Heading1 } from '../../components/StyledHeadings'
-import { CityContainer, CityItemContainer, CityRow, NeighbourhoodRow } from './StyledCities'
-import { City } from '../../components/Types/City'
-import { Neighbourhood } from '../../components/Types/Neighbourhood'
+import { CityContainer, CityItemContainer, CityRow, NeighbourhoodRow } from '../../components/CityDetail/StyledCities'
+import { City } from '../../../Types/City'
+import { Neighbourhood } from '../../../Types/Neighbourhood'
 
 const Cities = () => {
   const [cities, setCities] = useState()

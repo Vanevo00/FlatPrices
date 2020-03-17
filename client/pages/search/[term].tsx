@@ -8,11 +8,11 @@ import {
   ResultItem,
   ResultsContainer,
   ResultsTable
-} from './StyledSearchResults'
+} from '../../components/SearchResults/StyledSearchResults'
 import Spinner from '../../components/Spinner/Spinner'
-import { City } from '../../components/Types/City'
-import { Neighbourhood } from '../../components/Types/Neighbourhood'
-import { Flat } from '../../components/Types/Flat'
+import { City } from '../../../Types/City'
+import { Neighbourhood } from '../../../Types/Neighbourhood'
+import { Flat } from '../../../Types/Flat'
 import Link from 'next/link'
 
 interface Props {

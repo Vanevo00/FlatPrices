@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { FormButton, FormContainer, FormInput, FormRow, FormSelect, FormSuccessMessage } from './StyledForm'
-import { City } from '../Types/City'
+import { City } from '../../../Types/City'
 import Spinner from '../Spinner/Spinner'
 
 interface Props {

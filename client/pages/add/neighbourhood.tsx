@@ -3,7 +3,7 @@ import axios from 'axios'
 import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
 import Layout from '../../components/Layout'
-import { Neighbourhood } from '../../components/Types/Neighbourhood'
+import { Neighbourhood } from '../../../Types/Neighbourhood'
 import NeighbourhoodForm from '../../components/Forms/NeighbourhoodForm'
 
 const AddNeighbourhood = () => {

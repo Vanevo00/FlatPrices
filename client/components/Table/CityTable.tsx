@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Flat } from '../Types/Flat'
+import { Flat } from '../../../Types/Flat'
 import {
   ArrowDown,
   ArrowUp,

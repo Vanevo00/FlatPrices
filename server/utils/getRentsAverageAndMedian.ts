@@ -1,4 +1,4 @@
-import { Rent } from '../../client/components/Types/Rent'
+import { Rent } from '../../Types/Rent'
 
 const sortHighestToLowest = require('./sortHighestToLowest')
 

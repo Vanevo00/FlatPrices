@@ -1,7 +1,7 @@
 import React from 'react'
 import { PriceDescription, PriceNumber, StyledAvgPriceTable } from './StyledAveragePriceTable'
-import { AvgPrice } from '../Types/AvgPrice'
-import { RentPrices } from '../Types/RentPrices'
+import { AvgPrice } from '../../../Types/AvgPrice'
+import { RentPrices } from '../../../Types/RentPrices'
 
 interface Props {
   avgPrice: AvgPrice

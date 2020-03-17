@@ -6,7 +6,9 @@
   "scripts": {
     "start:api": "nodemon",
     "start:client": "npm run dev --prefix client",
+    "start:builtclient": "npm run start --prefix client",
     "start:watch": "concurrently \"kill $(lsof -t -i:4000)\" \"npm run start:api\" \"npm run start:client\"",
+    "start": "concurrently \"npm run start:api\" \"npm run start:builtclient\"",
     "build": "rm -rf ./build && tsc",
     "eslint": "eslint \"./**\"",
     "eslint:fix": "eslint --fix \"./**\"",

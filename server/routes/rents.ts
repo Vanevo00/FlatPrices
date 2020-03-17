@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { Rent } from '../../client/components/Types/Rent'
+import { Rent } from '../../Types/Rent'
 
 const { check, validationResult } = require('express-validator')
 

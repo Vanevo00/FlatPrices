@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { FormButton, FormContainer, FormInput, FormRow, FormSelect, FormSuccessMessage } from './StyledForm'
 import Spinner from '../Spinner/Spinner'
-import { Neighbourhood } from '../Types/Neighbourhood'
+import { Neighbourhood } from '../../../Types/Neighbourhood'
 
 interface Props {
   buttonText: string

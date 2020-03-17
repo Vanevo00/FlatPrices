@@ -10,7 +10,7 @@ import {
 } from '../Table/StyledTable'
 import { Heading1Centered } from '../StyledHeadings'
 import Spinner from '../Spinner/Spinner'
-import { Flat } from '../Types/Flat'
+import { Flat } from '../../../Types/Flat'
 import Link from 'next/link'
 
 const NewlyAddedFlats = () => {

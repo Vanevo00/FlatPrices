@@ -4,7 +4,7 @@ import Layout from '../../components/Layout'
 const flat = () => {
   return (
     <Layout>
-      flat
+      flat pes
     </Layout>
   )
 };

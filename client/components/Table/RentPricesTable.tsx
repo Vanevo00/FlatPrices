@@ -1,5 +1,5 @@
 import React from 'react'
-import { RentPrices } from '../Types/RentPrices'
+import { RentPrices } from '../../../Types/RentPrices'
 import { HeaderItem, NormalItem, Row, StyledRentsContainer } from './StyledRentPricesTable'
 
 interface Props {
