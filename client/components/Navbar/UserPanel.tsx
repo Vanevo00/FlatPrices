@@ -1,18 +1,22 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
-import { NavItemContainer, AddNewButton, NavItem } from './StyledNavbar'
+import React, { useContext, useState } from 'react'
+import { NavItemContainer, AddNewButton, NavItem, UserPanelContainer } from './StyledNavbar'
+import AuthContext from '../../context/auth/authContext'
 
-const AddNew = () => {
+const UserPanel = () => {
+  const authContext = useContext(AuthContext)
+
   const [showLinks, setShowLinks] = useState(false)
 
   const onClick = () => {
     setShowLinks(!showLinks)
   }
 
+
   return (
-    <>
+    <UserPanelContainer>
       <AddNewButton onClick={onClick}>
-        Add New
+        {authContext.user.name}
       </AddNewButton>
       <NavItemContainer>
         <Link href='/add/city'>
@@ -25,8 +29,8 @@ const AddNew = () => {
           <NavItem expanded={showLinks} delay={4}><i className="fas fa-building"/></NavItem>
         </Link>
       </NavItemContainer>
-    </>
+    </UserPanelContainer>
   )
 }
 
-export default AddNew
+export default UserPanel

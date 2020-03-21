@@ -27,6 +27,11 @@ export const NavLink = styled.a`
   }
 `
 
+export const UserPanelContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export const AddNewButton = styled.div`
   cursor: pointer;
   padding: .5rem;

@@ -2,17 +2,15 @@ import React, { useContext, useEffect } from 'react'
 import Link from 'next/link'
 import { NavbarContainer, NavLink } from './StyledNavbar'
 import Search from './Search'
-import AddNew from './AddNew'
 import AuthContext from '../../context/auth/authContext'
 import LoginOrRegister from './LoginOrRegister'
+import UserPanel from './UserPanel'
 
 const Navbar = () => {
   const authContext = useContext(AuthContext)
 
   const {
-    // @ts-ignore
     loadUser,
-    // @ts-ignore
     user
   } = authContext
 
@@ -35,7 +33,7 @@ const Navbar = () => {
 
       {
         user
-        ? <AddNew/>
+        ? <UserPanel/>
         : <LoginOrRegister/>
       }
 

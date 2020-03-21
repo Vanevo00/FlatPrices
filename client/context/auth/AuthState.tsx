@@ -88,8 +88,8 @@ const AuthState = (props: any) => {
       value={{
         token: state.token,
         isAuthenticated: state.isAuthenticated,
-        loading: state.loading,
         user: state.user,
+        userLoading: state.userLoading,
         error: state.error,
         register,
         login,
