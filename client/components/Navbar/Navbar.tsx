@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Link from 'next/link'
 import { NavbarContainer, NavLink } from './StyledNavbar'
 import Search from './Search'
 import AddNew from './AddNew'
+import AuthContext from '../../context/auth/authContext'
+import LoginOrRegister from './LoginOrRegister'
 
 const Navbar = () => {
+  const authContext = useContext(AuthContext)
+
+  const {
+    // @ts-ignore
+    loadUser,
+    // @ts-ignore
+    user
+  } = authContext
+
+  useEffect(() => {
+    loadUser()
+  },[])
+
   return (
     <NavbarContainer>
       <div>
@@ -17,7 +32,13 @@ const Navbar = () => {
       </div>
 
       <Search/>
-      <AddNew/>
+
+      {
+        user
+        ? <AddNew/>
+        : <LoginOrRegister/>
+      }
+
     </NavbarContainer>
   )
 }
