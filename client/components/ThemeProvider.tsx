@@ -3,6 +3,8 @@ const theme = {
     main: '#062770',
     successText: '#00a00c',
     successBackground: '#d4edda',
+    errorBackground: '#f8d7da',
+    errorText: '#721c24',
     successBorder: '#c3e6cb',
     danger: '#aa0507',
     dangerLighter: '#d80507',
@@ -11,7 +13,6 @@ const theme = {
     lightGray: '#bfbfbf',
     mainText: '#000',
     lightText: '#fff',
-    error: '#ce0006'
   },
   fontSizes: {
     xs: '.8rem',

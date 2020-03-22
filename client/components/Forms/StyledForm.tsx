@@ -60,6 +60,11 @@ export const FormSuccessMessage = styled.div`
   border-radius: 4px;
 `
 
+export const FormErrorMessage = styled(FormSuccessMessage)`
+  background-color: ${props => props.theme.colors.errorBackground};
+  color: ${props => props.theme.colors.errorText};
+`
+
 export const FormSelect = styled.select`
   width: 100%;
   height: 30px;

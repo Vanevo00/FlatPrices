@@ -15,6 +15,7 @@ export interface Flat {
   link: string
   neighbourhood: Neighbourhood
   city: City
+  addedBy: string
   floor?: number
   lift?: boolean
   rooms?: string

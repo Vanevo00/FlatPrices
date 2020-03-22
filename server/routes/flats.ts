@@ -232,6 +232,7 @@ router.post('/', [
     contacted,
     visited,
     neighbourhood,
+    addedBy,
     neighbourhoodNumber,
     rooms
   } = req.body
@@ -257,6 +258,7 @@ router.post('/', [
       visited,
       neighbourhood,
       city,
+      addedBy,
       neighbourhoodNumber,
       rooms
     })

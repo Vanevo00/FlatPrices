@@ -20,6 +20,8 @@ app.use('/api/neighbourhoods', require('./routes/neighbourhoods'))
 app.use('/api/flats', require('./routes/flats'))
 app.use('/api/rents', require('./routes/rents'))
 app.use('/api/search', require('./routes/search'))
+app.use('/api/users', require('./routes/users'))
+app.use('/api/auth', require('./routes/auth'))
 
 app.get('/', (req: Request, res: Response) => res.send('Welcome to flat prices API'))
 
