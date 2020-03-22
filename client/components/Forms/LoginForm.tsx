@@ -1,9 +1,9 @@
 import Router from 'next/router'
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
-import { FormButton, FormContainer, FormInput, FormRow } from './StyledForm'
+import { FormButton, FormContainer, FormInput, FormRow, FormErrorMessage } from './StyledForm'
 import AuthContext from '../../context/auth/authContext'
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const authContext = useContext(AuthContext)
   const [inputValues, setInputValues] = useState({
     email: '',
@@ -41,6 +41,9 @@ const LoginForm = (props) => {
           <FormInput type='password' full={true} name='password' placeholder='password' value={inputValues.password} onChange={onChange} required/>
         </FormRow>
         <FormButton type='submit'>Login</FormButton>
+        {
+          authContext.error && <FormErrorMessage>{authContext.error}</FormErrorMessage>
+        }
       </FormContainer>
     </form>
   )
