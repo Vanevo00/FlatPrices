@@ -7,6 +7,7 @@ import Navbar from './Navbar/Navbar'
 import AuthState from '../context/auth/AuthState'
 
 const Layout = (props: any) => {
+
   return (
     <AuthState>
       <Head>

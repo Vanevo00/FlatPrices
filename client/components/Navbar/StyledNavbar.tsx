@@ -32,7 +32,7 @@ export const UserPanelContainer = styled.div`
   align-items: center;
 `
 
-export const AddNewButton = styled.div`
+export const NavbarButton = styled.div`
   cursor: pointer;
   padding: .5rem;
   border: solid 1px ${props => props.theme.colors.main};
@@ -41,6 +41,33 @@ export const AddNewButton = styled.div`
   &:hover {
     border-color: ${props => props.theme.colors.mainBackground};
   }
+  
+  i {
+    margin-right: 5px;
+  }
+`
+
+export const UserMenuContainer = styled.div`
+  position: fixed;
+  right: 0;
+  top: 70px;
+  background-color: black;
+  width: 120px;
+`
+
+export const UserMenuItem = styled.div<Props>`
+  background-color: ${props => props.theme.colors.main};
+  color: ${props => props.theme.colors.lightText};
+  border: solid 1px ${props => props.theme.colors.lightText};
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: ${props => props.expanded ? '0' : '-120px'};
+  transition: .5s;
+  cursor: pointer;
 `
 
 export const NavItemContainer = styled.div`

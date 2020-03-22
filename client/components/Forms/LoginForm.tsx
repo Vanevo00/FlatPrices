@@ -1,12 +1,19 @@
-import React, { ChangeEvent, useContext, useState } from 'react'
+import Router from 'next/router'
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { FormButton, FormContainer, FormInput, FormRow } from './StyledForm'
 import AuthContext from '../../context/auth/authContext'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const authContext = useContext(AuthContext)
   const [inputValues, setInputValues] = useState({
     email: '',
     password: ''
+  })
+
+  useEffect(() => {
+    if(authContext.user) {
+      Router.push('/')
+    }
   })
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +25,6 @@ const LoginForm = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault()
-    // @ts-ignore
     authContext.login({
       email: inputValues.email,
       password: inputValues.password
