@@ -1,8 +1,9 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { FormButton, FormContainer, FormInput, FormRow, FormSelect, FormSuccessMessage } from './StyledForm'
 import Spinner from '../Spinner/Spinner'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
+import AuthContext from '../../context/auth/authContext'
 
 interface Props {
   buttonText: string
@@ -10,8 +11,21 @@ interface Props {
   successMessage?: string
 }
 
+interface InputValues {
+  address: string
+  neighbourhood: string
+  priceCZK: string
+  squareMeters: string
+  link: string
+  agency: string
+  rooms: string
+  addedBy?: string
+}
+
 const FlatForm = ({ buttonText, onSubmit, successMessage }: Props) => {
-  const [inputValues, setInputValues] = useState({
+  const authContext = useContext(AuthContext)
+
+  const [inputValues, setInputValues] = useState<InputValues>({
     address: '',
     neighbourhood: '',
     priceCZK: '',
@@ -40,8 +54,17 @@ const FlatForm = ({ buttonText, onSubmit, successMessage }: Props) => {
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault()
-    onSubmit(inputValues)
+    if (authContext.user) {
+      onSubmit({
+        ...inputValues,
+        addedBy: authContext.user._id
+      })
+    } else {
+      onSubmit(inputValues)
+    }
+
     setInputValues({
+      ...inputValues, //keep the user if there is one
       address: '',
       neighbourhood: '',
       priceCZK: '',

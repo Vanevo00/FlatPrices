@@ -57,6 +57,10 @@ const FlatSchema = mongoose.Schema({
     ref: 'city',
     required: true
   },
+  addedBy: {
+    type: mongoose.Schema.Types.ObjectID,
+    ref: 'user'
+  },
   createdAt: {
     type: Date,
     default: Date.now()
