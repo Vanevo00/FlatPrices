@@ -18,6 +18,7 @@ interface ContextInterface {
   logout: Function
   clearErrors: Function
   loadUser: Function
+  setError: Function
 }
 
 const AuthContext: Context<ContextInterface> = createContext(null)

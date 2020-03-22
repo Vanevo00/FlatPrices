@@ -11,7 +11,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  SET_ERROR
 } from '../types'
 
 const AuthState = (props: any) => {
@@ -81,7 +82,10 @@ const AuthState = (props: any) => {
 
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS })
 
-
+  const setError = (msg) => dispatch({
+    type: SET_ERROR,
+    payload: msg
+  })
 
   return (
     <AuthContext.Provider
@@ -95,7 +99,8 @@ const AuthState = (props: any) => {
         login,
         logout,
         clearErrors,
-        loadUser
+        loadUser,
+        setError
       }}
     >
       { props.children }

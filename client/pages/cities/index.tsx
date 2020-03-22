@@ -39,8 +39,6 @@ const Cities = () => {
       )
     })
 
-    console.log('cityNeighbourhoods', cityNeighbourhoods)
-
     return (
       <CityItemContainer>
         <Link href={`/city/${city._id}`}>
