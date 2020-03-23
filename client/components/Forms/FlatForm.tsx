@@ -37,7 +37,7 @@ const FlatForm = ({ buttonText, onSubmit, successMessage }: Props) => {
   const [neighbourhoods, setNeighbourhoods] = useState()
 
   const fetchNeighbourhoods = async () => {
-    const data = await axios.get('http://localhost:4000/api/neighbourhoods/')
+    const data = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/neighbourhoods/`)
     setNeighbourhoods(data.data)
   }
 
