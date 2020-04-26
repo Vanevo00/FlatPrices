@@ -1,33 +1,33 @@
 export interface RentPrices {
   rentPrices: number[]
-  avgRent: number
-  medianRent: number
-  rents1kk: {
+  avgRent?: number
+  medianRent?: number
+  rents1kk?: {
     amounts: number[]
     average: number
     median: number
   }
-  rents1plus1: {
+  rents1plus1?: {
     amounts: number[]
     average: number
     median: number
   }
-  rents2kk: {
+  rents2kk?: {
     amounts: number[]
     average: number
     median: number
   }
-  rents2plus1: {
+  rents2plus1?: {
     amounts: number[]
     average: number
     median: number
   }
-  rents3kk: {
+  rents3kk?: {
     amounts: number[]
     average: number
     median: number
   }
-  rents3plus1: {
+  rents3plus1?: {
     amounts: number[]
     average: number
     median: number

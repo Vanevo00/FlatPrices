@@ -14,7 +14,7 @@ import { Flat } from '../../../Types/Flat'
 import Link from 'next/link'
 
 const NewlyAddedFlats = () => {
-  const [newFlats, setNewFlats] = useState()
+  const [newFlats, setNewFlats] = useState([])
 
   const fetchFlats = async () => {
     const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/new/30`)
@@ -60,7 +60,7 @@ const NewlyAddedFlats = () => {
         </TableRowHeader>
 
         {
-          !newFlats
+          newFlats.length < 1
             ? <Spinner/>
             : newFlats.map((flat: Flat) => {
               const createdAt = new Date(flat.createdAt)

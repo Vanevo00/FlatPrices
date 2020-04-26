@@ -15,7 +15,7 @@ const NeighbourhoodForm = ({ buttonText, onSubmit, successMessage }: Props) => {
     name: '',
     city: ''
   })
-  const [cities, setCities] = useState()
+  const [cities, setCities] = useState([])
 
   const fetchCities = async () => {
     const data = await axios.get('http://localhost:4000/api/cities/')

@@ -20,7 +20,7 @@ interface Props {
 }
 
 const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
-  const [selectedForDelete, setSelectedForDelete] = useState()
+  const [selectedForDelete, setSelectedForDelete] = useState('')
 
   const handleDeleteClick = (_id: string) => {
       if (_id === selectedForDelete) {

@@ -9,8 +9,8 @@ import { City } from '../../../Types/City'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
 
 const Cities = () => {
-  const [cities, setCities] = useState()
-  const [neighbourhoods, setNeighbourhoods] = useState()
+  const [cities, setCities] = useState([])
+  const [neighbourhoods, setNeighbourhoods] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchData = async () => {

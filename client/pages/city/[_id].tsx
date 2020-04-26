@@ -15,10 +15,14 @@ interface Props {
 
 const CityDetail = ({ _id }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [city, setCity] = useState()
-  const [cityFlats, setCityFlats] = useState()
-  const [avgPrice, setAvgPrice] = useState()
-  const [avgRents, setAvgRents] = useState()
+  const [city, setCity] = useState({name: ''})
+  const [cityFlats, setCityFlats] = useState([])
+  const [avgPrice, setAvgPrice] = useState({
+    medianPrice: null
+  })
+  const [avgRents, setAvgRents] = useState({
+    rentPrices: []
+  })
 
   const fetchData = async () => {
     setIsLoading(true)
@@ -43,7 +47,7 @@ const CityDetail = ({ _id }: Props) => {
   }, [])
 
   return (
-    <Layout title={city && city.name}>
+    <Layout title={city.name}>
       <GeneralContainer>
         {isLoading && <Spinner/>}
         {
@@ -61,7 +65,7 @@ const CityDetail = ({ _id }: Props) => {
         }
         </AvgContainer>
         {
-          city && cityFlats && avgPrice &&
+          city && cityFlats.length > 0 && avgPrice &&
           <>
             <Heading2Centered>{cityFlats.length} Flats in {city.name}</Heading2Centered>
             <CityTable flats={cityFlats} medianPrice={avgPrice.medianPrice}/>

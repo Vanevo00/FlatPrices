@@ -20,7 +20,11 @@ interface Props {
 }
 
 const Search = ({ term }: Props) => {
-  const [searchResults, setSearchResults] = useState()
+  const [searchResults, setSearchResults] = useState({
+    cities: [],
+    neighbourhoods: [],
+    flats: []
+  })
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchSearchData = async () => {

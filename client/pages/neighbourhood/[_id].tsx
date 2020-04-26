@@ -13,9 +13,16 @@ interface Props {
 
 const NeighbourhoodDetail = ({ _id }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [neighbourhood, setNeighbourhood] = useState()
-  const [neighbourhoodFlats, setNeighbourhoodFlats] = useState()
-  const [avgPrice, setAvgPrice] = useState()
+  const [neighbourhood, setNeighbourhood] = useState({
+    name: ''
+  })
+  const [neighbourhoodFlats, setNeighbourhoodFlats] = useState([])
+  const [avgPrice, setAvgPrice] = useState({
+    avgPrice: 0,
+    medianPrice: 0,
+    largeFlatPricesMedian: 0,
+    smallFlatPricesMedian: 0
+  })
 
   const fetchData = async () => {
     setIsLoading(true)
