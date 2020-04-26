@@ -11,6 +11,7 @@ RUN cd client && npm i
 
 COPY . .
 
+RUN npm run build
 RUN cd client && npm run build
 
 EXPOSE 4000
