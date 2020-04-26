@@ -39,7 +39,7 @@ const Search = () => {
   const fetchSearchResults = async () => {
     setIsLoading(true)
     setSearchResults([])
-    const data = await axios.get(`http://localhost:4000/api/search/all/${searchInput}/${searchLimit}`)
+    const data = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/search/all/${searchInput}/${searchLimit}`)
     setSearchResults(data.data)
     setIsLoading(false)
   }

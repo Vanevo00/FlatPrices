@@ -33,7 +33,7 @@ const AuthState = (props: any) => {
     }
 
     try {
-      const res = await axios.get('http://localhost:4000/api/auth')
+      const res = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/auth`)
 
       dispatch({type: USER_LOADED, payload: res.data})
     } catch (err) {
@@ -44,7 +44,7 @@ const AuthState = (props: any) => {
 
   const register = async (formData) => {
     try {
-      const res = await axios.post('http://localhost:4000/api/users', formData)
+      const res = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/users`, formData)
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -62,7 +62,7 @@ const AuthState = (props: any) => {
 
   const login = async (formData) => {
     try {
-      const res = await axios.post('http://localhost:4000/api/auth', formData)
+      const res = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/auth`, formData)
 
       dispatch({
         type: LOGIN_SUCCESS,

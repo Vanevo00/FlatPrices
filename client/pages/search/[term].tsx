@@ -29,7 +29,7 @@ const Search = ({ term }: Props) => {
 
   const fetchSearchData = async () => {
     setIsLoading(true)
-    const data = await axios.get(`http://localhost:4000/api/search/all/${term}`)
+    const data = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/search/all/${term}`)
     setSearchResults(data.data)
     setIsLoading(false)
   }

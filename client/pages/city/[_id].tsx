@@ -27,10 +27,10 @@ const CityDetail = ({ _id }: Props) => {
   const fetchData = async () => {
     setIsLoading(true)
     const [city, flats, averagePrice, averageRents] = await Promise.all([
-      axios.get(`http://localhost:4000/api/cities/${_id}`),
-      axios.get(`http://localhost:4000/api/flats/byCity/${_id}`),
-      axios.get(`http://localhost:4000/api/flats/avgPriceCity/${_id}`),
-      axios.get(`http://localhost:4000/api/rents/avgRentCity/${_id}`)
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/${_id}`),
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}`),
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/avgPriceCity/${_id}`),
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/rents/avgRentCity/${_id}`)
     ])
 
     await Promise.all([

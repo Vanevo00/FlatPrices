@@ -10,7 +10,7 @@ const AddCity = () => {
 
   const sendAddCity = async (name: string, country: string) => {
     try {
-      const data = await axios.post('http://localhost:4000/api/cities/', {
+      const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/`, {
         name,
         country
       })

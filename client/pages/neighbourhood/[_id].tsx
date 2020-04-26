@@ -27,9 +27,9 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
   const fetchData = async () => {
     setIsLoading(true)
     const [neighbourhood, flats, averagePrice] = await Promise.all([
-      axios.get(`http://localhost:4000/api/neighbourhoods/${_id}`),
-      axios.get(`http://localhost:4000/api/flats/byNeighbourhood/${_id}`),
-      axios.get(`http://localhost:4000/api/flats/avgPriceNeighbourhood/${_id}`)
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/neighbourhoods/${_id}`),
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byNeighbourhood/${_id}`),
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/avgPriceNeighbourhood/${_id}`)
     ])
     setNeighbourhood(neighbourhood.data)
     setNeighbourhoodFlats(flats.data)

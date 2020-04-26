@@ -18,7 +18,7 @@ const NeighbourhoodForm = ({ buttonText, onSubmit, successMessage }: Props) => {
   const [cities, setCities] = useState([])
 
   const fetchCities = async () => {
-    const data = await axios.get('http://localhost:4000/api/cities/')
+    const data = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/`)
     setCities(data.data)
   }
 

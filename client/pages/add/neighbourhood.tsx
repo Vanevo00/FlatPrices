@@ -11,7 +11,7 @@ const AddNeighbourhood = () => {
 
   const sendAddNeighbourhood = async (neighbourhood: Neighbourhood) => {
     try {
-      const data = await axios.post('http://localhost:4000/api/neighbourhoods\/', {
+      const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/neighbourhoods\/`, {
         ...neighbourhood
       })
       setSuccessMessage(`${data.data.name} successfully added`)

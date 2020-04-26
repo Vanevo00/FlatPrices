@@ -16,8 +16,8 @@ const Cities = () => {
   const fetchData = async () => {
     setIsLoading(true)
     const [cityData, neighbourhoodData] = await Promise.all([
-      axios.get('http://localhost:4000/api/cities/'),
-      axios.get('http://localhost:4000/api/neighbourhoods/')
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/`),
+      axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/neighbourhoods/`)
     ])
     await Promise.all([
       setCities(cityData.data),

@@ -31,7 +31,7 @@ const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
   }
 
   const confirmDelete = async (_id: string) => {
-    await axios.delete(`http://localhost:4000/api/flats/${_id}`)
+    await axios.delete(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/${_id}`)
     location.reload()
   }
 

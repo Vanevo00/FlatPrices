@@ -11,7 +11,7 @@ const AddFlat = () => {
 
   const sendAddFlat = async (flat: Flat) => {
     try {
-      const data = await axios.post('http://localhost:4000/api/flats/', {
+      const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/`, {
         ...flat
       })
       setSuccessMessage(`Flat on address ${data.data.address} successfully added`)
