@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Layout from '../../components/Layout'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
 import { Heading1 } from '../../components/StyledHeadings'
@@ -59,7 +58,7 @@ const Cities = () => {
   }, [])
 
   return (
-    <Layout>
+    <>
       <Heading1>Cities & Neighbourhoods</Heading1>
       {isLoading && <Spinner/>}
       {
@@ -73,7 +72,7 @@ const Cities = () => {
 
           </CityContainer>
       }
-    </Layout>
+    </>
   )
 }
 

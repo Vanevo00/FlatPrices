@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../../components/Layout'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
 import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
@@ -47,7 +46,7 @@ const CityDetail = ({ _id }: Props) => {
   }, [])
 
   return (
-    <Layout title={city.name}>
+    <>
       <GeneralContainer>
         {isLoading && <Spinner/>}
         {
@@ -72,7 +71,7 @@ const CityDetail = ({ _id }: Props) => {
           </>
         }
       </GeneralContainer>
-    </Layout>
+    </>
   )
 }
 

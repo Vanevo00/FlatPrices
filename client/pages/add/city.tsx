@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
-import Layout from '../../components/Layout'
 import CityForm from '../../components/Forms/CityForm'
 
 const AddCity = () => {
@@ -24,12 +23,12 @@ const AddCity = () => {
   }
 
   return (
-    <Layout>
+    <>
       <GeneralContainer>
         <Heading2Centered>Add New City</Heading2Centered>
         <CityForm buttonText='Add City' onSubmit={sendAddCity} successMessage={successMessage}/>
       </GeneralContainer>
-    </Layout>
+    </>
   )
 }
 

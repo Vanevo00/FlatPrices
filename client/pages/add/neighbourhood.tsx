@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
-import Layout from '../../components/Layout'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
 import NeighbourhoodForm from '../../components/Forms/NeighbourhoodForm'
 
@@ -24,12 +23,12 @@ const AddNeighbourhood = () => {
   }
 
   return (
-    <Layout>
+    <>
       <GeneralContainer>
         <Heading2Centered>Add New Neighbourhood</Heading2Centered>
         <NeighbourhoodForm buttonText='Add Neighbourhood' onSubmit={sendAddNeighbourhood} successMessage={successMessage}/>
       </GeneralContainer>
-    </Layout>
+    </>
   )
 }
 

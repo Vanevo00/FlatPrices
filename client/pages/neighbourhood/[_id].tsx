@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../../components/Layout'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
 import { StyledAvgPriceTable, PriceDescription, PriceNumber } from '../../components/Table/StyledAveragePriceTable'
@@ -42,7 +41,7 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
   }, [])
 
   return (
-    <Layout>
+    <>
       <GeneralContainer>
         {isLoading && <Spinner/>}
         {
@@ -70,7 +69,7 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
             </>
         }
       </GeneralContainer>
-    </Layout>
+    </>
   )
 }
 

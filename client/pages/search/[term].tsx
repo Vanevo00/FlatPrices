@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../../components/Layout'
 import { Heading1 } from '../../components/StyledHeadings'
 import axios from 'axios'
 import {
@@ -39,7 +38,7 @@ const Search = ({ term }: Props) => {
   }, [])
 
   return (
-    <Layout>
+    <>
       <Heading1>Search results for "{term}"</Heading1>
       <ResultsContainer>
         <ResultsTable>
@@ -82,7 +81,7 @@ const Search = ({ term }: Props) => {
           )}
         </ResultsTable>
       </ResultsContainer>
-    </Layout>
+    </>
   )
 }
 

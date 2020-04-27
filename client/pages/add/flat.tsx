@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
-import Layout from '../../components/Layout'
 import { Flat } from '../../../Types/Flat'
 import FlatForm from '../../components/Forms/FlatForm'
 
@@ -24,12 +23,12 @@ const AddFlat = () => {
   }
 
   return (
-    <Layout>
+    <>
       <GeneralContainer>
         <Heading2Centered>Add New Flat</Heading2Centered>
         <FlatForm buttonText='Add Flat' onSubmit={sendAddFlat} successMessage={successMessage}/>
       </GeneralContainer>
-    </Layout>
+    </>
   )
 }
 

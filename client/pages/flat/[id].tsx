@@ -1,11 +1,8 @@
 import React from 'react'
-import Layout from '../../components/Layout'
 
 const flat = () => {
   return (
-    <Layout>
-      flat pes
-    </Layout>
+      <p>pes</p>
   )
 };
 
