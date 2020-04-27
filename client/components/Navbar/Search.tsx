@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
+import React, { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Spinner from '../Spinner/Spinner'
@@ -15,11 +15,15 @@ import Link from 'next/link'
 
 const searchLimit = 3
 
-const Search = () => {
+const                                                                                 Search = () => {
   const router = useRouter()
   const [searchInput, setSearchInput] = useState('')
   const [searchResults, setSearchResults] = useState<any>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [showSearchResults, setShowSearchResults] = useState(false)
+
+  const resultsContainer = useRef()
+  const searchInputRef = useRef()
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value)
@@ -30,9 +34,30 @@ const Search = () => {
     router.push(`/search/${searchInput}`)
   }
 
+  const handleClick = (e) => {
+    // @ts-ignore
+    if (resultsContainer && resultsContainer.current && resultsContainer.current.contains(e.target)) {
+      return
+    }
+    // @ts-ignore
+    if (searchInputRef && searchInputRef.current && searchInputRef.current.contains(e.target)) {
+      return setShowSearchResults(true)
+    }
+    setShowSearchResults(false)
+  }
+
   useEffect(() => {
-    if (searchInput.length > 2) {
+    document.addEventListener("mousedown", handleClick)
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [])
+
+  useEffect(() => {
+    if (searchInput.length > 1) {
       fetchSearchResults()
+    } else {
+      setShowSearchResults(false)
     }
   }, [searchInput])
 
@@ -42,6 +67,7 @@ const Search = () => {
     const data = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/search/all/${searchInput}/${searchLimit}`)
     setSearchResults(data.data)
     setIsLoading(false)
+    setShowSearchResults(true)
   }
 
   const {
@@ -54,14 +80,14 @@ const Search = () => {
     <MainContainer>
       <form onSubmit={onSubmit}>
         <SearchContainer>
-          <StyledInput type='text' placeholder='search for cities, neighbourhoods or flats..' onChange={onChange} value={searchInput}/>
+          <StyledInput ref={searchInputRef} type='text' placeholder='search for cities, neighbourhoods or flats..' onChange={onChange} value={searchInput}/>
           <SearchButton type='submit'><i className='fas fa-search-location fa-2x'/></SearchButton>
         </SearchContainer>
       </form>
 
       {
-        searchInput.length > 2 &&
-        <ResultsContainer>
+        showSearchResults &&
+        <ResultsContainer ref={resultsContainer}>
           {isLoading && <Spinner/>}
           {
             neighbourhoods && neighbourhoods.length === 0 && cities.length === 0 && flats.length === 0 &&

@@ -11,8 +11,7 @@ const Navbar = () => {
 
   const {
     loadUser,
-    user,
-    isAuthenticated
+    user
   } = authContext
 
   useEffect(() => {
