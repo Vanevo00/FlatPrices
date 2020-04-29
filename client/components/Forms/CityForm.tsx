@@ -22,8 +22,6 @@ const CityForm = ({ buttonText, onSubmit, successMessage }: Props) => {
     })
   }
 
-  console.log('inputValues', inputValues)
-
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValues({
       ...inputValues,
@@ -33,7 +31,6 @@ const CityForm = ({ buttonText, onSubmit, successMessage }: Props) => {
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault()
-    console.log(e.currentTarget)
     onSubmit(inputValues.name, inputValues.country, inputValues.image)
     setInputValues({
       name: '',

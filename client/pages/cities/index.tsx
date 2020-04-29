@@ -49,11 +49,6 @@ const Cities = () => {
   }
 
   useEffect(() => {
-    console.log('cities', cities)
-    console.log('neighbourhoods', neighbourhoods)
-  }, [neighbourhoods])
-
-  useEffect(() => {
     fetchData()
   }, [])
 

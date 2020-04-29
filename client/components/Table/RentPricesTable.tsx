@@ -7,8 +7,6 @@ interface Props {
 }
 
 const RentPricesTable = ({rentPrices}: Props) => {
-  console.log('rentPrices', rentPrices)
-
   return (
     <StyledRentsContainer>
       <Row>
