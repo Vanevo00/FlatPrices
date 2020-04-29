@@ -7,11 +7,12 @@ import CityForm from '../../components/Forms/CityForm'
 const AddCity = () => {
   const [successMessage, setSuccessMessage] = useState('')
 
-  const sendAddCity = async (name: string, country: string) => {
+  const sendAddCity = async (name: string, country: string, image: File) => {
     try {
       const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/`, {
         name,
-        country
+        country,
+        image
       })
       setSuccessMessage(`${data.data.name} successfully added`)
       setTimeout(() => {

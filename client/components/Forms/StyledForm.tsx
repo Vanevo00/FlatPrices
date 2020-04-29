@@ -20,6 +20,10 @@ export const FormRow = styled.div`
   width: 100%;
   margin-bottom: 1rem;
   color: ${props => props.theme.colors.main};
+  
+  input:focus {
+    outline: none;
+  }
 `
 
 export const FormInput = styled.input<Props>`
@@ -70,4 +74,14 @@ export const FormSelect = styled.select`
   height: 30px;
   font-size: ${props => props.theme.fontSizes.s};
   color: ${props => props.theme.colors.main};
+`
+
+export const DragNDrop = styled.div`
+  height: 100px;
+  border: 1px dashed ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.lightGray};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
