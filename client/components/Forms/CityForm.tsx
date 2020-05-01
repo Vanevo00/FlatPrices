@@ -6,13 +6,18 @@ interface Props {
   buttonText: string
   onSubmit: Function
   successMessage?: string
+  city?: {
+    name: string
+    country: string
+    mainImageLink?: string
+  }
 }
 
-const CityForm = ({ buttonText, onSubmit, successMessage }: Props) => {
+const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
   const [inputValues, setInputValues] = useState({
-    name: '',
-    country: '',
-    externalImageLink: ''
+    name: city && city.name || '',
+    country: city && city.country || '',
+    externalImageLink: city && city.mainImageLink || ''
   })
   const [image, setImage] = useState()
 

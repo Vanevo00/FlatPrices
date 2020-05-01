@@ -16,4 +16,6 @@ export const EditButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  z-index: 4;
 `

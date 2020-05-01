@@ -107,7 +107,47 @@ router.post('/', [
   }
 })
 
-// @route  DELETE api/citie
+// @route  POST  api/cities/edit/:_id
+// @desc   Edit existing city
+router.post('/edit/:_id', [
+  cityUpload.single('image'),
+  check('name', 'city name is required').not().isEmpty(),
+  check('country', 'country name is required').not().isEmpty()
+], async (req: any, res: Response) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
+  const { name, country, externalImageLink } = req.body
+
+  console.log('req.file', req.file)
+
+  let filename = ''
+  if (req.file) {
+    filename = `/city/${req.file.filename}`
+  } else if (externalImageLink) {
+    filename = externalImageLink
+  }
+
+  console.log('filename', filename)
+
+  try {
+    const editedCity = await City.findOne({ _id: req.params._id })
+    editedCity.name = name
+    editedCity.country = country
+    editedCity.mainImageLink = filename
+
+    const city = await editedCity.save()
+
+    res.json(city)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('an error has occurred')
+  }
+})
+
+// @route  DELETE api/cities
 // @desc   Delete City
 router.delete('/:_id', async (req: Request, res: Response) => {
   try {
