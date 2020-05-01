@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import Link from 'next/link'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
 import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
@@ -7,6 +8,8 @@ import CityTable from '../../components/Table/CityTable'
 import AvgPriceTable from '../../components/Table/AvgPriceTable'
 import { AvgContainer } from '../../components/Table/StyledAveragePriceTable'
 import RentPricesTable from '../../components/Table/RentPricesTable'
+import AuthContext from '../../context/auth/authContext'
+import { EditButton } from '../../components/StyledButtons'
 
 interface Props {
   _id: string
@@ -22,6 +25,11 @@ const CityDetail = ({ _id }: Props) => {
   const [avgRents, setAvgRents] = useState({
     rentPrices: []
   })
+
+  const {
+    isAuthenticated,
+    user
+  } = useContext(AuthContext)
 
   const fetchData = async () => {
     setIsLoading(true)
@@ -73,6 +81,14 @@ const CityDetail = ({ _id }: Props) => {
             <Heading2Centered>{cityFlats.length} Flats in {city.name}</Heading2Centered>
             <CityTable flats={cityFlats} medianPrice={avgPrice.medianPrice}/>
           </>
+        }
+        {
+          isAuthenticated && user.isAdmin &&
+            <Link href={`/edit/city/${_id}`}>
+              <EditButton>
+                <i className='far fa-edit fa-2x'/>
+              </EditButton>
+            </Link>
         }
       </GeneralContainer>
     </>
