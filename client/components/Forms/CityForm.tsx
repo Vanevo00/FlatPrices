@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { FormButton, FormContainer, FormInput, FormRow, FormSuccessMessage } from './StyledForm'
 import Dropzone from './Dropzone'
 
@@ -12,14 +12,12 @@ const CityForm = ({ buttonText, onSubmit, successMessage }: Props) => {
   const [inputValues, setInputValues] = useState({
     name: '',
     country: '',
-    image: null
+    externalImageLink: ''
   })
+  const [image, setImage] = useState()
 
   const saveImageToState = (imageFile) => {
-    setInputValues({
-      ...inputValues,
-      image: imageFile
-    })
+    setImage(imageFile[0])
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,12 +29,13 @@ const CityForm = ({ buttonText, onSubmit, successMessage }: Props) => {
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault()
-    onSubmit(inputValues.name, inputValues.country, inputValues.image)
+    onSubmit(inputValues.name, inputValues.country, inputValues.externalImageLink, image)
     setInputValues({
       name: '',
       country: '',
-      image: null
+      externalImageLink: ''
     })
+    setImage(undefined)
   }
 
   return (
@@ -48,14 +47,17 @@ const CityForm = ({ buttonText, onSubmit, successMessage }: Props) => {
         <FormRow>
           <FormInput type='text' full={true} name='country' placeholder='Country' value={inputValues.country} onChange={onChange} required/>
         </FormRow>
+        City image (optional):
         <FormRow>
           <Dropzone
             activeDragText={'Drop the image here ...'}
             emptyZoneText={'Drag \'n\' drop an image here, or click to select an image'}
             multipleFiles={false}
-            name={'image'}
             callback={saveImageToState}
           />
+        </FormRow>
+        <FormRow>
+          <FormInput type='text' full={true} name='externalImageLink' placeholder='or insert image url' value={inputValues.externalImageLink} onChange={onChange}/>
         </FormRow>
         <FormButton type='submit'>{buttonText}</FormButton>
         {

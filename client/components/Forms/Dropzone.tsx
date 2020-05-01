@@ -6,12 +6,11 @@ interface Props {
   activeDragText: string
   emptyZoneText: string
   multipleFiles: boolean
-  name: string
   callback: Function
   maxSize?: number
 }
 
-const Dropzone = ({activeDragText, emptyZoneText, multipleFiles, name, maxSize = 10000000, callback }: Props) => {
+const Dropzone = ({activeDragText, emptyZoneText, multipleFiles, maxSize = 10000000, callback }: Props) => {
   const onDrop = useCallback(acceptedFiles => {
     callback(acceptedFiles)
   }, [])
@@ -41,7 +40,7 @@ const Dropzone = ({activeDragText, emptyZoneText, multipleFiles, name, maxSize =
 
   return (
     <DragNDrop {...getRootProps()}>
-      <input {...getInputProps()} name={name}/>
+      <input {...getInputProps()}/>
       {renderDropzoneText()}
     </DragNDrop>
   )

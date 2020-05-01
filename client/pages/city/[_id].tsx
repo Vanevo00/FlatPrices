@@ -14,7 +14,7 @@ interface Props {
 
 const CityDetail = ({ _id }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [city, setCity] = useState({name: ''})
+  const [city, setCity] = useState({name: '', mainImageLink: ''})
   const [cityFlats, setCityFlats] = useState([])
   const [avgPrice, setAvgPrice] = useState({
     medianPrice: null
@@ -47,6 +47,10 @@ const CityDetail = ({ _id }: Props) => {
 
   return (
     <>
+      {
+        city && city.mainImageLink &&
+        <img src={city.mainImageLink} alt={city.name}/>
+      }
       <GeneralContainer>
         {isLoading && <Spinner/>}
         {
