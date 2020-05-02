@@ -10,6 +10,10 @@ export const CityListContainer = styled.div`
   overflow: scroll;
   margin: 0 auto;
   width: 90%;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const CityListItem = styled.div<Props>`
