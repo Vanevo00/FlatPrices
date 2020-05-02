@@ -49,7 +49,7 @@ const NewlyAddedFlats = () => {
             Price/m<sup>2</sup>
           </TableItemHeader>
           <TableItemHeader width={10}>
-            Added at
+            Added on
           </TableItemHeader>
           <TableItemHeader width={10}>
             Detail
