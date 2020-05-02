@@ -6,6 +6,7 @@ import { Heading1 } from '../../components/StyledHeadings'
 import { CityContainer, CityItemContainer, CityRow, NeighbourhoodRow } from '../../components/CityDetail/StyledCities'
 import { City } from '../../../Types/City'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
+import increasePopularity from '../../utils/icreasePopularity'
 
 const Cities = () => {
   const [cities, setCities] = useState([])
@@ -33,7 +34,7 @@ const Cities = () => {
     const neighbourhoodItems = cityNeighbourhoods.map((cityNeighbourhood: Neighbourhood) => {
       return (
         <Link href={`/neighbourhood/${cityNeighbourhood._id}`}>
-          <NeighbourhoodRow>{cityNeighbourhood.name}</NeighbourhoodRow>
+          <NeighbourhoodRow onClick={() => increasePopularity(city._id)}>{cityNeighbourhood.name}</NeighbourhoodRow>
         </Link>
       )
     })
@@ -41,7 +42,7 @@ const Cities = () => {
     return (
       <CityItemContainer>
         <Link href={`/city/${city._id}`}>
-          <CityRow>{city.name}</CityRow>
+          <CityRow onClick={() => increasePopularity(city._id)}>{city.name}</CityRow>
         </Link>
         {neighbourhoodItems}
       </CityItemContainer>

@@ -26,7 +26,7 @@ const City = require('../models/City')
 // @desc   Get all cities
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const allCities = await City.find({})
+    const allCities = await City.find({}).sort('-popularity')
     res.json(allCities)
   } catch (err) {
     console.error(err.message)
@@ -144,6 +144,19 @@ router.post('/edit/:_id', [
   } catch (err) {
     console.error(err)
     res.status(500).send('an error has occurred')
+  }
+})
+
+// @route POST api/cities/increasePopularity/:_id
+// @desc Increase popularity of a city by one
+router.post('/increasePopularity/:_id', async (req: Request, res: Response) => {
+  try {
+    const clickedCity = await City.findOne({ _id: req.params._id })
+    clickedCity.popularity = clickedCity.popularity + 1
+    clickedCity.save()
+    res.send('popularity increased')
+  } catch (err) {
+    console.log(err)
   }
 })
 

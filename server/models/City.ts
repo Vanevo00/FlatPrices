@@ -11,6 +11,11 @@ const CitySchema = mongoose.Schema({
   },
   mainImageLink: {
     type: String
+  },
+  popularity: {
+    type: Number,
+    required: true,
+    default: 0
   }
 })
 
