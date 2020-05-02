@@ -55,10 +55,6 @@ const CityDetail = ({ _id }: Props) => {
 
   return (
     <>
-      {
-        city && city.mainImageLink &&
-        <img src={city.mainImageLink} alt={city.name}/>
-      }
       <GeneralContainer>
         {isLoading && <Spinner/>}
         {
