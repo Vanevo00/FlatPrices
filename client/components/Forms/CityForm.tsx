@@ -9,6 +9,7 @@ interface Props {
   city?: {
     name: string
     country: string
+    srealityScraper?: string
     mainImageLink?: string
   }
 }
@@ -17,6 +18,7 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
   const [inputValues, setInputValues] = useState({
     name: city && city.name || '',
     country: city && city.country || '',
+    srealityScraper: city && city.srealityScraper || '',
     externalImageLink: city && city.mainImageLink || ''
   })
   const [image, setImage] = useState()
@@ -34,10 +36,11 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault()
-    onSubmit(inputValues.name, inputValues.country, inputValues.externalImageLink, image)
+    onSubmit(inputValues.name, inputValues.country, inputValues.srealityScraper, inputValues.externalImageLink, image)
     setInputValues({
       name: '',
       country: '',
+      srealityScraper: '',
       externalImageLink: ''
     })
     setImage(undefined)
@@ -51,6 +54,9 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
         </FormRow>
         <FormRow>
           <FormInput type='text' full={true} name='country' placeholder='Country' value={inputValues.country} onChange={onChange} required/>
+        </FormRow>
+        <FormRow>
+          <FormInput type='text' full={true} name='srealityScraper' placeholder='Sreality search link' value={inputValues.srealityScraper} onChange={onChange}/>
         </FormRow>
         City image (optional):
         <FormRow>

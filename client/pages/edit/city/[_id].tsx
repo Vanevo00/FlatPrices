@@ -28,11 +28,12 @@ const EditCity = ({_id}: Props) => {
     setIsLoading(false)
   }
 
-  const sendEditCity = async (name: string, country: string, externalImageLink: string, image: File) => {
+  const sendEditCity = async (name: string, country: string, srealityScraper: string, externalImageLink: string, image: File) => {
     try {
       const formData = new FormData()
       formData.append('image', image)
       formData.append('name', name)
+      formData.append('srealityScraper', srealityScraper)
       formData.append('externalImageLink', externalImageLink)
       formData.append('country', country)
       const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/edit/${_id}`, formData, {

@@ -16,6 +16,9 @@ const CitySchema = mongoose.Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  srealityScraper: {
+    type: String
   }
 })
 

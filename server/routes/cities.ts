@@ -82,7 +82,7 @@ router.post('/', [
     return res.status(400).json({ errors: errors.array() })
   }
 
-  const { name, country, externalImageLink } = req.body
+  const { name, country, srealityScraper, externalImageLink } = req.body
 
   let filename = ''
   if (req.file) {
@@ -95,6 +95,7 @@ router.post('/', [
     const newCity = new City({
       name,
       country,
+      srealityScraper,
       mainImageLink: filename
     })
 
@@ -119,7 +120,7 @@ router.post('/edit/:_id', [
     return res.status(400).json({ errors: errors.array() })
   }
 
-  const { name, country, externalImageLink } = req.body
+  const { name, country, srealityScraper, externalImageLink } = req.body
 
   console.log('req.file', req.file)
 
@@ -136,6 +137,7 @@ router.post('/edit/:_id', [
     const editedCity = await City.findOne({ _id: req.params._id })
     editedCity.name = name
     editedCity.country = country
+    editedCity.srealityScraper = srealityScraper
     editedCity.mainImageLink = filename
 
     const city = await editedCity.save()
