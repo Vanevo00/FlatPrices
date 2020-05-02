@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Spinner from '../../../components/Spinner/Spinner'
 import { GeneralContainer } from '../../../components/StyledContainers'
 import { Heading2Centered } from '../../../components/StyledHeadings'
 import CityForm from '../../../components/Forms/CityForm'
 import Router from 'next/router'
+import { limitToAdmin } from '../../../utils/limitToAdmin'
+import AuthContext from '../../../context/auth/authContext'
 
 interface Props {
   _id: string
@@ -18,6 +20,10 @@ const EditCity = ({_id}: Props) => {
     mainImageLink: ''
   })
   const [successMessage, setSuccessMessage] = useState('')
+
+  const authContext = useContext(AuthContext)
+
+  console.log(authContext)
 
   const fetchCity = async () => {
     setIsLoading(true)
@@ -48,10 +54,6 @@ const EditCity = ({_id}: Props) => {
   }
 
   useEffect(() => {
-    console.log(city)
-  }, [city])
-
-  useEffect(() => {
     fetchCity()
   }, [])
 
@@ -74,4 +76,4 @@ EditCity.getInitialProps = async (context: any) => {
   }
 }
 
-  export default EditCity;
+  export default limitToAdmin(EditCity);
