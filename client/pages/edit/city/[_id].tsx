@@ -6,7 +6,7 @@ import { Heading2Centered } from '../../../components/StyledHeadings'
 import CityForm from '../../../components/Forms/CityForm'
 import Router from 'next/router'
 import { limitToAdmin } from '../../../utils/limitToAdmin'
-import AuthContext from '../../../context/auth/authContext'
+import DeleteButton from '../../../components/Forms/DeleteButton'
 
 interface Props {
   _id: string
@@ -20,10 +20,6 @@ const EditCity = ({_id}: Props) => {
     mainImageLink: ''
   })
   const [successMessage, setSuccessMessage] = useState('')
-
-  const authContext = useContext(AuthContext)
-
-  console.log(authContext)
 
   const fetchCity = async () => {
     setIsLoading(true)
@@ -53,6 +49,11 @@ const EditCity = ({_id}: Props) => {
     }
   }
 
+  const deleteCity = async () => {
+    await axios.delete(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/${_id}`)
+    Router.push('/')
+  }
+
   useEffect(() => {
     fetchCity()
   }, [])
@@ -65,6 +66,7 @@ const EditCity = ({_id}: Props) => {
         <GeneralContainer>
           <Heading2Centered>Edit City: {city.name}</Heading2Centered>
           <CityForm buttonText='Edit City' onSubmit={sendEditCity} successMessage={successMessage} city={city}/>
+          <DeleteButton name={city.name} callback={deleteCity}/>
         </GeneralContainer>
       </>
   )

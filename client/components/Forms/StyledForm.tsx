@@ -5,6 +5,15 @@ interface Props {
   last?: boolean
 }
 
+interface DeleteProps {
+  show: boolean
+}
+
+interface ConfirmationProps {
+  show: boolean
+  showConfirm: boolean
+}
+
 export const FormContainer = styled.div`
   width: 50%;
   margin: 0 auto;
@@ -48,6 +57,10 @@ export const FormButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: ${props => props.theme.fontSizes.s};
+  
+  &:focus {
+    outline: 0;
+  }
 `
 
 export const FormSuccessMessage = styled.div`
@@ -57,8 +70,7 @@ export const FormSuccessMessage = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${props => props.theme.colors.successBackground};
-  color: ${props => props.theme.colors.successText};
-  border-color: ${props => props.theme.colors.successBorder}; 
+  color: ${props => props.theme.colors.successText}; 
   border: 1px solid transparent;
   margin-top: 1rem;
   border-radius: 4px;
@@ -84,4 +96,33 @@ export const DragNDrop = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+
+export const DeleteButtonContainer = styled.div`
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 1rem;
+`
+
+export const StyledDeleteButton = styled(FormButton)`
+  background-color: ${props => props.theme.colors.danger};
+  position: relative
+`
+
+export const DeleteText = styled.p<DeleteProps>`
+  opacity: ${props => props.show ? 1 : 0};
+  transition: .4s;
+`
+
+export const ConfirmDeleteIcons = styled.div<ConfirmationProps>`
+  position: absolute;
+  right: 1rem;
+  top: 20%;
+  display: ${props => props.showConfirm ? 'block' : 'none'};
+  opacity: ${props => props.show ? 1 : 0};
+  transition: .4s;
+  
+  i {
+    margin-right: .5rem;
+  }
 `
