@@ -122,16 +122,12 @@ router.post('/edit/:_id', [
 
   const { name, country, srealityScraper, externalImageLink } = req.body
 
-  console.log('req.file', req.file)
-
   let filename = ''
   if (req.file) {
     filename = `/city/${req.file.filename}`
   } else if (externalImageLink) {
     filename = externalImageLink
   }
-
-  console.log('filename', filename)
 
   try {
     const editedCity = await City.findOne({ _id: req.params._id })
