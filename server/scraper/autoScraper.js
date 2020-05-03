@@ -116,6 +116,8 @@ const autoScraper = async () => {
     }
     console.log('Scraping session finished!')
     await browser.close()
+  }, {
+      timezone: "Europe/Prague"
   })
 }
 
