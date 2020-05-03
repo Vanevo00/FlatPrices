@@ -1,4 +1,5 @@
 const axios = require('axios')
+const config = require('config')
 
 const saveFlat = async (flat) => {
   try {
@@ -8,7 +9,7 @@ const saveFlat = async (flat) => {
     }
 
     // eliminate duplicit flats
-    const duplicitFlat = await axios.post('http://localhost:4000/api/flats/searchByParameters', {
+    const duplicitFlat = await axios.post(`${config.get('dbAddress')}/api/flats/searchByParameters`, {
       address: flat.address,
       squareMeters: flat.squareMeters,
       priceCZK: flat.priceCZK,
@@ -19,9 +20,9 @@ const saveFlat = async (flat) => {
     }
 
     // fetch city or create it if it doesn't exist
-    let city = await axios.get(`http://localhost:4000/api/cities/byExactName/${encodeURIComponent(flat.city)}`)
+    let city = await axios.get(`${config.get('dbAddress')}/api/cities/byExactName/${encodeURIComponent(flat.city)}`)
     if (!city.data) {
-      city = await axios.post('http://localhost:4000/api/cities/', {
+      city = await axios.post(`${config.get('dbAddress')}/api/cities/`, {
         name: flat.city,
         country: 'Czech Republic'
       })
@@ -31,14 +32,14 @@ const saveFlat = async (flat) => {
     // fetch neighbourhood or create it if it doesn't exist
     let neighbourhood = await axios.get(`http://localhost:4000/api/neighbourhoods/byExactName/${encodeURIComponent(flat.neighbourhood)}`)
     if (!neighbourhood.data) {
-      neighbourhood = await axios.post('http://localhost:4000/api/neighbourhoods/', {
+      neighbourhood = await axios.post(`${config.get('dbAddress')}/api/neighbourhoods/`, {
         city: city.data._id,
         name: flat.neighbourhood
       })
       console.log(`New neighbourhood created: ${neighbourhood.data.name}!`)
     }
 
-    const newFlat = await axios.post('http://localhost:4000/api/flats/', {
+    const newFlat = await axios.post(`${config.get('dbAddress')}/api/flats/`, {
       ...flat,
       neighbourhood: neighbourhood.data._id,
       city: city.data._id

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express'
 const connectDB = require('../config/db')
+const autoScraper = require('./scraper/autoScraper')
 
 const cors = require('cors')
 const app = express()
@@ -22,6 +23,8 @@ app.use('/api/rents', require('./routes/rents'))
 app.use('/api/search', require('./routes/search'))
 app.use('/api/users', require('./routes/users'))
 app.use('/api/auth', require('./routes/auth'))
+
+autoScraper()
 
 app.get('/', (req: Request, res: Response) => res.send('Welcome to flat prices API'))
 
