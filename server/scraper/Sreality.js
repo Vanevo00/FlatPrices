@@ -71,7 +71,7 @@ const fetchSreality = async (searchedCity) => {
 
   console.log(`Scraping ${searchedCity} flats listed by Sreality..`)
 
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']})
   const page = await browser.newPage()
   page.setDefaultNavigationTimeout(0)
 
