@@ -78,7 +78,27 @@ router.post('/searchByParameters', async (req: Request, res: Response) => {
 // @desc   Get flats by city
 router.get('/byCity/:_id', async (req: Request, res: Response) => {
   try {
-    const flatsByCity = await Flat.find({ city: req.params._id }).populate('neighbourhood').sort('-createdAt')
+    //default limit is last week
+    let limit = new Date()
+    if (req.query.limit) {
+      if (req.query.limit === 'month') {
+        limit.setMonth(limit.getMonth() - 1)
+      } else if (req.query.limit === 'year') {
+        limit.setFullYear(limit.getFullYear() - 1)
+      } else if (req.query.limit === 'all data') {
+        limit.setFullYear(limit.getFullYear() - 30)
+      } else {
+        limit.setDate(limit.getDate() - 7)
+      }
+    } else {
+      limit.setDate(limit.getDate() - 7)
+    }
+    const flatsByCity = await Flat.find({
+      city: req.params._id,
+      createdAt: {$gte: limit}
+    })
+      .populate('neighbourhood')
+      .sort('-createdAt')
     res.json(flatsByCity)
   } catch (err) {
     console.error(err.message)
