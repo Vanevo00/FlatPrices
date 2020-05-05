@@ -83,7 +83,7 @@ const fetchSreality = async (searchedCity) => {
     while (true) {
       try {
         console.log(`fetching page no. ${currPage}`)
-        await page.goto(`${siteUrl}&strana=${currPage}`)
+        await page.goto(`${siteUrl}&strana=${currPage}`, {waitUntil: 'networkidle2'})
         const content = await page.content()
         const $ = await cheerio.load(content)
         $('.basic a').each((i, el) => {

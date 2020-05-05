@@ -55,38 +55,43 @@ const CityDetail = ({ _id }: Props) => {
 
   return (
     <>
-      <GeneralContainer>
-        {isLoading && <Spinner/>}
-        {
-          city &&
-          <Heading2>{city.name}</Heading2>
-        }
-        <AvgContainer>
-        {
-          avgPrice &&
-              <AvgPriceTable avgPrice={avgPrice} rentPrices={avgRents}/>
-        }
-        {
-          avgPrice && avgRents && avgRents.rentPrices.length > 0 &&
-          <RentPricesTable rentPrices={avgRents}/>
-        }
-        </AvgContainer>
-        {
-          city && cityFlats.length > 0 && avgPrice &&
-          <>
-            <Heading2Centered>{cityFlats.length} Flats in {city.name}</Heading2Centered>
-            <CityTable flats={cityFlats} medianPrice={avgPrice.medianPrice}/>
-          </>
-        }
-        {
-          isAuthenticated && user.isAdmin &&
-            <Link href={`/edit/city/${_id}`}>
-              <EditButton>
-                <i className='far fa-edit fa-2x'/>
-              </EditButton>
-            </Link>
-        }
-      </GeneralContainer>
+      {
+        isLoading
+          ?
+          <Spinner/>
+          :
+          <GeneralContainer>
+            {
+              city &&
+              <Heading2>{city.name}</Heading2>
+            }
+            <AvgContainer>
+              {
+                avgPrice &&
+                <AvgPriceTable avgPrice={avgPrice} rentPrices={avgRents}/>
+              }
+              {
+                avgPrice && avgRents && avgRents.rentPrices.length > 0 &&
+                <RentPricesTable rentPrices={avgRents}/>
+              }
+            </AvgContainer>
+            {
+              city && cityFlats.length > 0 && avgPrice &&
+              <>
+                <Heading2Centered>{cityFlats.length} Flats in {city.name}</Heading2Centered>
+                <CityTable flats={cityFlats} medianPrice={avgPrice.medianPrice}/>
+              </>
+            }
+            {
+              isAuthenticated && user.isAdmin &&
+              <Link href={`/edit/city/${_id}`}>
+                <EditButton>
+                  <i className='far fa-edit fa-2x'/>
+                </EditButton>
+              </Link>
+            }
+          </GeneralContainer>
+      }
     </>
   )
 }
