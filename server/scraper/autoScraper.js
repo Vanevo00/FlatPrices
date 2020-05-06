@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer')
 
 
 const autoScraper = async () => {
-  cron.schedule('0 9,15,20 * * *', async() => {
+  cron.schedule('0 8,14,19 * * *', async() => {
     const {
         data: cityData
     } = await axios.get(`${config.get('dbAddress')}/api/cities`)
