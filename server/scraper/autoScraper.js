@@ -8,7 +8,6 @@ const puppeteer = require('puppeteer')
 
 
 const autoScraper = async () => {
-  cron.schedule('0 9,15,20 * * *', async() => {
     const {
         data: cityData
     } = await axios.get(`${config.get('dbAddress')}/api/cities`)
@@ -116,9 +115,6 @@ const autoScraper = async () => {
     }
     console.log('Scraping session finished!')
     await browser.close()
-  }, {
-      timezone: "Europe/Prague"
-  })
 }
 
 module.exports = autoScraper
