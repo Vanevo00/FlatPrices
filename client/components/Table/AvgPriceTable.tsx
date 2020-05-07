@@ -24,7 +24,7 @@ const AvgPriceTable = ({avgPrice, rentPrices}: Props) => {
 
 
       {
-        rentPrices.rents1plus1 && rentPrices.rents1plus1.amounts.length > 0 && rentPrices.rents2plus1 && rentPrices.rents2plus1.amounts.length > 0 &&  avgPrice.smallFlatPricesMedian && avgPrice.medianPrice &&
+        rentPrices.rents1plus1 && rentPrices.rents2plus1 && (rentPrices.rents2plus1.amounts.length > 0 || rentPrices.rents1plus1.amounts.length > 0) &&  avgPrice.smallFlatPricesMedian && avgPrice.medianPrice &&
         <StyledAvgPriceTable>
           <PriceDescription>Estimated yearly return per 40m<sup>2</sup> 1+1 flat</PriceDescription>
           <PriceNumber>{(rentPrices.rents1plus1.median * 12).toLocaleString()} / {(avgPrice.smallFlatPricesMedian * 40).toLocaleString()} = {(((rentPrices.rents1plus1.median * 12) / (avgPrice.smallFlatPricesMedian * 40)) * 100).toFixed(2)}%</PriceNumber>
