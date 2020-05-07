@@ -10,6 +10,7 @@ import { AvgContainer } from '../../components/Table/StyledAveragePriceTable'
 import RentPricesTable from '../../components/Table/RentPricesTable'
 import AuthContext from '../../context/auth/authContext'
 import { EditButton } from '../../components/StyledButtons'
+import { CityTableHeader, SearchPeriod, SearchPeriodItem } from '../../components/CityDetail/StyledCities'
 
 interface Props {
   _id: string
@@ -25,6 +26,7 @@ const CityDetail = ({ _id }: Props) => {
   const [avgRents, setAvgRents] = useState({
     rentPrices: []
   })
+  const [activeLimitPeriod, setActiveLimitPeriod] = useState('week')
 
   const {
     isAuthenticated,
@@ -49,9 +51,18 @@ const CityDetail = ({ _id }: Props) => {
     setIsLoading(false)
   }
 
+  const fetchDataLimitedByPeriod = async () => {
+    const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?limit=${activeLimitPeriod}`)
+    setCityFlats(flats.data)
+  }
+
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    fetchDataLimitedByPeriod()
+  }, [activeLimitPeriod])
 
   return (
     <>
@@ -78,7 +89,16 @@ const CityDetail = ({ _id }: Props) => {
             {
               city && cityFlats.length > 0 && avgPrice &&
               <>
-                <Heading2Centered>{cityFlats.length} Flats in {city.name}</Heading2Centered>
+                <CityTableHeader>
+                  <SearchPeriod>
+                    <SearchPeriodItem active={activeLimitPeriod === 'week'} onClick={() => setActiveLimitPeriod('week')}>week</SearchPeriodItem>
+                    <SearchPeriodItem active={activeLimitPeriod === 'month'} onClick={() => setActiveLimitPeriod('month')}>month</SearchPeriodItem>
+                    <SearchPeriodItem active={activeLimitPeriod === 'year'} onClick={() => setActiveLimitPeriod('year')}>year</SearchPeriodItem>
+                    <SearchPeriodItem active={activeLimitPeriod === 'all'} onClick={() => setActiveLimitPeriod('all')} last={true}>all time</SearchPeriodItem>
+                  </SearchPeriod>
+                  <Heading2Centered>{cityFlats.length} Flats in {city.name}</Heading2Centered>
+                  <div></div>
+                </CityTableHeader>
                 <CityTable flats={cityFlats} medianPrice={avgPrice.medianPrice}/>
               </>
             }
