@@ -48,12 +48,15 @@ export const NeighbourhoodRow = styled.div`
 
 export const CityTableHeader = styled.div`
   display: flex;
-  justify-content: space-between;
+  position: relative;
+  justify-content: center;
   align-items: center;
 `
 
 export const SearchPeriod = styled.div`
   display: flex;
+  position: absolute;
+  left: 0;
 `
 
 export const SearchPeriodItem = styled.button<SearchPeriodProps>`

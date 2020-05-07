@@ -16,7 +16,8 @@ const GlobalStyle = createGlobalStyle<ThemeProps<any>>`
   body {
     margin: 0;
     padding: 0;
-    color: ${props => props.theme.colors.mainText}
+    color: ${props => props.theme.colors.mainText};
+    overflow-x: hidden; 
   }
   
   h1, h2, h3, p {

@@ -13,13 +13,15 @@ import {
   TableRowHeader
 } from './StyledTable'
 import ConfirmDelete from './ConfirmDelete'
+import Spinner from '../Spinner/Spinner'
 
 interface Props {
   flats: Flat[]
   medianPrice: number
+  isLoading: boolean
 }
 
-const CityTable = ({ flats, medianPrice }: Props) => {
+const CityTable = ({ flats, medianPrice, isLoading }: Props) => {
   const [selectedForDelete, setSelectedForDelete] = useState('')
 
   const handleDeleteClick = (_id: string) => {
@@ -79,7 +81,7 @@ const CityTable = ({ flats, medianPrice }: Props) => {
       </TableRowHeader>
 
       {
-        flats.map((flat) => {
+        isLoading ? <Spinner/> : flats.map((flat) => {
           const createdAt = new Date(flat.createdAt)
           const date = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}`
           const priceComparison = Math.ceil(flat.pricePerMeter - medianPrice)

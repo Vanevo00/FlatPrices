@@ -27,6 +27,7 @@ const CityDetail = ({ _id }: Props) => {
     rentPrices: []
   })
   const [activeLimitPeriod, setActiveLimitPeriod] = useState('week')
+  const [isCityTableLoading, setIsCityTableLoading] = useState(false)
 
   const {
     isAuthenticated,
@@ -52,8 +53,10 @@ const CityDetail = ({ _id }: Props) => {
   }
 
   const fetchDataLimitedByPeriod = async () => {
+    setIsCityTableLoading(true)
     const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?limit=${activeLimitPeriod}`)
     setCityFlats(flats.data)
+    setIsCityTableLoading(false)
   }
 
   useEffect(() => {
@@ -96,10 +99,9 @@ const CityDetail = ({ _id }: Props) => {
                     <SearchPeriodItem active={activeLimitPeriod === 'year'} onClick={() => setActiveLimitPeriod('year')}>year</SearchPeriodItem>
                     <SearchPeriodItem active={activeLimitPeriod === 'all'} onClick={() => setActiveLimitPeriod('all')} last={true}>all time</SearchPeriodItem>
                   </SearchPeriod>
-                  <Heading2Centered>{cityFlats.length} Flats in {city.name}</Heading2Centered>
-                  <div></div>
+                  <Heading2Centered>{cityFlats.length} Flat{cityFlats.length !== 1 && 's'} in {city.name} {activeLimitPeriod !== 'all' && `(last ${activeLimitPeriod})`}</Heading2Centered>
                 </CityTableHeader>
-                <CityTable flats={cityFlats} medianPrice={avgPrice.medianPrice}/>
+                <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice}/>
               </>
             }
             {
