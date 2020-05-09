@@ -26,7 +26,7 @@ const CitySchema = mongoose.Schema({
   remaxScraper: {
     type: String
   },
-  svobodaWilliamScraper: {
+  svobodaWilliamsScraper: {
     type: String
   },
   rentScraper: {

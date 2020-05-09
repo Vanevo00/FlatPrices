@@ -10,6 +10,10 @@ interface Props {
     name: string
     country: string
     srealityScraper?: string
+    nextRealityScraper?: string
+    remaxScraper?: string
+    svobodaWilliamsScraper?: string
+    rentScraper?: string
     mainImageLink?: string
   }
 }
@@ -19,6 +23,10 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
     name: city && city.name || '',
     country: city && city.country || '',
     srealityScraper: city && city.srealityScraper || '',
+    nextRealityScraper: city && city.nextRealityScraper || '',
+    remaxScraper: city && city.remaxScraper || '',
+    svobodaWilliamsScraper: city && city.svobodaWilliamsScraper || '',
+    rentScraper: city && city.rentScraper || '',
     externalImageLink: city && city.mainImageLink || ''
   })
   const [image, setImage] = useState()
@@ -36,11 +44,25 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault()
-    onSubmit(inputValues.name, inputValues.country, inputValues.srealityScraper, inputValues.externalImageLink, image)
+    onSubmit({
+      name: inputValues.name,
+      country: inputValues.country,
+      srealityScraper: inputValues.srealityScraper,
+      nextRealityScraper: inputValues.nextRealityScraper,
+      remaxScraper: inputValues.remaxScraper,
+      svobodaWilliamsScraper: inputValues.svobodaWilliamsScraper,
+      rentScraper: inputValues.rentScraper,
+      externalImageLink: inputValues.externalImageLink,
+      image
+    })
     setInputValues({
       name: '',
       country: '',
       srealityScraper: '',
+      nextRealityScraper: '',
+      remaxScraper: '',
+      svobodaWilliamsScraper: '',
+      rentScraper: '',
       externalImageLink: ''
     })
     setImage(undefined)
@@ -57,6 +79,18 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
         </FormRow>
         <FormRow>
           <FormInput type='text' full={true} name='srealityScraper' placeholder='Sreality search link' value={inputValues.srealityScraper} onChange={onChange}/>
+        </FormRow>
+        <FormRow>
+          <FormInput type='text' full={true} name='nextRealityScraper' placeholder='Next Reality search link' value={inputValues.nextRealityScraper} onChange={onChange}/>
+        </FormRow>
+        <FormRow>
+          <FormInput type='text' full={true} name='remaxScraper' placeholder='Remax search link' value={inputValues.remaxScraper} onChange={onChange}/>
+        </FormRow>
+        <FormRow>
+          <FormInput type='text' full={true} name='svobodaWilliamsScraper' placeholder='Svoboda & Williams search link' value={inputValues.svobodaWilliamsScraper} onChange={onChange}/>
+        </FormRow>
+        <FormRow>
+          <FormInput type='text' full={true} name='rentScraper' placeholder='Rents (Sreality) search link' value={inputValues.rentScraper} onChange={onChange}/>
         </FormRow>
         City image (optional):
         <FormRow>

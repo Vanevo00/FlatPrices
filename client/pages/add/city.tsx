@@ -5,15 +5,31 @@ import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
 import CityForm from '../../components/Forms/CityForm'
 
+interface AddCityInputs {
+  name: string
+  country: string
+  srealityScraper: string
+  nextRealityScraper: string
+  remaxScraper: string
+  svobodaWilliamsScraper: string
+  rentScraper: string
+  externalImageLink: string
+  image: File
+}
+
 const AddCity = () => {
   const [successMessage, setSuccessMessage] = useState('')
 
-  const sendAddCity = async (name: string, country: string, srealityScraper: string, externalImageLink: string, image: File) => {
+  const sendAddCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, rentScraper, externalImageLink, image }: AddCityInputs) => {
     try {
       const formData = new FormData()
       formData.append('image', image)
       formData.append('name', name)
       formData.append('srealityScraper', srealityScraper)
+      formData.append('nextRealityScraper', nextRealityScraper)
+      formData.append('remaxScraper', remaxScraper)
+      formData.append('svobodaWilliamsScraper', svobodaWilliamsScraper)
+      formData.append('rentScraper', rentScraper)
       formData.append('externalImageLink', externalImageLink)
       formData.append('country', country)
       const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/`, formData, {

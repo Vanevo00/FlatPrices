@@ -12,6 +12,18 @@ interface Props {
   _id: string
 }
 
+interface EditCityInputs {
+  name: string
+  country: string
+  srealityScraper: string
+  nextRealityScraper: string
+  remaxScraper: string
+  svobodaWilliamsScraper: string
+  rentScraper: string
+  externalImageLink: string
+  image: File
+}
+
 const EditCity = ({_id}: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [city, setCity] = useState({
@@ -28,12 +40,16 @@ const EditCity = ({_id}: Props) => {
     setIsLoading(false)
   }
 
-  const sendEditCity = async (name: string, country: string, srealityScraper: string, externalImageLink: string, image: File) => {
+  const sendEditCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, rentScraper, externalImageLink, image }: EditCityInputs) => {
     try {
       const formData = new FormData()
       formData.append('image', image)
       formData.append('name', name)
       formData.append('srealityScraper', srealityScraper)
+      formData.append('nextRealityScraper', nextRealityScraper)
+      formData.append('remaxScraper', remaxScraper)
+      formData.append('svobodaWilliamsScraper', svobodaWilliamsScraper)
+      formData.append('rentScraper', rentScraper)
       formData.append('externalImageLink', externalImageLink)
       formData.append('country', country)
       const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/edit/${_id}`, formData, {
