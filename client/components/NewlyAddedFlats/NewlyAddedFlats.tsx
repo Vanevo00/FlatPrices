@@ -86,12 +86,16 @@ const NewlyAddedFlats = () => {
                   </TableItem>
                   <TableItemButton width={12}>
                     <Link href={`/city/${flat.city._id}`}>
-                      {flat.city.name}
+                      <a>
+                        {flat.city.name}
+                      </a>
                     </Link>
                   </TableItemButton>
                   <TableItemButton width={12}>
                     <Link href={`/neighbourhood/${flat.neighbourhood._id}`}>
-                      {flat.neighbourhood.name}
+                      <a>
+                        {flat.neighbourhood.name}
+                      </a>
                     </Link>
                   </TableItemButton>
                   <TableItem width={6}>

@@ -34,7 +34,9 @@ const Cities = () => {
     const neighbourhoodItems = cityNeighbourhoods.map((cityNeighbourhood: Neighbourhood) => {
       return (
         <Link href={`/neighbourhood/${cityNeighbourhood._id}`}>
-          <NeighbourhoodRow onClick={() => increasePopularity(city._id)}>{cityNeighbourhood.name}</NeighbourhoodRow>
+          <a>
+            <NeighbourhoodRow onClick={() => increasePopularity(city._id)}>{cityNeighbourhood.name}</NeighbourhoodRow>
+          </a>
         </Link>
       )
     })
@@ -42,7 +44,9 @@ const Cities = () => {
     return (
       <CityItemContainer>
         <Link href={`/city/${city._id}`}>
-          <CityRow onClick={() => increasePopularity(city._id)}>{city.name}</CityRow>
+          <a>
+            <CityRow onClick={() => increasePopularity(city._id)}>{city.name}</CityRow>
+          </a>
         </Link>
         {neighbourhoodItems}
       </CityItemContainer>

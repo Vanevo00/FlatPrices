@@ -8,8 +8,7 @@ import {
   CityListItem,
   CountryText,
   ItemDescription,
-  NameText,
-  NoDecorationA
+  NameText
 } from './StyledCityList'
 import increasePopularity from '../../utils/icreasePopularity'
 
@@ -37,7 +36,7 @@ const CityList = () => {
           <CityListContainer>
             {cities.map((city) =>
               <Link href={`/city/${city._id}`} key={city._id}>
-                <NoDecorationA>
+                <a>
                   <CityListItem backgroundImage={city.mainImageLink ? city.mainImageLink : CITY_IMAGE_PLACEHOLDER} onClick={() => increasePopularity(city._id)}>
                     <ItemDescription>
                       <div>
@@ -46,7 +45,7 @@ const CityList = () => {
                       </div>
                     </ItemDescription>
                   </CityListItem>
-                </NoDecorationA>
+                </a>
               </Link>
             )}
           </CityListContainer>

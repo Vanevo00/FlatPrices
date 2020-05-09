@@ -46,7 +46,9 @@ const Search = ({ term }: Props) => {
           {isLoading && <Spinner/>}
           {searchResults && searchResults.cities.length > 0 && searchResults.cities.map((city: City) =>
             <Link href={`/city/${city._id}`}>
-              <ResultItem key={city._id}>{city.name}&nbsp;<GreySmallText>{city.country}</GreySmallText></ResultItem>
+              <a>
+                <ResultItem key={city._id}>{city.name}&nbsp;<GreySmallText>{city.country}</GreySmallText></ResultItem>
+              </a>
             </Link>
           )}
         </ResultsTable>
@@ -56,9 +58,11 @@ const Search = ({ term }: Props) => {
           {isLoading && <Spinner/>}
           {searchResults && searchResults.neighbourhoods.length > 0 && searchResults.neighbourhoods.map((neighbourhood: Neighbourhood) =>
             <Link href={`/neighbourhood/${neighbourhood._id}`}>
-              <ResultItem key={neighbourhood._id}>
-                {neighbourhood.name}&nbsp;<GreySmallText>{neighbourhood.city.name}</GreySmallText>
-              </ResultItem>
+              <a>
+                <ResultItem key={neighbourhood._id}>
+                  {neighbourhood.name}&nbsp;<GreySmallText>{neighbourhood.city.name}</GreySmallText>
+                </ResultItem>
+              </a>
             </Link>
 
           )}
@@ -69,14 +73,16 @@ const Search = ({ term }: Props) => {
           {isLoading && <Spinner/>}
           {searchResults && searchResults.flats.length > 0 && searchResults.flats.map((flat: Flat) =>
             <Link href={`/flat/${flat._id}`}>
-              <ResultItem key={flat._id}>
-                <div>
-                  {flat.address}&nbsp;<GreySmallText>{flat.neighbourhood.name}&nbsp;({flat.city.name})</GreySmallText>
-                </div>
-                <div>
-                  <GreySmallText>{flat.squareMeters}m2 | {flat.priceCZK.toLocaleString()} CZK | {flat.agency}</GreySmallText>
-                </div>
-              </ResultItem>
+              <a>
+                <ResultItem key={flat._id}>
+                  <div>
+                    {flat.address}&nbsp;<GreySmallText>{flat.neighbourhood.name}&nbsp;({flat.city.name})</GreySmallText>
+                  </div>
+                  <div>
+                    <GreySmallText>{flat.squareMeters}m2 | {flat.priceCZK.toLocaleString()} CZK | {flat.agency}</GreySmallText>
+                  </div>
+                </ResultItem>
+              </a>
             </Link>
           )}
         </ResultsTable>

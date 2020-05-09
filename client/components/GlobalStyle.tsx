@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle<ThemeProps<any>>`
     font-family: 'Roboto', sans-serif;
   }
   
+  a {
+    text-decoration: none;
+  }
+  
   body {
     margin: 0;
     padding: 0;
