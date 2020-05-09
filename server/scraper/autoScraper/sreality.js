@@ -9,6 +9,8 @@ const puppeteer = require('puppeteer')
 
 const sreality = async () => {
   cron.schedule('0 8,14,19 * * *', async() => {
+    console.log('Scraping Sreality...')
+
     const {
         data: cityData
     } = await axios.get(`${config.get('dbAddress')}/api/cities`)
@@ -114,7 +116,7 @@ const sreality = async () => {
             }
         }
     }
-    console.log('Scraping session finished!')
+    console.log('Sreality scraping session finished!')
     await browser.close()
   }, {
     timezone: "Europe/Prague"
