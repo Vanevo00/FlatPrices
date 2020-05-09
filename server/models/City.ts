@@ -19,6 +19,18 @@ const CitySchema = mongoose.Schema({
   },
   srealityScraper: {
     type: String
+  },
+  nextRealityScraper: {
+    type: String
+  },
+  remaxScraper: {
+    type: String
+  },
+  svobodaWilliamScraper: {
+    type: String
+  },
+  rentScraper: {
+    type: String
   }
 })
 

@@ -82,7 +82,16 @@ router.post('/', [
     return res.status(400).json({ errors: errors.array() })
   }
 
-  const { name, country, srealityScraper, externalImageLink } = req.body
+  const {
+    name,
+    country,
+    srealityScraper,
+    nextRealityScraper,
+    remaxScraper,
+    svobodaWilliamsScraper,
+    rentScraper,
+    externalImageLink
+  } = req.body
 
   let filename = ''
   if (req.file) {
@@ -96,6 +105,10 @@ router.post('/', [
       name,
       country,
       srealityScraper,
+      nextRealityScraper,
+      remaxScraper,
+      svobodaWilliamsScraper,
+      rentScraper,
       mainImageLink: filename
     })
 
@@ -120,7 +133,16 @@ router.post('/edit/:_id', [
     return res.status(400).json({ errors: errors.array() })
   }
 
-  const { name, country, srealityScraper, externalImageLink } = req.body
+  const {
+    name,
+    country,
+    srealityScraper,
+    nextRealityScraper,
+    remaxScraper,
+    svobodaWilliamsScraper,
+    rentScraper,
+    externalImageLink
+  } = req.body
 
   let filename = ''
   if (req.file) {
@@ -134,7 +156,11 @@ router.post('/edit/:_id', [
     editedCity.name = name
     editedCity.country = country
     editedCity.srealityScraper = srealityScraper
+    editedCity.rentScraper = rentScraper
     editedCity.mainImageLink = filename
+    editedCity.nextRealityScraper = nextRealityScraper
+    editedCity.remaxScraper = remaxScraper
+    editedCity.svobodaWilliamsScraper = svobodaWilliamsScraper
 
     const city = await editedCity.save()
 
