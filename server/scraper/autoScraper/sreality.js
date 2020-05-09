@@ -1,14 +1,14 @@
 const cron = require('node-cron')
 const axios = require('axios')
 const config = require('config')
-const saveFlat = require('./saveFlat')
+const saveFlat = require('../saveFlat')
 const cheerio = require('cheerio')
 const puppeteer = require('puppeteer')
 
 
 
-const autoScraper = async () => {
-  cron.schedule('0 8,14,19 * * *', async() => {
+const sreality = async () => {
+  // cron.schedule('0 8,14,19 * * *', async() => {
     const {
         data: cityData
     } = await axios.get(`${config.get('dbAddress')}/api/cities`)
@@ -116,9 +116,6 @@ const autoScraper = async () => {
     }
     console.log('Scraping session finished!')
     await browser.close()
-  }, {
-      timezone: "Europe/Prague"
-  })
-}
+  }
 
-module.exports = autoScraper
+module.exports = sreality
