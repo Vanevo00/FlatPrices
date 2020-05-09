@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer')
 
 
 const sreality = async () => {
-  // cron.schedule('0 8,14,19 * * *', async() => {
+  cron.schedule('0 8,14,19 * * *', async() => {
     console.log('Scraping Sreality...')
 
     const {
@@ -54,6 +54,16 @@ const sreality = async () => {
 
             for (const flatUrl of await getLinks()) {
                 try {
+                    //find already scraped flat and skip it
+                    const scrapedFlat = await axios.post(
+                      `${config.get('dbAddress')}/api/flats/byLink`,
+                      { link: flatUrl })
+
+                    if (scrapedFlat.data) {
+                        console.log(`skipping already scraped flat ${flatUrl}`)
+                        continue
+                    }
+
                     const flat = {
                         link: flatUrl,
                         city: city.name
@@ -118,9 +128,9 @@ const sreality = async () => {
     }
     console.log('Sreality scraping session finished!')
     await browser.close()
-  // }, {
-  //   timezone: "Europe/Prague"
-  // })
+  }, {
+    timezone: "Europe/Prague"
+  })
 }
 
 module.exports = sreality

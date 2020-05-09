@@ -56,6 +56,18 @@ router.get('/search/:_id', async (req: Request, res: Response) => {
   }
 })
 
+// @route  POST api/flats/byLink
+// @desc   Get one flat by link
+router.post('/byLink', async (req: Request, res: Response) => {
+  try {
+    const flat = await Flat.findOne({ link: req.body.link })
+    res.json(flat)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  POST api/flats/searchByParameters
 // @desc   Get one flat by address, squareMeters, priceCZK and agency
 router.post('/searchByParameters', async (req: Request, res: Response) => {
