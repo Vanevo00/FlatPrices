@@ -6,7 +6,7 @@ const cheerio = require('cheerio')
 const puppeteer = require('puppeteer')
 
 const rents = async () => {
-  cron.schedule('0 11 * * *', async() => {
+  // cron.schedule('0 11 * * *', async() => {
     console.log('Scraping rents...')
 
     const {
@@ -107,9 +107,10 @@ const rents = async () => {
       }
     }
     console.log('Rent scraping session finished!')
-  }, {
-    timezone: "Europe/Prague"
-  })
+  // }
+  // , {
+  //   timezone: "Europe/Prague"
+  // })
 }
 
 module.exports = rents
