@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer')
 
 
 const sreality = async () => {
-  cron.schedule('0 8,14,19 * * *', async() => {
+  // cron.schedule('0 8,14,19 * * *', async() => {
     console.log('Scraping Sreality...')
 
     const {
@@ -118,9 +118,9 @@ const sreality = async () => {
     }
     console.log('Sreality scraping session finished!')
     await browser.close()
-  }, {
-    timezone: "Europe/Prague"
-  })
+  // }, {
+  //   timezone: "Europe/Prague"
+  // })
 }
 
 module.exports = sreality
