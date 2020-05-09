@@ -24,14 +24,20 @@ router.get('/', async (req: Request, res: Response) => {
 // @desc   Get newest flats
 router.get('/new/:limit?', async (req: Request, res: Response) => {
   try {
+    const page = parseInt(<string>req.query.page) - 1 || 0
     const limit = parseInt(req.params.limit) || 10
+    const flatCount = await Flat.countDocuments({})
     const newFlats = await Flat
       .find({})
       .populate('city')
       .populate('neighbourhood')
       .sort('-createdAt')
       .limit(limit)
-    res.json(newFlats)
+      .skip(page * limit)
+    res.json({
+      flatCount,
+      newFlats
+    })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')

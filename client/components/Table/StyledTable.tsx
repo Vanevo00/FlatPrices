@@ -10,7 +10,7 @@ interface ConfirmDeleteProps {
 }
 
 export const TableContainer = styled.div`
-  margin: 0 auto;
+  margin: 0 auto 1rem auto;
   width: 90%;
   min-height: 120px;
   border: solid 2px ${props => props.theme.colors.main};

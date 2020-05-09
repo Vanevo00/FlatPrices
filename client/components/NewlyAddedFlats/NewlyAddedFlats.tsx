@@ -12,13 +12,26 @@ import { Heading1Centered } from '../StyledHeadings'
 import Spinner from '../Spinner/Spinner'
 import { Flat } from '../../../Types/Flat'
 import Link from 'next/link'
+import Paginator from '../Table/Paginator'
+
+const PAGE_LIMIT = 30
 
 const NewlyAddedFlats = () => {
   const [newFlats, setNewFlats] = useState([])
+  const [newFlatsLoading, setNewFlatsLoading] = useState(false)
+  const [count, setCount] = useState(0)
 
   const fetchFlats = async () => {
-    const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/new/30`)
-    setNewFlats(flats.data)
+    const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/new/${PAGE_LIMIT}`)
+    setNewFlats(flats.data.newFlats)
+    setCount(flats.data.flatCount)
+  }
+
+  const fetchNewPage = async (page) => {
+    setNewFlatsLoading(true)
+    const newFlats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/new/${PAGE_LIMIT}?page=${page}`)
+    setNewFlats(newFlats.data.newFlats)
+    setNewFlatsLoading(false)
   }
 
   useEffect(() => {
@@ -60,7 +73,7 @@ const NewlyAddedFlats = () => {
         </TableRowHeader>
 
         {
-          newFlats.length < 1
+          newFlats.length < 1 || newFlatsLoading
             ? <Spinner/>
             : newFlats.map((flat: Flat) => {
               const createdAt = new Date(flat.createdAt)
@@ -105,6 +118,8 @@ const NewlyAddedFlats = () => {
               )
             })
         }
+
+        <Paginator pageLimit={PAGE_LIMIT} count={count} maxPages={12} loading={newFlatsLoading} callback={fetchNewPage}/>
 
       </TableContainer>
     </>

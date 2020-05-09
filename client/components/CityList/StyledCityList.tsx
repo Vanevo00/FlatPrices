@@ -5,6 +5,10 @@ interface Props {
   backgroundImage?: string
 }
 
+export const NoDecorationA = styled.a`
+  text-decoration: none;
+`
+
 export const CityListContainer = styled.div`
   display: flex;
   overflow: scroll;
