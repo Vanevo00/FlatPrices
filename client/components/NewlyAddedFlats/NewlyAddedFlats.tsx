@@ -114,9 +114,9 @@ const NewlyAddedFlats = () => {
                   Detail
                   </TableItemButton>
                   <TableItemButton width={3} last={true}>
-                    <StyledLink href={flat.link} target='_blank'>
-                      <i className="fas fa-globe-europe"/>
-                    </StyledLink>
+                      <StyledLink href={flat.link} target='_blank'>
+                        <i className="fas fa-globe-europe"/>
+                      </StyledLink>
                   </TableItemButton>
                 </TableRow>
               )

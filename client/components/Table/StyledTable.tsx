@@ -41,6 +41,7 @@ export const TableItem = styled.div<TableItemProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   position: relative;
 `
 
@@ -60,6 +61,11 @@ export const TableItemButton = styled(TableItem)`
   a {
     text-decoration: none;
     color: inherit;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 
