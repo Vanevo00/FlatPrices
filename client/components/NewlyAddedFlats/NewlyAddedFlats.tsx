@@ -13,6 +13,7 @@ import Spinner from '../Spinner/Spinner'
 import { Flat } from '../../../Types/Flat'
 import Link from 'next/link'
 import Paginator from '../Table/Paginator'
+import increasePopularity from '../../utils/icreasePopularity'
 
 const PAGE_LIMIT = 30
 
@@ -114,7 +115,7 @@ const NewlyAddedFlats = () => {
                   Detail
                   </TableItemButton>
                   <TableItemButton width={3} last={true}>
-                      <StyledLink href={flat.link} target='_blank'>
+                      <StyledLink href={flat.link} target='_blank' onClick={() => increasePopularity(flat.city._id)}>
                         <i className="fas fa-globe-europe"/>
                       </StyledLink>
                   </TableItemButton>
