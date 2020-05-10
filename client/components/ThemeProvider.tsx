@@ -1,6 +1,7 @@
 const theme = {
   colors: {
     main: '#062770',
+    mainLighter: '#274279',
     successText: '#00a00c',
     successBackground: '#d4edda',
     errorBackground: '#f8d7da',

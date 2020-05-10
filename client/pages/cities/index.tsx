@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
-import { Heading1 } from '../../components/StyledHeadings'
-import { CityContainer, CityItemContainer, CityRow, NeighbourhoodRow } from '../../components/CityDetail/StyledCities'
+import { Heading1, Heading1Centered } from '../../components/StyledHeadings'
+import { CityContainer, CityItemContainer, CityRow, NeighbourhoodRow } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
 import { City } from '../../../Types/City'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
 import increasePopularity from '../../utils/icreasePopularity'
+import CitiesAndNeighbourhoods from '../../components/CityDetail/CitiesAndNeighbourhoods'
 
 const Cities = () => {
   const [cities, setCities] = useState([])
@@ -26,50 +27,20 @@ const Cities = () => {
     setIsLoading(false)
   }
 
-  const renderCitiesAndNeighbourhoods = (city: City) => {
-    const cityNeighbourhoods = neighbourhoods.filter((neighbourhood: Neighbourhood) => {
-      return neighbourhood.city._id === city._id
-    })
-
-    const neighbourhoodItems = cityNeighbourhoods.map((cityNeighbourhood: Neighbourhood) => {
-      return (
-        <Link href={`/neighbourhood/${cityNeighbourhood._id}`}>
-          <a>
-            <NeighbourhoodRow onClick={() => increasePopularity(city._id)}>{cityNeighbourhood.name}</NeighbourhoodRow>
-          </a>
-        </Link>
-      )
-    })
-
-    return (
-      <CityItemContainer>
-        <Link href={`/city/${city._id}`}>
-          <a>
-            <CityRow onClick={() => increasePopularity(city._id)}>{city.name}</CityRow>
-          </a>
-        </Link>
-        {neighbourhoodItems}
-      </CityItemContainer>
-    )
-  }
-
   useEffect(() => {
     fetchData()
   }, [])
 
   return (
     <>
-      <Heading1>Cities & Neighbourhoods</Heading1>
+      <Heading1Centered>Cities & Neighbourhoods</Heading1Centered>
       {isLoading && <Spinner/>}
       {
         cities && neighbourhoods &&
           <CityContainer>
-            {cities.map((city: City) => {
-              return (
-                renderCitiesAndNeighbourhoods(city)
-              )
-            })}
-
+            {cities.map((city: City) =>
+                <CitiesAndNeighbourhoods city={city} neighbourhoods={neighbourhoods}/>
+            )}
           </CityContainer>
       }
     </>

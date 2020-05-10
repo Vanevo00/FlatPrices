@@ -10,7 +10,7 @@ import { AvgContainer } from '../../components/Table/StyledAveragePriceTable'
 import RentPricesTable from '../../components/Table/RentPricesTable'
 import AuthContext from '../../context/auth/authContext'
 import { EditButton } from '../../components/StyledButtons'
-import { CityTableHeader, SearchPeriod, SearchPeriodItem } from '../../components/CityDetail/StyledCities'
+import { CityTableHeader, SearchPeriod, SearchPeriodItem } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
 
 interface Props {
   _id: string
