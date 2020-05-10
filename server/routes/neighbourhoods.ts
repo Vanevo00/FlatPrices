@@ -55,9 +55,12 @@ router.get('/byName/:name', async (req: Request, res: Response) => {
 
 // @route  GET api/neighbourhoods/byExactName/:name
 // @desc   Get neighbourhood by exact name
-router.get('/byExactName/:name', async (req: Request, res: Response) => {
+router.get('/byExactName/:name/:cityId', async (req: Request, res: Response) => {
   try {
-    const neighbourhoodByName = await Neighbourhood.findOne({ name: req.params.name })
+    const neighbourhoodByName = await Neighbourhood.findOne({
+      name: req.params.name,
+      city: req.params.cityId
+    })
     res.json(neighbourhoodByName)
   } catch (err) {
     console.error(err.message)

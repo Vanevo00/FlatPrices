@@ -28,6 +28,8 @@ const pribramUrl = 'https://www.sreality.cz/hledani/prodej/byty?region=obec%20P%
 
 const berounUrl = 'https://www.sreality.cz/hledani/prodej/byty?region=obec%20Beroun&region-id=3579&region-typ=municipality'
 
+const khUrl = 'https://www.sreality.cz/hledani/prodej/byty?region=obec%20Kutn%C3%A1%20Hora&region-id=3774&region-typ=municipality'
+
 const fetchSreality = async (searchedCity) => {
   let siteUrl
 
@@ -64,6 +66,9 @@ const fetchSreality = async (searchedCity) => {
       break
     case ('Beroun'):
       siteUrl = berounUrl
+      break
+    case ('Kutná Hora'):
+      siteUrl = khUrl
       break
     default:
       return console.log('Invalid city name, try again')
@@ -171,7 +176,7 @@ const fetchSreality = async (searchedCity) => {
   await browser.close()
 }
 
-readline.question('Select a city to scrape: Praha, Kolín, Kralupy nad Vltavou, Hranice, Ústí nad Labem, Most, Olomouc, Nový Jičín, Valašské Meziříčí, Beroun, Příbram: ', (userInput) => {
+readline.question('Select a city to scrape: Praha, Kolín, Kralupy nad Vltavou, Hranice, Ústí nad Labem, Most, Olomouc, Nový Jičín, Valašské Meziříčí, Beroun, Příbram, Kutná Hora: ', (userInput) => {
   fetchSreality(userInput)
   readline.close()
 })
