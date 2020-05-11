@@ -15,7 +15,7 @@ import Link from 'next/link'
 
 const searchLimit = 3
 
-const                                                                                 Search = () => {
+const Search = () => {
   const router = useRouter()
   const [searchInput, setSearchInput] = useState('')
   const [searchResults, setSearchResults] = useState<any>([])
@@ -40,7 +40,7 @@ const                                                                           
       return
     }
     // @ts-ignore
-    if (searchInputRef && searchInputRef.current && searchInputRef.current.contains(e.target)) {
+    if (searchInput && searchInputRef && searchInputRef.current && searchInputRef.current.contains(e.target)) {
       return setShowSearchResults(true)
     }
     setShowSearchResults(false)
@@ -51,7 +51,7 @@ const                                                                           
     return () => {
       document.removeEventListener("mousedown", handleClick);
     };
-  }, [])
+  })
 
   useEffect(() => {
     if (searchInput.length > 1) {
@@ -98,8 +98,8 @@ const                                                                           
           {
             neighbourhoods && neighbourhoods.map((neighbourhood: any) => {
               return (
-                <Link href={`/neighbourhood/${neighbourhood._id}`}>
-                  <ResultItem key={neighbourhood._id}>
+                <Link href={`/neighbourhood/${neighbourhood._id}`} key={neighbourhood._id}>
+                  <ResultItem>
                     <p><strong>{neighbourhood.name}</strong></p>
                     <p>neighbourhood</p>
                   </ResultItem>
@@ -110,8 +110,8 @@ const                                                                           
           {
             cities && cities.map((city: any) => {
               return (
-                <Link href={`/city/${city._id}`}>
-                  <ResultItem key={city._id}>
+                <Link href={`/city/${city._id}`} key={city._id}>
+                  <ResultItem>
                     <p><strong>{city.name}</strong></p>
                     <p>city</p>
                   </ResultItem>
@@ -123,8 +123,8 @@ const                                                                           
           {
             flats && flats.map((flat: any) => {
               return (
-                <Link href={`/flat/${flat._id}`}>
-                  <ResultItem key={flat._id}>
+                <Link href={`/flat/${flat._id}`} key={flat._id}>
+                  <ResultItem>
                     <p><strong>{flat.address}</strong></p>
                     <p>flat</p>
                   </ResultItem>
