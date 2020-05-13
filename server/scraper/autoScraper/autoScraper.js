@@ -9,11 +9,11 @@ const autoScraper = () => {
     timezone: "Europe/Prague"
   })
 
-  // cron.schedule('0 11 * * *', async() => {
+  cron.schedule('0 11 * * *', async() => {
   rents()
-  // }, {
-  //   timezone: "Europe/Prague"
-  // })
+  }, {
+  timezone: "Europe/Prague"
+})
 }
 
 module.exports = autoScraper
