@@ -22,6 +22,8 @@ const berounUrl = 'https://www.sreality.cz/hledani/pronajem/byty?region=obec%20B
 
 const pribramUrl = 'https://www.sreality.cz/hledani/pronajem/byty?region=obec%20P%C5%99%C3%ADbram&region-id=4306&region-typ=municipality'
 
+const tepliceUrl = 'https://www.sreality.cz/hledani/pronajem/byty?region=obec%20Teplice&region-id=2074&region-typ=municipality'
+
 const fetchRents = async (searchedCity) => {
   let siteUrl
 
@@ -49,6 +51,9 @@ const fetchRents = async (searchedCity) => {
       break
     case ('Příbram'):
       siteUrl = pribramUrl
+      break
+    case ('Teplice'):
+      siteUrl = tepliceUrl
       break
     default:
       return console.log('Invalid city name, try again')
@@ -147,7 +152,7 @@ const fetchRents = async (searchedCity) => {
   await browser.close()
 }
 
-readline.question('Select a city to scrape: Kolín, Kralupy nad Vltavou, Ústí nad Labem, Most, Valašské Meziříčí, Hranice, Beroun, Příbram: ', (userInput) => {
+readline.question('Select a city to scrape: Kolín, Kralupy nad Vltavou, Ústí nad Labem, Most, Valašské Meziříčí, Hranice, Beroun, Příbram, Teplice: ', (userInput) => {
   fetchRents(userInput)
   readline.close()
 })
