@@ -52,6 +52,16 @@ const rents = async () => {
 
         for (const flatUrl of await getLinks()) {
           try {
+            //find already scraped flat and skip it
+            const scrapedFlat = await axios.post(
+              `${config.get('dbAddress')}/api/rents/byLink`,
+              {link: flatUrl})
+
+            if (scrapedFlat.data) {
+              console.log(`skipping already scraped flat ${flatUrl}`)
+              continue
+            }
+
             const flat = {
               link: flatUrl,
               city: city.name

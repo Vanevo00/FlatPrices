@@ -109,6 +109,18 @@ router.post('/', [
   }
 })
 
+// @route  POST api/rent/byLink
+// @desc   Get one rent by link
+router.post('/byLink', async (req: Request, res: Response) => {
+  try {
+    const rent = await Rent.findOne({ link: req.body.link })
+    res.json(rent)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  POST api/rents/searchByParameters
 // @desc   Get one flat by address, squareMeters, rentCZK and rooms
 router.post('/searchByParameters', async (req: Request, res: Response) => {
