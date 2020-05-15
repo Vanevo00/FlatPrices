@@ -1,4 +1,3 @@
-const cron = require('node-cron')
 const axios = require('axios')
 const config = require('config')
 const saveRent = require('../saveRent')
