@@ -82,7 +82,12 @@ const remax = async () => {
           const address = streetArr.join(' ')
           flat.neighbourhoodNumber = city.name === 'Praha' ? `Praha ${pragueNumber.trim()}` : undefined
           flat.address = address
-          flat.neighbourhood = neighbourhood
+          if (neighbourhood) {
+            flat.neighbourhood = neighbourhood
+          } else {
+            flat.neighbourhood = 'unknown'
+          }
+
 
           const size = $('.pd-detail-info__row > div:contains("Celková plocha:")').next().text()
           flat.squareMeters = parseInt(size.split(' ')[0])
