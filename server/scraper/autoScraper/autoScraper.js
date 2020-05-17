@@ -13,11 +13,10 @@ const autoScraper = () => {
 
   cron.schedule('0 13 * * *', async () => {
     await nextReality()
+    await remax()
   }, {
     timezone: "Europe/Prague"
   })
-
-  remax()
 
   cron.schedule('0 11 * * *', () => {
   rents()
