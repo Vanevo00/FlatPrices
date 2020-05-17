@@ -3,7 +3,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const config = require('config')
 
-const nextReality = async() => {
+const nextReality = async () => {
   console.log('Scraping Next reality...')
 
   const {

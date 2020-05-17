@@ -107,6 +107,9 @@ const sreality = async () => {
                     if (!agencyName) {
                         agencyName = 'Unknown'
                     }
+                    if (/re\/?max/gi.test(agencyName)) { //searching for weird Remax names and thus eliminating duplicit flats from Sreality and Remax websites
+                        agencyName = 'Remax'
+                    }
                     flat.agency = agencyName
 
                     const roomsText = $('.name.ng-binding').text()
