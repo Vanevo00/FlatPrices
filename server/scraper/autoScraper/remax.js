@@ -85,7 +85,11 @@ const remax = async () => {
           streetArr.shift()
           const address = streetArr.join(' ')
           flat.neighbourhoodNumber = city.name === 'Praha' ? `Praha ${pragueNumber.trim()}` : undefined
-          flat.address = address
+          if (city.name === 'Praha' && !pragueNumber) {
+            flat.address = 'unknown'
+          } else {
+            flat.address = address
+          }
           if (neighbourhood) {
             flat.neighbourhood = neighbourhood
           } else {
