@@ -124,7 +124,7 @@ const sreality = async () => {
             }
         }
     }
-    console.log('Sreality scraping session finished!')
+    console.log(`Sreality scraping session finished on ${new Date()}`)
     await browser.close()
 }
 

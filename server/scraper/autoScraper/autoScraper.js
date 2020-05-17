@@ -4,7 +4,7 @@ const rents = require('./rents')
 const nextReality = require('./nextReality')
 
 const autoScraper = () => {
-  cron.schedule('40 8,14,18,22 * * *', () => {
+  cron.schedule('0 8,14,17,22 * * *', () => {
     sreality()
   },{
     timezone: "Europe/Prague"
