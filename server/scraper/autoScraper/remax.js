@@ -75,7 +75,11 @@ const remax = async () => {
           neighbourhood = neighbourhood.join(' ')
           let pragueNumber
           if (city.name === 'Praha') {
-            pragueNumber = area.trim().split(' ')[1].substring(0, 2)
+            try {
+              pragueNumber = area.trim().split(' ')[1].substring(0, 2)
+            } catch {
+              pragueNumber = ''
+            }
           }
           const streetArr = street.split(' ')
           streetArr.shift()
