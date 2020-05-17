@@ -68,7 +68,10 @@ const remax = async () => {
           let neighbourhood = neighbourhoodName.split(' ')
           neighbourhood.pop()
           neighbourhood = neighbourhood.join(' ')
-          const pragueNumber = area.trim().split(' ')[1].substring(0, 2)
+          let pragueNumber
+          if (city.name === 'Praha') {
+            pragueNumber = area.trim().split(' ')[1].substring(0, 2)
+          }
           const streetArr = street.split(' ')
           streetArr.shift()
           const address = streetArr.join(' ')
