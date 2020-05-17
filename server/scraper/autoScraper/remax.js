@@ -64,7 +64,12 @@ const remax = async () => {
 
           const location = $('.pd-header__address').text().trim()
           const [street, area] = location.split(',')
-          const neighbourhoodName = location.split('–')[1].trim()
+          let neighbourhoodName
+          try {
+            neighbourhoodName = location.split('–')[1].trim()
+          } catch {
+            neighbourhoodName = 'unknown'
+          }
           let neighbourhood = neighbourhoodName.split(' ')
           neighbourhood.pop()
           neighbourhood = neighbourhood.join(' ')
