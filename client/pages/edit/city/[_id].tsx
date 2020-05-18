@@ -19,6 +19,8 @@ interface EditCityInputs {
   nextRealityScraper: string
   remaxScraper: string
   svobodaWilliamsScraper: string
+  realityMatScraper: string
+  idnesScraper: string
   rentScraper: string
   externalImageLink: string
   image: File
@@ -40,7 +42,7 @@ const EditCity = ({_id}: Props) => {
     setIsLoading(false)
   }
 
-  const sendEditCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, rentScraper, externalImageLink, image }: EditCityInputs) => {
+  const sendEditCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, realityMatScraper, idnesScraper, rentScraper, externalImageLink, image }: EditCityInputs) => {
     try {
       const formData = new FormData()
       formData.append('image', image)
@@ -49,6 +51,8 @@ const EditCity = ({_id}: Props) => {
       formData.append('nextRealityScraper', nextRealityScraper)
       formData.append('remaxScraper', remaxScraper)
       formData.append('svobodaWilliamsScraper', svobodaWilliamsScraper)
+      formData.append('realityMatScraper', realityMatScraper)
+      formData.append('idnesScraper', idnesScraper)
       formData.append('rentScraper', rentScraper)
       formData.append('externalImageLink', externalImageLink)
       formData.append('country', country)

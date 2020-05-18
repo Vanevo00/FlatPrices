@@ -13,6 +13,8 @@ interface Props {
     nextRealityScraper?: string
     remaxScraper?: string
     svobodaWilliamsScraper?: string
+    realityMatScraper?: string
+    idnesScraper?: string
     rentScraper?: string
     mainImageLink?: string
   }
@@ -26,6 +28,8 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
     nextRealityScraper: city && city.nextRealityScraper || '',
     remaxScraper: city && city.remaxScraper || '',
     svobodaWilliamsScraper: city && city.svobodaWilliamsScraper || '',
+    realityMatScraper: city && city.realityMatScraper || '',
+    idnesScraper: city && city.idnesScraper || '',
     rentScraper: city && city.rentScraper || '',
     externalImageLink: city && city.mainImageLink || ''
   })
@@ -51,21 +55,12 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
       nextRealityScraper: inputValues.nextRealityScraper,
       remaxScraper: inputValues.remaxScraper,
       svobodaWilliamsScraper: inputValues.svobodaWilliamsScraper,
+      realityMatScraper: inputValues.realityMatScraper,
+      idnesScraper: inputValues.idnesScraper,
       rentScraper: inputValues.rentScraper,
       externalImageLink: inputValues.externalImageLink,
       image
     })
-    setInputValues({
-      name: '',
-      country: '',
-      srealityScraper: '',
-      nextRealityScraper: '',
-      remaxScraper: '',
-      svobodaWilliamsScraper: '',
-      rentScraper: '',
-      externalImageLink: ''
-    })
-    setImage(undefined)
   }
 
   return (
@@ -88,6 +83,12 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
         </FormRow>
         <FormRow>
           <FormInput type='text' full={true} name='svobodaWilliamsScraper' placeholder='Svoboda & Williams search link' value={inputValues.svobodaWilliamsScraper} onChange={onChange}/>
+        </FormRow>
+        <FormRow>
+          <FormInput type='text' full={true} name='realityMatScraper' placeholder='Realitymat search link' value={inputValues.realityMatScraper} onChange={onChange}/>
+        </FormRow>
+        <FormRow>
+          <FormInput type='text' full={true} name='idnesScraper' placeholder='Reality Idnes search link' value={inputValues.idnesScraper} onChange={onChange}/>
         </FormRow>
         <FormRow>
           <FormInput type='text' full={true} name='rentScraper' placeholder='Rents (Sreality) search link' value={inputValues.rentScraper} onChange={onChange}/>

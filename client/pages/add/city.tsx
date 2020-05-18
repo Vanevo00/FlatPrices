@@ -12,6 +12,8 @@ interface AddCityInputs {
   nextRealityScraper: string
   remaxScraper: string
   svobodaWilliamsScraper: string
+  realityMatScraper: string
+  idnesScraper: string
   rentScraper: string
   externalImageLink: string
   image: File
@@ -20,7 +22,7 @@ interface AddCityInputs {
 const AddCity = () => {
   const [successMessage, setSuccessMessage] = useState('')
 
-  const sendAddCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, rentScraper, externalImageLink, image }: AddCityInputs) => {
+  const sendAddCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, realityMatScraper, idnesScraper, rentScraper, externalImageLink, image }: AddCityInputs) => {
     try {
       const formData = new FormData()
       formData.append('image', image)
@@ -29,6 +31,8 @@ const AddCity = () => {
       formData.append('nextRealityScraper', nextRealityScraper)
       formData.append('remaxScraper', remaxScraper)
       formData.append('svobodaWilliamsScraper', svobodaWilliamsScraper)
+      formData.append('realityMatScraper', realityMatScraper)
+      formData.append('idnesScraper', idnesScraper)
       formData.append('rentScraper', rentScraper)
       formData.append('externalImageLink', externalImageLink)
       formData.append('country', country)
