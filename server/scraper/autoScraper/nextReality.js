@@ -95,7 +95,7 @@ const nextReality = async () => {
       }
     }
   }
-  console.log('Next Reality scraping session finished!')
+  console.log(`Next Reality scraping session finished at ${new Date()}`)
 }
 
 module.exports = nextReality
