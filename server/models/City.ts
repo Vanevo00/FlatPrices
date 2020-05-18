@@ -29,6 +29,12 @@ const CitySchema = mongoose.Schema({
   svobodaWilliamsScraper: {
     type: String
   },
+  realityMatScraper: {
+    type: String
+  },
+  idnesScraper: {
+    type: String
+  },
   rentScraper: {
     type: String
   }

@@ -89,6 +89,8 @@ router.post('/', [
     nextRealityScraper,
     remaxScraper,
     svobodaWilliamsScraper,
+    realityMatScraper,
+    idnesScraper,
     rentScraper,
     externalImageLink
   } = req.body
@@ -108,6 +110,8 @@ router.post('/', [
       nextRealityScraper,
       remaxScraper,
       svobodaWilliamsScraper,
+      realityMatScraper,
+      idnesScraper,
       rentScraper,
       mainImageLink: filename
     })
@@ -140,6 +144,8 @@ router.post('/edit/:_id', [
     nextRealityScraper,
     remaxScraper,
     svobodaWilliamsScraper,
+    realityMatScraper,
+    idnesScraper,
     rentScraper,
     externalImageLink
   } = req.body
@@ -159,6 +165,8 @@ router.post('/edit/:_id', [
     editedCity.rentScraper = rentScraper
     editedCity.mainImageLink = filename
     editedCity.nextRealityScraper = nextRealityScraper
+    editedCity.realityMatScraper = realityMatScraper
+    editedCity.idnesScraper = idnesScraper
     editedCity.remaxScraper = remaxScraper
     editedCity.svobodaWilliamsScraper = svobodaWilliamsScraper
 
