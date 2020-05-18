@@ -4,6 +4,7 @@ const rents = require('./rents')
 const nextReality = require('./nextReality')
 const remax = require('./remax')
 const svobodaWilliams = require('./svobodaWilliams')
+const realityMat = require('./realityMat')
 
 const autoScraper = () => {
   cron.schedule('0 8,14,17,22 * * *', () => {
@@ -16,6 +17,7 @@ const autoScraper = () => {
     await nextReality()
     await remax()
     await svobodaWilliams()
+    await realityMat()
   }, {
     timezone: "Europe/Prague"
   })
