@@ -56,13 +56,13 @@ const NewlyAddedFlats = () => {
           <TableItemHeader width={6}>
             m<sup>2</sup>
           </TableItemHeader>
-          <TableItemHeader width={16}>
+          <TableItemHeader width={13}>
             Price
           </TableItemHeader>
-          <TableItemHeader width={16}>
+          <TableItemHeader width={13}>
             Price/m<sup>2</sup>
           </TableItemHeader>
-          <TableItemHeader width={10}>
+          <TableItemHeader width={16}>
             Added on
           </TableItemHeader>
           <TableItemHeader width={10}>
@@ -78,7 +78,7 @@ const NewlyAddedFlats = () => {
             ? <Spinner/>
             : newFlats.map((flat: Flat) => {
               const createdAt = new Date(flat.createdAt)
-              const date = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}`
+              const date = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()} ${createdAt.getHours()}:${('0' + createdAt.getMinutes()).slice(-2)}:${('0' + createdAt.getSeconds()).slice(-2)}`
 
               return (
                 <TableRow key={flat._id}>
@@ -102,13 +102,13 @@ const NewlyAddedFlats = () => {
                   <TableItem width={6}>
                     {flat.squareMeters}
                   </TableItem>
-                  <TableItem width={16}>
+                  <TableItem width={13}>
                     {flat.priceCZK.toLocaleString()} CZK
                   </TableItem>
-                  <TableItem width={16}>
+                  <TableItem width={13}>
                     {flat.pricePerMeter.toLocaleString()} CZK
                   </TableItem>
-                  <TableItem width={10}>
+                  <TableItem width={16}>
                     {date}
                   </TableItem>
                   <TableItemButton width={10}>
