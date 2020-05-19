@@ -14,14 +14,19 @@ import {
 } from './StyledTable'
 import ConfirmDelete from './ConfirmDelete'
 import Spinner from '../Spinner/Spinner'
+import Paginator from './Paginator'
 
 interface Props {
   flats: Flat[]
   medianPrice: number
   isLoading: boolean
+  pageLimit: number
+  count: number
+  callback: Function
+  flatsLoading: boolean
 }
 
-const CityTable = ({ flats, medianPrice, isLoading }: Props) => {
+const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, flatsLoading }: Props) => {
   const [selectedForDelete, setSelectedForDelete] = useState('')
 
   const handleDeleteClick = (_id: string) => {
@@ -81,7 +86,7 @@ const CityTable = ({ flats, medianPrice, isLoading }: Props) => {
       </TableRowHeader>
 
       {
-        isLoading ? <Spinner/> : flats.map((flat) => {
+        isLoading || flatsLoading ? <Spinner/> : flats.map((flat) => {
           const createdAt = new Date(flat.createdAt)
           const date = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}`
           const priceComparison = Math.ceil(flat.pricePerMeter - medianPrice)
@@ -134,6 +139,13 @@ const CityTable = ({ flats, medianPrice, isLoading }: Props) => {
           )
         })
       }
+      <Paginator
+        pageLimit={pageLimit}
+        count={count}
+        maxPages={12}
+        loading={flatsLoading}
+        callback={callback}
+      />
     </TableContainerFull>
   )
 }

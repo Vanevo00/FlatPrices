@@ -16,6 +16,8 @@ interface Props {
   _id: string
 }
 
+const PAGE_LIMIT = 50
+
 const CityDetail = ({ _id }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [city, setCity] = useState({name: '', mainImageLink: ''})
@@ -28,6 +30,8 @@ const CityDetail = ({ _id }: Props) => {
   })
   const [activeLimitPeriod, setActiveLimitPeriod] = useState('week')
   const [isCityTableLoading, setIsCityTableLoading] = useState(false)
+  const [flatCount, setFlatCount] = useState(0)
+  const [flatsLoading, setFlatsLoading] = useState(false)
 
   const {
     isAuthenticated,
@@ -45,17 +49,26 @@ const CityDetail = ({ _id }: Props) => {
 
     await Promise.all([
       setCity(city.data),
-      setCityFlats(flats.data),
+      setCityFlats(flats.data.flatsByCity),
+      setFlatCount(flats.data.count),
       setAvgRents(averageRents.data),
       setAvgPrice(averagePrice.data)
     ])
     setIsLoading(false)
   }
 
+  const fetchNewPage = async (page) => {
+    setFlatsLoading(true)
+    const fetchedFlatsPage = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?page=${page}&pageLimit=${PAGE_LIMIT}&limit=${activeLimitPeriod}`)
+    setCityFlats(fetchedFlatsPage.data.flatsByCity)
+    setFlatsLoading(false)
+  }
+
   const fetchDataLimitedByPeriod = async () => {
     setIsCityTableLoading(true)
     const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?limit=${activeLimitPeriod}`)
-    setCityFlats(flats.data)
+    setCityFlats(flats.data.flatsByCity)
+    setFlatCount(flats.data.count)
     setIsCityTableLoading(false)
   }
 
@@ -99,9 +112,9 @@ const CityDetail = ({ _id }: Props) => {
                     <SearchPeriodItem active={activeLimitPeriod === 'year'} onClick={() => setActiveLimitPeriod('year')}>year</SearchPeriodItem>
                     <SearchPeriodItem active={activeLimitPeriod === 'all'} onClick={() => setActiveLimitPeriod('all')} last={true}>all time</SearchPeriodItem>
                   </SearchPeriod>
-                  <Heading2Centered>{cityFlats.length} Flat{cityFlats.length !== 1 && 's'} in {city.name} {activeLimitPeriod !== 'all' && `(last ${activeLimitPeriod})`}</Heading2Centered>
+                  <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name} {activeLimitPeriod !== 'all' && `(last ${activeLimitPeriod})`}</Heading2Centered>
                 </CityTableHeader>
-                <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice}/>
+                <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice} callback={fetchNewPage} count={flatCount} pageLimit={PAGE_LIMIT} flatsLoading={flatsLoading}/>
               </>
             }
             {

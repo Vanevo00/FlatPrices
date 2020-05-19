@@ -124,7 +124,13 @@ const NewlyAddedFlats = () => {
             })
         }
 
-        <Paginator pageLimit={PAGE_LIMIT} count={count} maxPages={12} loading={newFlatsLoading} callback={fetchNewPage}/>
+        <Paginator
+          pageLimit={PAGE_LIMIT}
+          count={count}
+          maxPages={12}
+          loading={newFlatsLoading}
+          callback={fetchNewPage}
+        />
 
       </TableContainer>
     </>

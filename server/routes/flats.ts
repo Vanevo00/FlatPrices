@@ -95,6 +95,9 @@ router.post('/searchByParameters', async (req: Request, res: Response) => {
 // @route  GET api/flats/byCity/:_id
 // @desc   Get flats by city
 router.get('/byCity/:_id', async (req: Request, res: Response) => {
+  const page = parseInt(<string>req.query.page) - 1 || 0
+  const pageLimit = parseInt(<string>req.query.pageLimit) || 50
+
   try {
     //default limit is last week
     let limit = new Date()
@@ -111,13 +114,23 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
     } else {
       limit.setDate(limit.getDate() - 7)
     }
+
+    const flatCount = await Flat.countDocuments({
+      city: req.params._id,
+      createdAt: {$gte: limit}
+    })
     const flatsByCity = await Flat.find({
       city: req.params._id,
       createdAt: {$gte: limit}
     })
       .populate('neighbourhood')
+      .limit(pageLimit)
+      .skip(page * pageLimit)
       .sort('-createdAt')
-    res.json(flatsByCity)
+    res.json({
+      count: flatCount,
+      flatsByCity
+    })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
@@ -127,8 +140,14 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
 // @route  GET api/flats/byNeighbourhood/:_id
 // @desc   Get flats by neighbourhood
 router.get('/byNeighbourhood/:_id', async (req: Request, res: Response) => {
+  const page = parseInt(<string>req.query.page) - 1 || 0
+  const pageLimit = parseInt(<string>req.query.pageLimit) || 50
+
   try {
-    const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id }).sort('-createdAt')
+    const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id })
+      .limit(pageLimit)
+      .skip(page * pageLimit)
+      .sort('-createdAt')
     res.json(flatsByNeighbourhood)
   } catch (err) {
     console.error(err.message)
