@@ -1,5 +1,10 @@
 interface Filters {
   timeLimit?: string
+  minMeters?: string
+  maxMeters?: string
+  maxPrice?: string
+  maxPricePerMeter?: string
+  rooms?:string
 }
 
 module.exports = (filters: Filters) => {
@@ -19,8 +24,28 @@ module.exports = (filters: Filters) => {
       break
     default:
       limit.setDate(limit.getDate() - 7)
+  }
+  finalFilter = {...finalFilter, createdAt: {$gte: limit}}
 
-    finalFilter = {...finalFilter, createdAt: {$gte: limit}}
+  if (filters.maxMeters) {
+    finalFilter = {...finalFilter, squareMeters: {$lte: filters.maxMeters}}
+  }
+
+  if (filters.minMeters) {
+    finalFilter = {...finalFilter, squareMeters: {$gte: filters.minMeters}}
+  }
+
+  if (filters.maxPrice) {
+    finalFilter = {...finalFilter, priceCZK: {$lte: filters.maxPrice}}
+  }
+
+  if (filters.maxPricePerMeter) {
+    finalFilter = {...finalFilter, pricePerMeter: {$lte: filters.maxPricePerMeter}}
+  }
+
+  if (filters.rooms) {
+    const roomsArr = filters.rooms.split(',')
+    finalFilter = {...finalFilter, rooms: {$in: roomsArr}}
   }
 
   return finalFilter

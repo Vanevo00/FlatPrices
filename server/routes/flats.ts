@@ -100,8 +100,15 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
   const pageLimit = parseInt(<string>req.query.pageLimit) || 50
 
   const filters = {
-    timeLimit: req.query.timeLimit
+    timeLimit: req.query.timeLimit,
+    minMeters: req.query.minMeters,
+    maxMeters: req.query.maxMeters,
+    maxPrice: req.query.maxPrice,
+    maxPricePerMeter: req.query.maxPricePerMeter,
+    rooms: req.query.rooms
   }
+
+  const sortBy = req.query.sort || '-createdAt'
 
   try {
     //default limit is last week
@@ -131,7 +138,7 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
       .populate('neighbourhood')
       .limit(pageLimit)
       .skip(page * pageLimit)
-      .sort('-createdAt')
+      .sort(`${sortBy}`)
     res.json({
       count: flatCount,
       flatsByCity
