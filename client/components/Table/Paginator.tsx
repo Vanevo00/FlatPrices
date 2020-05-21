@@ -54,7 +54,7 @@ const Paginator = ({pageLimit, count, maxPages, loading, callback}: Props) => {
       }
     }
 
-    if (showedPages.length < 1) {
+    if (showedPages.length < 2) {
       return null
     }
 
