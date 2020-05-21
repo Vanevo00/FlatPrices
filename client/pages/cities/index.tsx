@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
-import { Heading1, Heading1Centered } from '../../components/StyledHeadings'
-import { CityContainer, CityItemContainer, CityRow, NeighbourhoodRow } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
+import { Heading1Centered } from '../../components/StyledHeadings'
+import { CityContainer } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
 import { City } from '../../../Types/City'
-import { Neighbourhood } from '../../../Types/Neighbourhood'
-import increasePopularity from '../../utils/icreasePopularity'
 import CitiesAndNeighbourhoods from '../../components/CityDetail/CitiesAndNeighbourhoods'
 
 const Cities = () => {

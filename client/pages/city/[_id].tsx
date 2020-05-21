@@ -11,6 +11,7 @@ import RentPricesTable from '../../components/Table/RentPricesTable'
 import AuthContext from '../../context/auth/authContext'
 import { EditButton } from '../../components/StyledButtons'
 import { CityTableHeader, SearchPeriod, SearchPeriodItem } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
+import FlatFilter from '../../components/Forms/FlatFilter'
 
 interface Props {
   _id: string
@@ -106,12 +107,10 @@ const CityDetail = ({ _id }: Props) => {
               city && cityFlats.length > 0 && avgPrice &&
               <>
                 <CityTableHeader>
-                  <SearchPeriod>
-                    <SearchPeriodItem active={activeLimitPeriod === 'week'} onClick={() => setActiveLimitPeriod('week')}>week</SearchPeriodItem>
-                    <SearchPeriodItem active={activeLimitPeriod === 'month'} onClick={() => setActiveLimitPeriod('month')}>month</SearchPeriodItem>
-                    <SearchPeriodItem active={activeLimitPeriod === 'year'} onClick={() => setActiveLimitPeriod('year')}>year</SearchPeriodItem>
-                    <SearchPeriodItem active={activeLimitPeriod === 'all'} onClick={() => setActiveLimitPeriod('all')} last={true}>all time</SearchPeriodItem>
-                  </SearchPeriod>
+                  <FlatFilter
+                    activeLimitPeriod={activeLimitPeriod}
+                    setActiveLimitPeriod={(limit) => setActiveLimitPeriod(limit)}
+                  />
                   <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name} {activeLimitPeriod !== 'all' && `(last ${activeLimitPeriod})`}</Heading2Centered>
                 </CityTableHeader>
                 <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice} callback={fetchNewPage} count={flatCount} pageLimit={PAGE_LIMIT} flatsLoading={flatsLoading}/>

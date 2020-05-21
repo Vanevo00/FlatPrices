@@ -45,6 +45,13 @@ const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, 
 
   return (
     <TableContainerFull>
+      <Paginator
+        pageLimit={pageLimit}
+        count={count}
+        maxPages={12}
+        loading={flatsLoading}
+        callback={callback}
+      />
       <TableRowHeader>
         <TableItemHeader width={14}>
           Name
