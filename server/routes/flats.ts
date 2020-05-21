@@ -7,6 +7,7 @@ const router = express.Router()
 const Flat = require('../models/Flat')
 const Neighbourhood = require('../models/Neighbourhood')
 const sortHighestToLowest = require('../utils/sortHighestToLowest')
+const applyFilters = require('../utils/applyFilters')
 
 // @route  GET api/flats
 // @desc   Get all flats
@@ -98,6 +99,10 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
   const page = parseInt(<string>req.query.page) - 1 || 0
   const pageLimit = parseInt(<string>req.query.pageLimit) || 50
 
+  const filters = {
+    timeLimit: req.query.timeLimit
+  }
+
   try {
     //default limit is last week
     let limit = new Date()
@@ -117,11 +122,11 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
 
     const flatCount = await Flat.countDocuments({
       city: req.params._id,
-      createdAt: {$gte: limit}
+      ...applyFilters(filters)
     })
     const flatsByCity = await Flat.find({
       city: req.params._id,
-      createdAt: {$gte: limit}
+      ...applyFilters(filters)
     })
       .populate('neighbourhood')
       .limit(pageLimit)
