@@ -103,7 +103,9 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
     timeLimit: req.query.timeLimit,
     minMeters: req.query.minMeters,
     maxMeters: req.query.maxMeters,
+    minPrice: req.query.minPrice,
     maxPrice: req.query.maxPrice,
+    minPricePerMeter: req.query.minPricePerMeter,
     maxPricePerMeter: req.query.maxPricePerMeter,
     rooms: req.query.rooms
   }
@@ -111,22 +113,6 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
   const sortBy = req.query.sort || '-createdAt'
 
   try {
-    //default limit is last week
-    let limit = new Date()
-    if (req.query.limit) {
-      if (req.query.limit === 'month') {
-        limit.setMonth(limit.getMonth() - 1)
-      } else if (req.query.limit === 'year') {
-        limit.setFullYear(limit.getFullYear() - 1)
-      } else if (req.query.limit === 'all') {
-        limit.setFullYear(limit.getFullYear() - 30)
-      } else {
-        limit.setDate(limit.getDate() - 7)
-      }
-    } else {
-      limit.setDate(limit.getDate() - 7)
-    }
-
     const flatCount = await Flat.countDocuments({
       city: req.params._id,
       ...applyFilters(filters)

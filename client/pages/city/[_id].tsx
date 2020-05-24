@@ -10,7 +10,7 @@ import { AvgContainer } from '../../components/Table/StyledAveragePriceTable'
 import RentPricesTable from '../../components/Table/RentPricesTable'
 import AuthContext from '../../context/auth/authContext'
 import { EditButton } from '../../components/StyledButtons'
-import { CityTableHeader, SearchPeriod, SearchPeriodItem } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
+import { CityTableHeader } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
 import FlatFilter from '../../components/Forms/FlatFilter'
 
 interface Props {
@@ -29,10 +29,10 @@ const CityDetail = ({ _id }: Props) => {
   const [avgRents, setAvgRents] = useState({
     rentPrices: []
   })
-  const [activeLimitPeriod, setActiveLimitPeriod] = useState('week')
   const [isCityTableLoading, setIsCityTableLoading] = useState(false)
   const [flatCount, setFlatCount] = useState(0)
   const [flatsLoading, setFlatsLoading] = useState(false)
+  const [filterQuery, setFilterQuery] = useState('')
 
   const {
     isAuthenticated,
@@ -60,14 +60,14 @@ const CityDetail = ({ _id }: Props) => {
 
   const fetchNewPage = async (page) => {
     setFlatsLoading(true)
-    const fetchedFlatsPage = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?page=${page}&pageLimit=${PAGE_LIMIT}&limit=${activeLimitPeriod}`)
+    const fetchedFlatsPage = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?page=${page}&pageLimit=${PAGE_LIMIT}${filterQuery}`)
     setCityFlats(fetchedFlatsPage.data.flatsByCity)
     setFlatsLoading(false)
   }
 
-  const fetchDataLimitedByPeriod = async () => {
+  const fetchFilteredData = async () => {
     setIsCityTableLoading(true)
-    const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?limit=${activeLimitPeriod}`)
+    const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?pageLimit=${PAGE_LIMIT}${filterQuery}`)
     setCityFlats(flats.data.flatsByCity)
     setFlatCount(flats.data.count)
     setIsCityTableLoading(false)
@@ -78,8 +78,8 @@ const CityDetail = ({ _id }: Props) => {
   }, [])
 
   useEffect(() => {
-    fetchDataLimitedByPeriod()
-  }, [activeLimitPeriod])
+    fetchFilteredData()
+  }, [filterQuery])
 
   return (
     <>
@@ -106,12 +106,11 @@ const CityDetail = ({ _id }: Props) => {
             {
               city && cityFlats.length > 0 && avgPrice &&
               <>
+                <FlatFilter
+                  callback={(query) => setFilterQuery(query)}
+                />
                 <CityTableHeader>
-                  <FlatFilter
-                    activeLimitPeriod={activeLimitPeriod}
-                    setActiveLimitPeriod={(limit) => setActiveLimitPeriod(limit)}
-                  />
-                  <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name} {activeLimitPeriod !== 'all' && `(last ${activeLimitPeriod})`}</Heading2Centered>
+                  <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name}</Heading2Centered>
                 </CityTableHeader>
                 <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice} callback={fetchNewPage} count={flatCount} pageLimit={PAGE_LIMIT} flatsLoading={flatsLoading}/>
               </>

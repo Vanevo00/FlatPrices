@@ -2,7 +2,9 @@ interface Filters {
   timeLimit?: string
   minMeters?: string
   maxMeters?: string
+  minPrice?: string
   maxPrice?: string
+  minPricePerMeter?: string
   maxPricePerMeter?: string
   rooms?:string
 }
@@ -10,7 +12,7 @@ interface Filters {
 module.exports = (filters: Filters) => {
   let finalFilter = {}
 
-  //timeLimit will apply in every case
+  //timeLimit will apply in every case and is week in default
   let limit = new Date()
   switch(filters.timeLimit) {
     case 'month':
@@ -27,20 +29,28 @@ module.exports = (filters: Filters) => {
   }
   finalFilter = {...finalFilter, createdAt: {$gte: limit}}
 
-  if (filters.maxMeters) {
+  if (filters.maxMeters && filters.minMeters) {
+    finalFilter = {...finalFilter, squareMeters: {$lte: filters.maxMeters, $gte: filters.minMeters}}
+  } else if (filters.maxMeters) {
     finalFilter = {...finalFilter, squareMeters: {$lte: filters.maxMeters}}
-  }
-
-  if (filters.minMeters) {
+  } else if (filters.minMeters) {
     finalFilter = {...finalFilter, squareMeters: {$gte: filters.minMeters}}
   }
 
-  if (filters.maxPrice) {
+  if (filters.maxPrice && filters.minPrice) {
+    finalFilter = {...finalFilter, priceCZK: {$lte: filters.maxPrice, $gte: filters.minPrice}}
+  } else if (filters.maxPrice) {
     finalFilter = {...finalFilter, priceCZK: {$lte: filters.maxPrice}}
+  } else if (filters.minPrice) {
+    finalFilter = {...finalFilter, priceCZK: {$gte: filters.minPrice}}
   }
 
-  if (filters.maxPricePerMeter) {
+  if (filters.minPricePerMeter && filters.maxPricePerMeter) {
+    finalFilter = {...finalFilter, pricePerMeter: {$lte: filters.maxPricePerMeter, $gte: filters.minPricePerMeter}}
+  } else if (filters.maxPricePerMeter) {
     finalFilter = {...finalFilter, pricePerMeter: {$lte: filters.maxPricePerMeter}}
+  } else if (filters.minPricePerMeter) {
+    finalFilter = {...finalFilter, pricePerMeter: {$gte: filters.minPricePerMeter}}
   }
 
   if (filters.rooms) {

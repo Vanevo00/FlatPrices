@@ -17,3 +17,8 @@ export const Heading2Centered = styled.h2`
   margin: 1rem 0;
   text-align: center;
 `
+
+export const Heading2CenteredColor = styled.h2`
+  text-align: center;
+  color: ${props => props.theme.colors.main};
+`

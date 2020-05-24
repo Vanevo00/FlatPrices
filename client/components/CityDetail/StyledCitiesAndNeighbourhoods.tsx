@@ -1,10 +1,5 @@
 import styled from 'styled-components'
 
-interface SearchPeriodProps {
-  last?: boolean
-  active: boolean
-}
-
 interface CityImageProps {
   backgroundImage: string
 }
@@ -156,28 +151,4 @@ export const CityTableHeader = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
-`
-
-export const SearchPeriod = styled.div`
-  display: flex;
-  position: absolute;
-  left: 0;
-`
-
-export const SearchPeriodItem = styled.button<SearchPeriodProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20px;
-  width: 60px;
-  font-weight: bold;
-  border: solid 1px ${props => props.theme.colors.main};
-  border-right: ${props => props.last ? `solid 1px ${props => props.theme.colors.main}` : 'none'};
-  color: ${props => props.active ? props.theme.colors.lightText : props.theme.colors.main};
-  background-color: ${props => props.active ? props.theme.colors.main : props.theme.colors.lightText};
-  cursor: pointer;
-  
-  &:focus {
-    outline: 0;
-  }
 `

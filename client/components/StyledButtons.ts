@@ -1,6 +1,18 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
+  background-color: ${props => props.theme.colors.main};
+  color: ${props => props.theme.colors.lightText};
+  font-weight: bold;
+  border: none;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+  
+  &:focus {
+    outline: none;
+  }
 `
 
 export const EditButton = styled.button`
@@ -18,4 +30,8 @@ export const EditButton = styled.button`
   align-items: center;
   cursor: pointer;
   z-index: 4;
+  
+  &:focus {
+    outline: none;
+  }
 `
