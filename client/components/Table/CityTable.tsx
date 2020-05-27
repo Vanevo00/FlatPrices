@@ -42,7 +42,6 @@ const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, 
     location.reload()
   }
 
-
   return (
     <TableContainerFull>
       <TableRowHeader>
@@ -69,7 +68,7 @@ const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, 
         </TableItemHeader>
         <TableItemHeader width={10}>
           <i className="fas fa-long-arrow-alt-up"/>
-          <i className="fas fa-long-arrow-alt-down"></i>
+          <i className="fas fa-long-arrow-alt-down"/>
         </TableItemHeader>
         <TableItemHeader width={10}>
           Date Added

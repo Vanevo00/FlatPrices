@@ -19,6 +19,7 @@ export const Heading2Centered = styled.h2`
 `
 
 export const Heading2CenteredColor = styled.h2`
+  width: 100%;
   text-align: center;
   color: ${props => props.theme.colors.main};
 `

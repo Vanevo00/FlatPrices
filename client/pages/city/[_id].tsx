@@ -17,8 +17,6 @@ interface Props {
   _id: string
 }
 
-const PAGE_LIMIT = 50
-
 const CityDetail = ({ _id }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [city, setCity] = useState({name: '', mainImageLink: ''})
@@ -33,6 +31,7 @@ const CityDetail = ({ _id }: Props) => {
   const [flatCount, setFlatCount] = useState(0)
   const [flatsLoading, setFlatsLoading] = useState(false)
   const [filterQuery, setFilterQuery] = useState('')
+  const [pageLimit, setPageLimit] = useState(50)
 
   const {
     isAuthenticated,
@@ -60,14 +59,14 @@ const CityDetail = ({ _id }: Props) => {
 
   const fetchNewPage = async (page) => {
     setFlatsLoading(true)
-    const fetchedFlatsPage = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?page=${page}&pageLimit=${PAGE_LIMIT}${filterQuery}`)
+    const fetchedFlatsPage = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?${filterQuery}&page=${page}`)
     setCityFlats(fetchedFlatsPage.data.flatsByCity)
     setFlatsLoading(false)
   }
 
   const fetchFilteredData = async () => {
     setIsCityTableLoading(true)
-    const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?pageLimit=${PAGE_LIMIT}${filterQuery}`)
+    const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byCity/${_id}?${filterQuery}`)
     setCityFlats(flats.data.flatsByCity)
     setFlatCount(flats.data.count)
     setIsCityTableLoading(false)
@@ -103,18 +102,15 @@ const CityDetail = ({ _id }: Props) => {
                 <RentPricesTable rentPrices={avgRents}/>
               }
             </AvgContainer>
-            {
-              city && cityFlats.length > 0 && avgPrice &&
-              <>
-                <FlatFilter
-                  callback={(query) => setFilterQuery(query)}
-                />
-                <CityTableHeader>
-                  <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name}</Heading2Centered>
-                </CityTableHeader>
-                <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice} callback={fetchNewPage} count={flatCount} pageLimit={PAGE_LIMIT} flatsLoading={flatsLoading}/>
-              </>
-            }
+            <FlatFilter
+              setPageLimitCallback={(limit) => setPageLimit(limit)}
+              callback={(query) => setFilterQuery(query)}
+              pageLimit={pageLimit}
+            />
+            <CityTableHeader>
+              <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name}</Heading2Centered>
+            </CityTableHeader>
+            <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice} callback={fetchNewPage} count={flatCount} pageLimit={pageLimit} flatsLoading={flatsLoading}/>
             {
               isAuthenticated && user.isAdmin &&
               <Link href={`/edit/city/${_id}`}>
