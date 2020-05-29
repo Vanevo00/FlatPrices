@@ -7,7 +7,7 @@
     "start:api": "nodemon",
     "start:client": "npm run dev --prefix client",
     "start:builtclient": "npm run start --prefix client",
-    "start:watch": "concurrently \"kill $(lsof -t -i:4000)\" \"npm run start:api\" \"npm run start:client\"",
+    "start:watch": "concurrently \"kill -9 $(lsof -t -i:4000)\" \"npm run start:api\" \"npm run start:client\"",
     "start": "concurrently \"node build/server/server.js\" \"npm run start:builtclient\"",
     "build": "rm -rf ./build && tsc",
     "eslint": "eslint \"./**\"",
@@ -34,7 +34,7 @@
     "mongoose": "^5.9.10",
     "multer": "^1.4.2",
     "node-cron": "^2.0.3",
-    "nodemon": "^2.0.3",
+    "nodemon": "^2.0.4",
     "puppeteer": "^2.1.1"
   },
   "devDependencies": {
