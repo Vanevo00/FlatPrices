@@ -101,9 +101,11 @@ const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, 
               <TableItem width={10}>
                 {flat.agency}
               </TableItem>
-              <TableItem width={9}>
-                {flat.neighbourhood ? flat.neighbourhood.name : 'Unknown'}
-              </TableItem>
+              <TableItemButton width={9}>
+                <StyledLink href={flat.neighbourhood ? `/neighbourhood/${flat.neighbourhood._id}` : '#'}>
+                  {flat.neighbourhood ? flat.neighbourhood.name : 'Unknown'}
+                </StyledLink>
+              </TableItemButton>
               <TableItem width={5}>
                 {flat.squareMeters}
               </TableItem>

@@ -30,7 +30,6 @@ const realityIdnes = async () => {
         for (let i = 1; i <= lastPage; i++) {
           console.log(`fetching page no. ${i}`)
           const fetchedPage = await axios.get(`${city.idnesScraper}${i === 1 ? '' : '?page=' + String(i - 1)}`)
-          console.log(`${city.idnesScraper}${i === 1 ? '' : '?page=' + String(i - 1)}`)
           const $ = await cheerio.load(fetchedPage.data)
           $('.c-list-products__content a').each( (i, el) => {
             links.push(`https://reality.idnes.cz${el.attribs.href}`)
