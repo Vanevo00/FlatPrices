@@ -2,9 +2,9 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const stretchdelay = keyframes`
-  0%, 40%, 100% { 
+  0%, 40%, 100% {
     transform: scaleY(0.4);
-  }  20% { 
+  }  20% {
     transform: scaleY(1.0);
   }
 `
@@ -30,29 +30,29 @@ const SpinnerElement = styled.div`
   height: 40px;
   text-align: center;
   font-size: 10px;
-  
+
   & > div {
     background-color: ${props => props.theme.colors.main};
     margin-right: 1px;
     height: 100%;
     width: 6px;
     display: inline-block;
-    
+
     animation: ${stretchdelay} 1.2s infinite ease-in-out;
   }
-  
+
   ${Rect2} {
       animation-delay: -1.1s;
   }
-  
+
   ${Rect3} {
       animation-delay: -1s;
   }
-  
+
   ${Rect4} {
       animation-delay: -0.9s;
   }
-  
+
   ${Rect5} {
       animation-delay: -0.8s;
   }
