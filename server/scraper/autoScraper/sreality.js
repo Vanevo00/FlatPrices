@@ -120,6 +120,11 @@ const sreality = async () => {
                         flat.rooms = rooms.split(/\s{1}/)[0]
                     }
 
+                    const mainImage = $('.gallery img').attr('src')
+                    if (mainImage) {
+                        flat.mainImage = mainImage
+                    }
+
                     saveFlat.saveFlat(flat)
                 } catch (err) {
                     console.log(err)
