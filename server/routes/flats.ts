@@ -139,7 +139,7 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
 // @desc   Get flats by neighbourhood
 router.get('/byNeighbourhood/:_id', async (req: Request, res: Response) => {
   const page = parseInt(<string>req.query.page) - 1 || 0
-  const pageLimit = parseInt(<string>req.query.pageLimit) || 50
+  const pageLimit = parseInt(<string>req.query.pageLimit) || 5000
 
   try {
     const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id })
