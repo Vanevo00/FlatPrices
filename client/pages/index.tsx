@@ -1,6 +1,6 @@
 import React from 'react'
 import NewlyAddedFlats from '../components/NewlyAddedFlats/NewlyAddedFlats'
-import MostPopularCitiesList from '../components/CityList/MostPopularCitiesList'
+import MostPopularCitiesList from '../components/MostPopularCities/MostPopularCitiesList'
 
 const Index = () => {
   return (

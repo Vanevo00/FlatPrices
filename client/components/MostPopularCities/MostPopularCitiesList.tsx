@@ -9,7 +9,7 @@ import {
   CountryText,
   ItemDescription,
   NameText
-} from './StyledCityList'
+} from './StyledMostPopularCities'
 import increasePopularity from '../../utils/icreasePopularity'
 
 const CITY_IMAGE_PLACEHOLDER = 'https://store-images.s-microsoft.com/image/apps.47288.14188059920471079.8845931d-936f-4c5b-848c-e9700ef87a6b.92da2b6e-01a3-4806-8575-6f6278ecd71b?mode=scale&q=90&h=1080&w=1920&format=jpg'
