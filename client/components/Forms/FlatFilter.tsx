@@ -25,7 +25,9 @@ const FlatFilter = ({ setPageLimitCallback, callback, pageLimit }: Props) => {
     minMeters: undefined,
     maxMeters: undefined,
     minPricePerMeter: undefined,
-    maxPricePerMeter: undefined
+    maxPricePerMeter: undefined,
+    agency: undefined,
+    address: undefined
   })
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +47,9 @@ const FlatFilter = ({ setPageLimitCallback, callback, pageLimit }: Props) => {
       minMeters: '',
       maxMeters: '',
       minPricePerMeter: '',
-      maxPricePerMeter: ''
+      maxPricePerMeter: '',
+      agency: '',
+      address: ''
     })
   }
 
@@ -78,6 +82,14 @@ const FlatFilter = ({ setPageLimitCallback, callback, pageLimit }: Props) => {
 
     if (inputValues.maxPricePerMeter) {
       finalQuery += `&maxPricePerMeter=${inputValues.maxPricePerMeter}`
+    }
+
+    if (inputValues.agency) {
+      finalQuery += `&agency=${inputValues.agency}`
+    }
+
+    if (inputValues.address) {
+      finalQuery += `&address=${inputValues.address}`
     }
 
     finalQuery += `&pageLimit=${selectedPageLimit}`
@@ -163,6 +175,14 @@ const FlatFilter = ({ setPageLimitCallback, callback, pageLimit }: Props) => {
               <input type='number' name='maxMeters' value={inputValues.maxMeters} onChange={onChange}/>
             </MinMaxInputs>
           </FilterInteraction>
+        </FilterRow>
+        <FilterRow>
+          <FilterDescription>Agency name</FilterDescription>
+          <input type='text' name='agency' value={inputValues.agency} onChange={onChange}/>
+        </FilterRow>
+        <FilterRow>
+          <FilterDescription>Address</FilterDescription>
+          <input type='text' name='address' value={inputValues.address} onChange={onChange}/>
         </FilterRow>
       </IndividualFilters>
       <FilterButtons>

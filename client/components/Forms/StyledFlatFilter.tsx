@@ -16,7 +16,7 @@ interface ShowFiltersButtonProps {
 
 export const FilterContainer = styled.div<FilterContainerProps>`
   width: ${props => props.expanded ? '100%' : '120px'};
-  height: ${props => props.expanded ? '350px' : '40px'};
+  height: ${props => props.expanded ? '400px' : '40px'};
   position: relative;
   border: solid 1px ${props => props.theme.colors.main};
   padding: 1rem;
