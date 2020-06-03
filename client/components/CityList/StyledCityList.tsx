@@ -7,8 +7,9 @@ interface Props {
 
 export const CityListContainer = styled.div`
   display: flex;
-  overflow: scroll;
+  justify-content: space-between;
   margin: 0 auto;
+  flex-wrap: wrap;
   width: 90%;
   
   &::-webkit-scrollbar {
@@ -21,6 +22,7 @@ export const CityListItem = styled.div<Props>`
   max-width: 200px;
   height: 250px;
   margin-right: ${props => props.last ? 0 : '50px'};
+  margin-bottom: 1rem;
   background-image: url(${props => props.backgroundImage});
   background-position: center;
   background-size: cover;
