@@ -55,7 +55,11 @@ export const CityImageDescription = styled.div<CityImageDescriptionProps>`
   padding-top: 11px;
   transition: .5s;
   position: relative;
-  overflow: scroll;
+  overflow: ${props => props.expanded ? 'scroll' : 'visible'};
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
   
   p {
     padding-bottom: .5rem;
