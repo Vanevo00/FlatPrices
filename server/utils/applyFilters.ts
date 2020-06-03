@@ -7,12 +7,14 @@ interface Filters {
   minPricePerMeter?: string
   maxPricePerMeter?: string
   rooms?:string
+  agency?: string
+  address?: string
 }
 
 module.exports = (filters: Filters) => {
   let finalFilter = {}
 
-  //timeLimit will apply in every case and is week in default
+  //timeLimit will apply in every case and is week by default
   let limit = new Date()
   switch(filters.timeLimit) {
     case 'month':
@@ -56,6 +58,14 @@ module.exports = (filters: Filters) => {
   if (filters.rooms) {
     const roomsArr = filters.rooms.split(',')
     finalFilter = {...finalFilter, rooms: {$in: roomsArr}}
+  }
+
+  if (filters.agency) {
+    finalFilter = {...finalFilter, agency:  {$regex: '.*' + filters.agency + '.*', $options: 'i'}}
+  }
+
+  if (filters.address) {
+    finalFilter = {...finalFilter, address: {$regex: '.*' + filters.address + '.*', $options: 'i'}}
   }
 
   return finalFilter

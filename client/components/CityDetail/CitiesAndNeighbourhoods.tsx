@@ -89,10 +89,6 @@ const CitiesAndNeighbourhoods = ({ city, neighbourhoods }: Props) => {
         </CityImageDescription>
 
       </CityImage>
-      {/*<Link href={`/city/${city._id}`}>*/}
-      {/*  <CityRow onClick={() => increasePopularity(city._id)}>{city.name}</CityRow>*/}
-      {/*</Link>*/}
-      {/*{neighbourhoodItems}*/}
     </CityItemContainer>
   )
 }

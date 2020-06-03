@@ -107,7 +107,9 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
     maxPrice: req.query.maxPrice,
     minPricePerMeter: req.query.minPricePerMeter,
     maxPricePerMeter: req.query.maxPricePerMeter,
-    rooms: req.query.rooms
+    rooms: req.query.rooms,
+    agency: req.query.agency,
+    address: req.query.address
   }
 
   const sortBy = req.query.sort || '-createdAt'
