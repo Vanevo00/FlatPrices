@@ -114,6 +114,8 @@ const realityMat = async () => {
             flat.rooms = roomInfoHeading[2]
           }
 
+          flat.mainImage = $('a.touch-touch-link').attr('href')
+
           saveFlat.saveFlat(flat)
         } catch(err) {
           console.error(err)
