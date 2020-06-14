@@ -111,7 +111,9 @@ const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
                 {date}
               </TableItem>
               <TableItemButton width={7}>
+                <StyledLink href={`/flat/${flat._id}`} target='_blank'>
                   Detail
+                </StyledLink>
               </TableItemButton>
               <TableItemButton width={3}>
                 <StyledLink href={flat.link} target='_blank'>

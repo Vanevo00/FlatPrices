@@ -35,10 +35,63 @@ const FlatSchema = mongoose.Schema({
     default: false
   },
   visited: {
-    type: Boolean,
-    default: false
+    type: Date
   },
   agency: {
+    type: String
+  },
+  contact: {
+    type: String
+  },
+  reasonForSelling: {
+    type: String
+  },
+  houseOwnershipStructure: {
+    type: String
+  },
+  ownershipStructure: {
+    type: String
+  },
+  lastSale: {
+    type: Date
+  },
+  ownershipType: {
+    type: String
+  },
+  monthlyExpensesAssociation: {
+    type: Number
+  },
+  monthlyExpensesOther: {
+    type: Number
+  },
+  reconstructed: {
+    type: Date
+  },
+  houseReconstructed: {
+    type: Date
+  },
+  parking: {
+    type: Boolean
+  },
+  balcony: {
+    type: Boolean
+  },
+  garden: {
+    type: Boolean
+  },
+  heating: {
+    type: String
+  },
+  publicTransport: {
+    type: String
+  },
+  mortgaged: {
+    type: Boolean
+  },
+  cadastralInfo: {
+    type: String
+  },
+  notes: {
     type: String
   },
   neighbourhoodNumber: {

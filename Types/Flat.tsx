@@ -5,7 +5,7 @@ export interface Flat {
   _id: string
   address: string
   contacted: boolean
-  visited: boolean
+  visited: string
   createdAt: string
   squareMeters: number
   priceCZK: number
@@ -20,4 +20,21 @@ export interface Flat {
   lift?: boolean
   rooms?: string
   neighboourhoodNumber?: string
+  contact?: string
+  reasonForSelling?: string
+  houseOwnershipStructure?: string
+  ownershipStructure?: string
+  lastSale?: string
+  ownershipType?: string
+  monthlyExpensesAssociation?: number
+  monthlyExpensesOther?: number
+  reconstructed?: string
+  houseReconstructed?: string
+  parking?: boolean
+  balcony?: boolean
+  heating?: string
+  publicTransport?: string
+  mortgaged?: boolean
+  cadastralInfo?: string
+  notes?: string
 }

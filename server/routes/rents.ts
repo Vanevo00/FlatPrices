@@ -33,7 +33,15 @@ router.get('/avgRentCity/:_id', async (req: Request, res: Response) => {
     })
     rentPrices = sortHighestToLowest(rentPrices)
 
+    let squareMeters: number[] = []
+    rentsByCity.map((rent: Rent) => {
+      squareMeters.push(rent.squareMeters)
+    })
+    squareMeters = sortHighestToLowest(squareMeters)
+
+    const medianSquareMeters = squareMeters[Math.ceil(squareMeters.length / 2) - 1]
     const medianRent = rentPrices[Math.ceil(rentPrices.length / 2) - 1]
+    const medianRentPerMeter = Math.ceil(medianRent / medianSquareMeters)
     const avgRent = parseInt((rentPrices.reduce((a, b) => a + b, 0) / rentPrices.length).toFixed(2))
 
     const medianFlatsByDispositions = () => {
@@ -48,6 +56,7 @@ router.get('/avgRentCity/:_id', async (req: Request, res: Response) => {
     }
 
     res.json({
+      medianRentPerMeter,
       rentPrices,
       avgRent,
       medianRent,

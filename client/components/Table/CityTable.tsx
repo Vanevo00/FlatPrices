@@ -15,6 +15,7 @@ import {
 import ConfirmDelete from './ConfirmDelete'
 import Spinner from '../Spinner/Spinner'
 import Paginator from './Paginator'
+import increasePopularity from '../../utils/icreasePopularity'
 
 interface Props {
   flats: Flat[]
@@ -125,7 +126,9 @@ const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, 
                 {date}
               </TableItem>
               <TableItemButton width={7}>
-                Detail
+                <StyledLink href={`/flat/${flat._id}`} target='_blank'>
+                  Detail
+                </StyledLink>
               </TableItemButton>
               <TableItemButton width={3}>
                 <StyledLink href={flat.link} target='_blank'>

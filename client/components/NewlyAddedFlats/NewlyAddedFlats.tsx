@@ -14,6 +14,8 @@ import { Flat } from '../../../Types/Flat'
 import Link from 'next/link'
 import Paginator from '../Table/Paginator'
 import increasePopularity from '../../utils/icreasePopularity'
+import formatDate from '../../utils/formatDate'
+
 
 const PAGE_LIMIT = 30
 
@@ -109,10 +111,12 @@ const NewlyAddedFlats = () => {
                     {flat.pricePerMeter.toLocaleString()} CZK
                   </TableItem>
                   <TableItem width={16}>
-                    {date}
+                    {formatDate(flat.createdAt)}
                   </TableItem>
                   <TableItemButton width={10}>
-                  Detail
+                    <StyledLink href={`flat/${flat._id}`} target='_blank' onClick={() => increasePopularity(flat.city._id)}>
+                      Detail
+                    </StyledLink>
                   </TableItemButton>
                   <TableItemButton width={3} last={true}>
                       <StyledLink href={flat.link} target='_blank' onClick={() => increasePopularity(flat.city._id)}>

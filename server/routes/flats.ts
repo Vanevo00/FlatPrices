@@ -49,7 +49,10 @@ router.get('/new/:limit?', async (req: Request, res: Response) => {
 // @desc   Get one flat by id
 router.get('/search/:_id', async (req: Request, res: Response) => {
   try {
-    const flat = await Flat.findById(req.params._id)
+    const flat = await Flat
+      .findById(req.params._id)
+      .populate('neighbourhood')
+      .populate('city')
     res.json(flat)
   } catch (err) {
     console.error(err.message)

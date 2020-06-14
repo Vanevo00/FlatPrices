@@ -2,6 +2,7 @@ export interface RentPrices {
   rentPrices: number[]
   avgRent?: number
   medianRent?: number
+  medianRentPerMeter?: number
   rents1kk?: {
     amounts: number[]
     average: number

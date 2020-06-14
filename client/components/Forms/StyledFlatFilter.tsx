@@ -35,6 +35,7 @@ export const ShowFiltersButton = styled.button<ShowFiltersButtonProps>`
   width: 120px;
   height: 40px;
   color: ${props => props.theme.colors.main};
+  background-color: ${props => props.theme.colors.mainBackground};
   font-size: ${props => props.theme.fontSizes.s};
   cursor: pointer;
   transition: .6s;
