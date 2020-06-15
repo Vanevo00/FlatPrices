@@ -12,10 +12,7 @@
     "build": "rm -rf ./build && tsc",
     "eslint": "eslint \"./**\"",
     "eslint:fix": "eslint --fix \"./**\"",
-    "scrape": "node server/scraper/index.js",
-    "scrape:remax": "node server/scraper/Remax.js",
-    "scrape:sreality": "node server/scraper/Sreality.js",
-    "scrape:rents": "node server/scraper/rents.js"
+    "manualScraper": "node server/scraper/manualScraper.js"
   },
   "keywords": [],
   "author": "Vojtech Vanek",
