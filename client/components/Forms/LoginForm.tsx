@@ -6,7 +6,7 @@ import AuthContext from '../../context/auth/authContext'
 const LoginForm = () => {
   const authContext = useContext(AuthContext)
   const [inputValues, setInputValues] = useState({
-    email: '',
+    emailOrUsername: '',
     password: ''
   })
 
@@ -26,7 +26,7 @@ const LoginForm = () => {
   const onSubmit = (e: any) => {
     e.preventDefault()
     authContext.login({
-      email: inputValues.email,
+      email: inputValues.emailOrUsername,
       password: inputValues.password
     })
   }
@@ -35,7 +35,7 @@ const LoginForm = () => {
     <form onSubmit={onSubmit}>
       <FormContainer>
         <FormRow>
-          <FormInput type='email' full={true} name='email' placeholder='email' value={inputValues.email} onChange={onChange} required/>
+          <FormInput type='text' full={true} name='emailOrUsername' placeholder='email or username' value={inputValues.emailOrUsername} onChange={onChange} required/>
         </FormRow>
         <FormRow>
           <FormInput type='password' full={true} name='password' placeholder='password' value={inputValues.password} onChange={onChange} required/>
