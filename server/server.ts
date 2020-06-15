@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 const connectDB = require('../config/db')
-const autoScraper = require('./scraper/autoScraper/autoScraper')
+const autoScraper = require('./scraper/autoScraper')
 
 const cors = require('cors')
 const app = express()

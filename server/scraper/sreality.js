@@ -1,6 +1,6 @@
 const axios = require('axios')
 const config = require('config')
-const saveFlat = require('../saveFlat')
+const saveFlat = require('./saveFlat')
 const cheerio = require('cheerio')
 const puppeteer = require('puppeteer')
 

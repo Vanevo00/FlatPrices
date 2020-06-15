@@ -24,6 +24,8 @@ const autoScraper = () => {
     timezone: "Europe/Prague"
   })
 
+  remax()
+
   cron.schedule('0 11 * * *', () => {
   rents()
   }, {

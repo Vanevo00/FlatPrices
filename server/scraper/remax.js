@@ -1,5 +1,5 @@
 const axios = require('axios')
-const saveFlat = require('../saveFlat')
+const saveFlat = require('./saveFlat')
 const config = require('config')
 const cheerio = require('cheerio')
 

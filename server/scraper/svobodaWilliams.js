@@ -1,4 +1,4 @@
-const saveFlat = require('../saveFlat')
+const saveFlat = require('./saveFlat')
 const axios = require('axios')
 const cheerio = require('cheerio')
 const config = require('config')
