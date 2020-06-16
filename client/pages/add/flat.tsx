@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
 import { Flat } from '../../../Types/Flat'
 import FlatForm from '../../components/Forms/FlatForm'
+import AuthContext from '../../context/auth/authContext'
+import Router from 'next/router'
+import { limitToLoggedIn } from '../../utils/limitToLoggedIn'
 
 const AddFlat = () => {
+  const authContext = useContext(AuthContext)
   const [successMessage, setSuccessMessage] = useState('')
 
   const sendAddFlat = async (flat: Flat) => {
@@ -26,10 +30,10 @@ const AddFlat = () => {
     <>
       <GeneralContainer>
         <Heading2Centered>Add New Flat</Heading2Centered>
-        <FlatForm buttonText='Add Flat' onSubmit={sendAddFlat} successMessage={successMessage}/>
+        <FlatForm authContext={authContext} buttonText='Add Flat' onSubmit={sendAddFlat} successMessage={successMessage}/>
       </GeneralContainer>
     </>
   )
 }
 
-export default AddFlat
+export default limitToLoggedIn(AddFlat)

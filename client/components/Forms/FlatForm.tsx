@@ -8,6 +8,7 @@ import AuthContext from '../../context/auth/authContext'
 interface Props {
   buttonText: string
   onSubmit: Function
+  authContext: any
   successMessage?: string
 }
 
@@ -22,8 +23,7 @@ interface InputValues {
   addedBy?: string
 }
 
-const FlatForm = ({ buttonText, onSubmit, successMessage }: Props) => {
-  const authContext = useContext(AuthContext)
+const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) => {
 
   const [inputValues, setInputValues] = useState<InputValues>({
     address: '',

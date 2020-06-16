@@ -4,6 +4,7 @@ import axios from 'axios'
 import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
 import CityForm from '../../components/Forms/CityForm'
+import { limitToLoggedIn } from '../../utils/limitToLoggedIn'
 
 interface AddCityInputs {
   name: string
@@ -60,4 +61,4 @@ const AddCity = () => {
   )
 }
 
-export default AddCity
+export default limitToLoggedIn(AddCity)
