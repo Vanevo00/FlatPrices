@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { DragNDrop } from './StyledForm'
+import { DragNDrop, ImagePreviewContainer, UploadContainer } from './StyledForm'
 
 interface Props {
   activeDragText: string
@@ -10,7 +10,7 @@ interface Props {
   maxSize?: number
 }
 
-const Dropzone = ({activeDragText, emptyZoneText, multipleFiles, maxSize = 10000000, callback }: Props) => {
+const Dropzone = ({ activeDragText, emptyZoneText, multipleFiles, maxSize = 10000000, callback }: Props) => {
   const onDrop = useCallback(acceptedFiles => {
     callback(acceptedFiles)
   }, [])
@@ -39,10 +39,17 @@ const Dropzone = ({activeDragText, emptyZoneText, multipleFiles, maxSize = 10000
   }
 
   return (
-    <DragNDrop {...getRootProps()}>
-      <input {...getInputProps()}/>
-      {renderDropzoneText()}
-    </DragNDrop>
+    <>
+      <UploadContainer>
+        <DragNDrop {...getRootProps()}>
+          <input {...getInputProps()}/>
+          {renderDropzoneText()}
+        </DragNDrop>
+      </UploadContainer>
+      <ImagePreviewContainer>
+
+      </ImagePreviewContainer>
+    </>
   )
 }
 

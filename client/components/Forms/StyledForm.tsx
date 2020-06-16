@@ -112,6 +112,14 @@ export const FormSelect = styled.select`
   color: ${props => props.theme.colors.main};
 `
 
+export const UploadContainer = styled.div`
+  width: 70%;
+`
+
+export const ImagePreviewContainer = styled.div`
+ width: 30%;
+`
+
 export const DragNDrop = styled.div`
   height: 100px;
   border: 1px dashed ${props => props.theme.colors.lightGray};

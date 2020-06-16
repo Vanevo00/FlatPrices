@@ -7,11 +7,12 @@ import {
   FormInputLabelRequired,
   FullRow,
   FormSelect,
-  FormSuccessMessage, HalfRow, FormInputError
+  FormSuccessMessage, HalfRow, FormInputError, FormInputLabel
 } from './StyledForm'
 import Spinner from '../Spinner/Spinner'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
 import { useForm } from "react-hook-form"
+import Dropzone from './Dropzone'
 
 interface Props {
   buttonText: string
@@ -160,6 +161,15 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               {errors.neighbourhood && <FormInputError>Please select a neighbourhood</FormInputError>}
             </FullRow>
           }
+          <FullRow>
+            <FormInputLabel>Image</FormInputLabel>
+            <Dropzone
+              activeDragText={'Drop the image here ...'}
+              emptyZoneText={'Drag \'n\' drop an image here, or click to select an image'}
+              multipleFiles={false}
+              callback={() => console.log('pes')}
+            />
+          </FullRow>
           <FullRow>
             <FormInput type='number' name='priceCZK' placeholder='Price in CZK' value={inputValues.priceCZK} onChange={onChange} required/>
             <FormInput type='number' last={true} name='squareMeters' placeholder='m2' value={inputValues.squareMeters} onChange={onChange} required/>
