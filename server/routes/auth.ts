@@ -26,7 +26,7 @@ router.get('/', auth, async (req: any, res: Response) => {
 //@desc   auth user and get token
 //@access Public
 router.post ('/', [
-  check('email', 'please include a valid email').isEmail(),
+  check('emailOrUsername', 'please include a valid email or username').not().isEmpty(),
   check('password', 'password is required ').exists()
 ], async (req: Request, res: Response) => {
   const errors = validationResult(req)
@@ -34,13 +34,16 @@ router.post ('/', [
     return res.status(400).json({msg: errors.array()[0].msg})
   }
 
-  const { email, password } = req.body
+  const { emailOrUsername, password } = req.body
 
   try {
-    let user =  await User.findOne({email})
+    let user =  await User.findOne({email: emailOrUsername})
+    if (!user) {
+      user = await User.findOne({name: emailOrUsername})
+    }
 
     if (!user) {
-      return res.status(400).json({msg: 'Invalid Credentials'})
+      return res.status(400).json({msg: 'Invalid Name or Email'})
     }
 
     const isMatch = await bcrypt.compare(password, user.password)

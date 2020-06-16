@@ -26,7 +26,7 @@ const LoginForm = () => {
   const onSubmit = (e: any) => {
     e.preventDefault()
     authContext.login({
-      email: inputValues.emailOrUsername,
+      emailOrUsername: inputValues.emailOrUsername,
       password: inputValues.password
     })
   }
