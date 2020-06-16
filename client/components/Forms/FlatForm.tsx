@@ -1,9 +1,9 @@
-import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { FormButton, FormContainer, FormInput, FormRow, FormSelect, FormSuccessMessage } from './StyledForm'
 import Spinner from '../Spinner/Spinner'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
-import AuthContext from '../../context/auth/authContext'
+import { Flat } from '../../../Types/Flat'
 
 interface Props {
   buttonText: string
@@ -12,24 +12,12 @@ interface Props {
   successMessage?: string
 }
 
-interface InputValues {
-  address: string
-  neighbourhood: string
-  priceCZK: string
-  squareMeters: string
-  link: string
-  agency: string
-  rooms: string
-  addedBy?: string
-}
-
 const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) => {
-
-  const [inputValues, setInputValues] = useState<InputValues>({
+  const [inputValues, setInputValues] = useState({
     address: '',
     neighbourhood: '',
-    priceCZK: '',
-    squareMeters: '',
+    priceCZK: 0,
+    squareMeters: 0,
     link: '',
     agency: '',
     rooms: ''
@@ -62,17 +50,6 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     } else {
       onSubmit(inputValues)
     }
-
-    setInputValues({
-      ...inputValues, //keep the user if there is one
-      address: '',
-      neighbourhood: '',
-      priceCZK: '',
-      squareMeters: '',
-      link: '',
-      agency: '',
-      rooms: ''
-    })
   }
 
   if (neighbourhoods.length < 1) {
@@ -93,9 +70,9 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
             <FormInput type='number' last={true} name='squareMeters' placeholder='m2' value={inputValues.squareMeters} onChange={onChange} required/>
           </FormRow>
           {
-            inputValues.priceCZK && inputValues.squareMeters.length > 1 &&
+            inputValues.priceCZK && inputValues.squareMeters > 1 &&
             <FormRow>
-              <p>{(parseInt(inputValues.priceCZK) / parseInt(inputValues.squareMeters)).toFixed(0)} CZK / m<sup>2</sup></p>
+              <p>{(inputValues.priceCZK / inputValues.squareMeters).toFixed(0)} CZK / m<sup>2</sup></p>
             </FormRow>
           }
           <FormRow>
