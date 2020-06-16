@@ -33,7 +33,7 @@ router.get('/:_id', async (req: Request, res: Response) => {
 // @desc   Get all neighbourhoods in the city
 router.get('/byCity/:_id', async (req: Request, res: Response) => {
   try {
-    const neighbourhoodsByCity = await Neighbourhood.find({ city: req.params._id })
+    const neighbourhoodsByCity = await Neighbourhood.find({ city: req.params._id }).sort('name')
     res.json(neighbourhoodsByCity)
   } catch (err) {
     console.error(err.message)

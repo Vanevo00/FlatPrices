@@ -1,6 +1,6 @@
 import Router from 'next/router'
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
-import { FormButton, FormContainer, FormInput, FormRow, FormErrorMessage } from './StyledForm'
+import { FormButton, FormContainer, FormInput, FullRow, FormErrorMessage } from './StyledForm'
 import AuthContext from '../../context/auth/authContext'
 
 const LoginForm = () => {
@@ -34,12 +34,12 @@ const LoginForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <FormContainer>
-        <FormRow>
+        <FullRow>
           <FormInput type='text' full={true} name='emailOrUsername' placeholder='email or username' value={inputValues.emailOrUsername} onChange={onChange} required/>
-        </FormRow>
-        <FormRow>
+        </FullRow>
+        <FullRow>
           <FormInput type='password' full={true} name='password' placeholder='password' value={inputValues.password} onChange={onChange} required/>
-        </FormRow>
+        </FullRow>
         <FormButton type='submit'>Login</FormButton>
         {
           authContext.error && <FormErrorMessage>{authContext.error}</FormErrorMessage>

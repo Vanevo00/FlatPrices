@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
-import { FormButton, FormContainer, FormInput, FormRow, FormSelect, FormSuccessMessage } from './StyledForm'
+import { FormButton, FormContainer, FormInput, FullRow, FormSelect, FormSuccessMessage } from './StyledForm'
 import { City } from '../../../Types/City'
 import Spinner from '../Spinner/Spinner'
 
@@ -51,17 +51,17 @@ const NeighbourhoodForm = ({ buttonText, onSubmit, successMessage }: Props) => {
   return (
     <form onSubmit={onSubmitForm}>
       <FormContainer>
-        <FormRow>
+        <FullRow>
           <FormInput type='text' full={true} name='name' placeholder='Neighbourhood Name' value={inputValues.name} onChange={onChange} required/>
-        </FormRow>
-        <FormRow>
+        </FullRow>
+        <FullRow>
           <FormSelect name='city' value={inputValues.city} onChange={onChange}>
             <option value=''>Select city..</option>
             {cities.map((city: City) =>
               <option value={city._id} key={city._id}>{city.name}</option>
             )}
           </FormSelect>
-        </FormRow>
+        </FullRow>
         <FormButton type='submit'>{buttonText}</FormButton>
         {
           successMessage && <FormSuccessMessage>{successMessage}</FormSuccessMessage>

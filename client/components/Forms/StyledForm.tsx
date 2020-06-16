@@ -15,7 +15,7 @@ interface ConfirmationProps {
 }
 
 export const FormContainer = styled.div`
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
   border: solid 2px ${props => props.theme.colors.main};
   border-radius: 4px;
@@ -25,20 +25,38 @@ export const FormContainer = styled.div`
   flex-wrap: wrap;
 `
 
-export const FormRow = styled.div`
+export const FullRow = styled.div`
   width: 100%;
   margin-bottom: 1rem;
+  padding: 0 .25rem;
   color: ${props => props.theme.colors.main};
+  position: relative;
   
   input:focus {
     outline: none;
   }
 `
 
+export const HalfRow = styled(FullRow)`
+ width: 50%;
+`
+
+export const FormInputLabel = styled.label``
+
+export const FormInputLabelRequired = styled(FormInputLabel)`
+  font-weight: bold;
+  
+  &::after {
+    content: ' *';
+    color: ${props => props.theme.colors.danger};
+  }
+`
+
 export const FormInput = styled.input<Props>`
   border: none;
   border-bottom: 1px solid ${props => props.theme.colors.lightGray};
-  width: ${props => props.full ? '100%' : '48%'};
+  padding-top: .5rem;
+  width: ${props => props.full ? '100%' : '100%'};
   margin-right: ${props => props.full ? '0' : props.last ? '0' : '1rem'};
   font-size: ${props => props.theme.fontSizes.s};
   color: ${props => props.theme.colors.main};
@@ -46,6 +64,12 @@ export const FormInput = styled.input<Props>`
   &::placeholder {
     font-size: ${props => props.theme.fontSizes.s};
   }
+`
+
+export const FormInputError = styled.p`
+ color: ${props => props.theme.colors.danger};
+ font-size: ${props => props.theme.fontSizes.xs};
+ position: absolute;
 `
 
 export const FormButton = styled.button`
