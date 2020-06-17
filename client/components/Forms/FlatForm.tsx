@@ -26,6 +26,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     address: '',
     city: 'Select a city...',
     neighbourhood: 'Select a neighbourhood...',
+    mainImage: '',
     priceCZK: 0,
     squareMeters: 0,
     link: '',
@@ -77,6 +78,13 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     setInputValues({
       ...inputValues,
       [e.target.name]: e.target.value
+    })
+  }
+
+  const handleImageUpload = (path: string) => {
+    setInputValues({
+      ...inputValues,
+      mainImage: path
     })
   }
 
@@ -161,13 +169,27 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               {errors.neighbourhood && <FormInputError>Please select a neighbourhood</FormInputError>}
             </FullRow>
           }
+          {
+            !neighbourhoodsLoading && neighbourhoods.length === 0 &&
+              <p>No neighbourhoods found! Please select a different city or create a neighbourhood first.</p>
+          }
           <FullRow>
             <FormInputLabel>Image</FormInputLabel>
             <Dropzone
               activeDragText={'Drop the image here ...'}
               emptyZoneText={'Drag \'n\' drop an image here, or click to select an image'}
               multipleFiles={false}
-              callback={() => console.log('pes')}
+              callback={handleImageUpload}
+              imagePreview={inputValues.mainImage}
+            />
+          </FullRow>
+          <FullRow>
+            <FormInput
+              type='text'
+              name='mainImage'
+              placeholder={'or enter external image address here'}
+              value={inputValues.mainImage}
+              onChange={onChange}
             />
           </FullRow>
           <FullRow>

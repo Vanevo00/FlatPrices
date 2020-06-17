@@ -112,12 +112,24 @@ export const FormSelect = styled.select`
   color: ${props => props.theme.colors.main};
 `
 
+export const DropzoneContainer = styled.div`
+  display: flex;
+`
+
 export const UploadContainer = styled.div`
   width: 70%;
 `
 
 export const ImagePreviewContainer = styled.div`
  width: 30%;
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+`
+
+export const ImagePreview = styled.img`
+  max-width: 100%;
+  max-height: 100px;
 `
 
 export const DragNDrop = styled.div`
