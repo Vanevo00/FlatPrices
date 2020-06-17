@@ -7,7 +7,7 @@ import {
   FormInputLabelRequired,
   FullRow,
   FormSelect,
-  FormSuccessMessage, HalfRow, FormInputError, FormInputLabel
+  FormSuccessMessage, HalfRow, FormInputError, FormInputLabel, ThirdRow, PricePerMeter
 } from './StyledForm'
 import Spinner from '../Spinner/Spinner'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
@@ -169,10 +169,6 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               {errors.neighbourhood && <FormInputError>Please select a neighbourhood</FormInputError>}
             </FullRow>
           }
-          {
-            !neighbourhoodsLoading && neighbourhoods.length === 0 &&
-              <p>No neighbourhoods found! Please select a different city or create a neighbourhood first.</p>
-          }
           <FullRow>
             <FormInputLabel>Image</FormInputLabel>
             <Dropzone
@@ -192,15 +188,41 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               onChange={onChange}
             />
           </FullRow>
-          <FullRow>
-            <FormInput type='number' name='priceCZK' placeholder='Price in CZK' value={inputValues.priceCZK} onChange={onChange} required/>
-            <FormInput type='number' last={true} name='squareMeters' placeholder='m2' value={inputValues.squareMeters} onChange={onChange} required/>
-          </FullRow>
+          <ThirdRow>
+            <FormInputLabelRequired>Price in CZK</FormInputLabelRequired>
+            <FormInput
+              type='number'
+              name='priceCZK'
+              value={inputValues.priceCZK}
+              onChange={onChange}
+              ref={register({
+                validate: {
+                  filled: () => inputValues.priceCZK > 0
+                }
+              })}
+            />
+            {errors.priceCZK && <FormInputError>Enter a price.</FormInputError>}
+          </ThirdRow>
+          <ThirdRow>
+            <FormInputLabelRequired>Square meters</FormInputLabelRequired>
+            <FormInput
+              type='number'
+              name='squareMeters'
+              value={inputValues.squareMeters}
+              onChange={onChange}
+              ref={register({
+                validate: {
+                  filled: () => inputValues.squareMeters > 0
+                }
+              })}
+            />
+            {errors.squareMeters && <FormInputError>Enter square meters.</FormInputError>}
+          </ThirdRow>
           {
             inputValues.priceCZK && inputValues.squareMeters > 1 &&
-            <FullRow>
-              <p>{(inputValues.priceCZK / inputValues.squareMeters).toFixed(0)} CZK / m<sup>2</sup></p>
-            </FullRow>
+            <ThirdRow>
+              <PricePerMeter>{parseInt((inputValues.priceCZK / inputValues.squareMeters).toFixed(0)).toLocaleString()} CZK / m<sup>2</sup></PricePerMeter>
+            </ThirdRow>
           }
           <FullRow>
             <FormInput type='text' full={true} name='link' placeholder='Link' value={inputValues.link} onChange={onChange}/>

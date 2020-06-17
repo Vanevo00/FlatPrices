@@ -41,6 +41,10 @@ export const HalfRow = styled(FullRow)`
  width: 50%;
 `
 
+export const ThirdRow = styled(FullRow)`
+  width: 33.3%;
+`
+
 export const FormInputLabel = styled.label``
 
 export const FormInputLabelRequired = styled(FormInputLabel)`
@@ -169,4 +173,12 @@ export const ConfirmDeleteIcons = styled.div<ConfirmationProps>`
   i {
     margin-right: .5rem;
   }
+`
+
+export const PricePerMeter = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
