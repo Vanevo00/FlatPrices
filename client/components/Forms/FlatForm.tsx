@@ -13,6 +13,7 @@ import Spinner from '../Spinner/Spinner'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
 import { useForm } from "react-hook-form"
 import Dropzone from './Dropzone'
+import ExternalImageUpload from './ExternalImageUpload'
 
 interface Props {
   buttonText: string
@@ -180,13 +181,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
             />
           </FullRow>
           <FullRow>
-            <FormInput
-              type='text'
-              name='mainImage'
-              placeholder={'or enter external image address here'}
-              value={inputValues.mainImage}
-              onChange={onChange}
-            />
+            <ExternalImageUpload/>
           </FullRow>
           <ThirdRow>
             <FormInputLabelRequired>Price in CZK</FormInputLabelRequired>

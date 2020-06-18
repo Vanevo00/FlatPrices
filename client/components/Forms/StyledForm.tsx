@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Button } from '../StyledButtons'
 
 interface Props {
   full?: boolean
@@ -181,4 +182,15 @@ export const PricePerMeter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+export const ExternalImageInputContainer = styled.div`
+ width: 100%;
+ display: flex;
+`
+
+export const UploadButton = styled(Button)`
+  width: 200px;
+  height: auto;
+  padding: .5rem;
 `
