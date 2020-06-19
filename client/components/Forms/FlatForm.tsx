@@ -181,7 +181,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
             />
           </FullRow>
           <FullRow>
-            <ExternalImageUpload/>
+            <ExternalImageUpload callback={handleImageUpload}/>
           </FullRow>
           <ThirdRow>
             <FormInputLabelRequired>Price in CZK</FormInputLabelRequired>
@@ -214,9 +214,9 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
             {errors.squareMeters && <FormInputError>Enter square meters.</FormInputError>}
           </ThirdRow>
           {
-            inputValues.priceCZK && inputValues.squareMeters > 1 &&
+            inputValues.priceCZK > 0 && inputValues.squareMeters > 0 &&
             <ThirdRow>
-              <PricePerMeter>{parseInt((inputValues.priceCZK / inputValues.squareMeters).toFixed(0)).toLocaleString()} CZK / m<sup>2</sup></PricePerMeter>
+                <PricePerMeter>{parseInt((inputValues.priceCZK / inputValues.squareMeters).toFixed(0)).toLocaleString()} CZK / m<sup>2</sup></PricePerMeter>
             </ThirdRow>
           }
           <FullRow>

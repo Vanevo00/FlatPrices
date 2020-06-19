@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 import { ExternalImageInputContainer, FormInput, UploadButton } from './StyledForm'
+import axios from 'axios'
 
-const ExternalImageUpload = () => {
+interface Props {
+  callback: Function
+}
+
+const ExternalImageUpload = ({ callback }) => {
   const [imageAddress, setImageAddress] = useState<string>()
 
   const onClick = async () => {
+    const response = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/images/external`, {
+      link: imageAddress,
+      headers: 'application/json'
+    })
 
+    callback(response.data)
   }
 
   return (
