@@ -58,9 +58,8 @@ export const FormInputLabelRequired = styled(FormInputLabel)`
 `
 
 export const FormInput = styled.input<Props>`
-  border: none;
-  border-bottom: 1px solid ${props => props.theme.colors.lightGray};
-  padding-top: .5rem;
+  border: 1px solid ${props => props.theme.colors.lightGray};
+  padding: .25rem;
   width: ${props => props.full ? '100%' : '100%'};
   margin-right: ${props => props.full ? '0' : props.last ? '0' : '1rem'};
   font-size: ${props => props.theme.fontSizes.s};

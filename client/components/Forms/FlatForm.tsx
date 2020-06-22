@@ -27,13 +27,16 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     address: '',
     city: 'Select a city...',
     neighbourhood: 'Select a neighbourhood...',
-    mainImage: '',
     priceCZK: 0,
     squareMeters: 0,
     link: '',
     agency: '',
-    rooms: ''
+    rooms: '',
+    floor: undefined,
+    contact: '',
+    visited: undefined,
   })
+  const [mainImage, setMainImage] = useState<string>()
   const [citiesLoading, setCitiesLoading] = useState(true)
   const [cities, setCities] = useState([])
   const [neighbourhoodsLoading, setNeighbourhoodsLoading] = useState(false)
@@ -83,10 +86,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
   }
 
   const handleImageUpload = (path: string) => {
-    setInputValues({
-      ...inputValues,
-      mainImage: path
-    })
+    setMainImage(path)
   }
 
   const onSubmitForm = (e: FormEvent) => {
@@ -109,7 +109,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
 
   if (cities) {
     return (
-      <form onSubmit={handleSubmit(onSubmitForm)}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <FormContainer>
           <HalfRow>
             <FormInputLabelRequired>Address</FormInputLabelRequired>
@@ -177,7 +177,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               emptyZoneText={'Drag \'n\' drop an image here, or click to select an image'}
               multipleFiles={false}
               callback={handleImageUpload}
-              imagePreview={inputValues.mainImage}
+              imagePreview={mainImage}
             />
           </FullRow>
           <FullRow>
@@ -219,28 +219,73 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
                 <PricePerMeter>{parseInt((inputValues.priceCZK / inputValues.squareMeters).toFixed(0)).toLocaleString()} CZK / m<sup>2</sup></PricePerMeter>
             </ThirdRow>
           }
-          <FullRow>
-            <FormInput type='text' full={true} name='link' placeholder='Link' value={inputValues.link} onChange={onChange}/>
-          </FullRow>
-          <FullRow>
-            <FormInput type='text' full={true} name='agency' placeholder='Real Estate Agency' value={inputValues.agency} onChange={onChange}/>
-          </FullRow>
-          <FullRow>
+          <HalfRow>
+            <FormInputLabel>Listing link</FormInputLabel>
+            <FormInput
+              type='text'
+              id='link'
+              name='link'
+              value={inputValues.link}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Real Estate Agency</FormInputLabel>
+            <FormInput
+              type='text'
+              id='agency'
+              name='agency'
+              value={inputValues.agency}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Agency/Seller contact</FormInputLabel>
+            <FormInput
+              type='text'
+              id='contact'
+              name='contact'
+              value={inputValues.contact}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Floor</FormInputLabel>
+            <FormInput
+              type='number'
+              id='floor'
+              name='floor'
+              value={inputValues.floor}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Disposition</FormInputLabel>
             <FormSelect name='rooms' value={inputValues.rooms} onChange={onChange}>
-              <option value=''>Select dispositions of the flat..</option>
-              <option value='1 + kk'>1 + kk</option>
-              <option value='1 + 1'>1 + 1</option>
-              <option value='2 + kk'>2 + kk</option>
-              <option value='2 + 1'>2 + 1</option>
-              <option value='3 + kk'>3 + kk</option>
-              <option value='3 + 1'>3 + 1</option>
-              <option value='4 + kk'>4 + kk</option>
-              <option value='4 + 1'>4 + 1</option>
-              <option value='5 + 1'>5 + 1</option>
-              <option value='Larger than 5 + 1'>Larger than 5 + 1</option>
+              <option value='' disabled>Select dispositions of the flat..</option>
+              <option value='1+kk'>1+kk</option>
+              <option value='1+1'>1+1</option>
+              <option value='2+kk'>2+kk</option>
+              <option value='2+1'>2+1</option>
+              <option value='3+kk'>3+kk</option>
+              <option value='3+1'>3+1</option>
+              <option value='4+kk'>4+kk</option>
+              <option value='4+1'>4+1</option>
+              <option value='5+1'>5+1</option>
+              <option value='Larger than 5 + 1'>Larger than 5+1</option>
             </FormSelect>
-          </FullRow>
-          <FormButton type='submit'>{buttonText}</FormButton>
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Visited on</FormInputLabel>
+            <FormInput
+              type='datetime-local'
+              id='visited'
+              name='visited'
+              value={inputValues.visited}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <FormButton onClick={handleSubmit(onSubmitForm)}>{buttonText}</FormButton>
           {
             successMessage && <FormSuccessMessage>{successMessage}</FormSuccessMessage>
           }
