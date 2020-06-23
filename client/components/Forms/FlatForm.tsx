@@ -7,13 +7,14 @@ import {
   FormInputLabelRequired,
   FullRow,
   FormSelect,
-  FormSuccessMessage, HalfRow, FormInputError, FormInputLabel, ThirdRow, PricePerMeter
+  FormSuccessMessage, HalfRow, FormInputError, FormInputLabel, ThirdRow, PricePerMeter, ButtonListItemForm, FormTextarea
 } from './StyledForm'
 import Spinner from '../Spinner/Spinner'
-import { Neighbourhood } from '../../../Types/Neighbourhood'
 import { useForm } from "react-hook-form"
 import Dropzone from './Dropzone'
 import ExternalImageUpload from './ExternalImageUpload'
+import { ButtonList } from './StyledFlatFilter'
+import { Heading3UnderlineColor } from '../StyledHeadings'
 
 interface Props {
   buttonText: string
@@ -35,6 +36,23 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     floor: undefined,
     contact: '',
     visited: undefined,
+    lift: undefined,
+    parking: undefined,
+    balcony: undefined,
+    reasonForSelling: '',
+    ownershipStructure: '',
+    houseOwnershipStructure: '',
+    lastSale: undefined,
+    ownershipType: '',
+    monthlyExpensesAssociation: undefined,
+    monthlyExpensesOther: undefined,
+    renovated: undefined,
+    houseRenovated: undefined,
+    garden: undefined,
+    heating: '',
+    publicTransport: '',
+    cadastralInfo: '',
+    notes: ''
   })
   const [mainImage, setMainImage] = useState<string>()
   const [citiesLoading, setCitiesLoading] = useState(true)
@@ -111,6 +129,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     return (
       <form onSubmit={(e) => e.preventDefault()}>
         <FormContainer>
+          <Heading3UnderlineColor>Main info</Heading3UnderlineColor>
           <HalfRow>
             <FormInputLabelRequired>Address</FormInputLabelRequired>
             <FormInput
@@ -183,22 +202,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
           <FullRow>
             <ExternalImageUpload callback={handleImageUpload}/>
           </FullRow>
-          <ThirdRow>
-            <FormInputLabelRequired>Price in CZK</FormInputLabelRequired>
-            <FormInput
-              type='number'
-              name='priceCZK'
-              value={inputValues.priceCZK}
-              onChange={onChange}
-              ref={register({
-                validate: {
-                  filled: () => inputValues.priceCZK > 0
-                }
-              })}
-            />
-            {errors.priceCZK && <FormInputError>Enter a price.</FormInputError>}
-          </ThirdRow>
-          <ThirdRow>
+          <HalfRow>
             <FormInputLabelRequired>Square meters</FormInputLabelRequired>
             <FormInput
               type='number'
@@ -212,13 +216,274 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               })}
             />
             {errors.squareMeters && <FormInputError>Enter square meters.</FormInputError>}
+          </HalfRow>
+          <Heading3UnderlineColor>Price</Heading3UnderlineColor>
+          <HalfRow>
+            <FormInputLabelRequired>Price in CZK</FormInputLabelRequired>
+            <FormInput
+              type='number'
+              name='priceCZK'
+              value={inputValues.priceCZK}
+              onChange={onChange}
+              ref={register({
+                validate: {
+                  filled: () => inputValues.priceCZK > 0
+                }
+              })}
+            />
+            {errors.priceCZK && <FormInputError>Enter a price.</FormInputError>}
+          </HalfRow>
+          <HalfRow>
+            {
+              inputValues.priceCZK > 0 && inputValues.squareMeters > 0 ?
+              <PricePerMeter>{parseInt((inputValues.priceCZK / inputValues.squareMeters).toFixed(0)).toLocaleString()} CZK / m<sup>2</sup></PricePerMeter>
+                : <PricePerMeter>Please enter square meters and price in CZK</PricePerMeter>
+            }
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Reason for selling</FormInputLabel>
+            <FormInput
+              type='text'
+              name='reasonForSelling'
+              value={inputValues.reasonForSelling}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Last sale of the flat</FormInputLabel>
+            <FormInput
+              type='datetime-local'
+              id='lastSale'
+              name='lastSale'
+              value={inputValues.lastSale}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Monthly expenses - Association (SVJ)</FormInputLabel>
+            <FormInput
+              type='number'
+              name='monthlyExpensesAssociation'
+              value={inputValues.monthlyExpensesAssociation}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Monthly expenses - other</FormInputLabel>
+            <FormInput
+              type='number'
+              name='monthlyExpensesOther'
+              value={inputValues.monthlyExpensesOther}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <Heading3UnderlineColor>Flat info</Heading3UnderlineColor>
+          <HalfRow>
+            <FormInputLabel>Disposition</FormInputLabel>
+            <FormSelect name='rooms' value={inputValues.rooms} onChange={onChange}>
+              <option value='' disabled>Select disposition of the flat..</option>
+              <option value='1+kk'>1+kk</option>
+              <option value='1+1'>1+1</option>
+              <option value='2+kk'>2+kk</option>
+              <option value='2+1'>2+1</option>
+              <option value='3+kk'>3+kk</option>
+              <option value='3+1'>3+1</option>
+              <option value='4+kk'>4+kk</option>
+              <option value='4+1'>4+1</option>
+              <option value='5+1'>5+1</option>
+              <option value='Larger than 5 + 1'>Larger than 5+1</option>
+            </FormSelect>
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Floor</FormInputLabel>
+            <FormInput
+              type='number'
+              id='floor'
+              name='floor'
+              value={inputValues.floor}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Flat ownership structure</FormInputLabel>
+            <FormInput
+              type='text'
+              name='ownershipStructure'
+              value={inputValues.ownershipStructure}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>House ownership structure</FormInputLabel>
+            <FormInput
+              type='text'
+              name='houseOwnershipStructure'
+              value={inputValues.houseOwnershipStructure}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>OwnershipType</FormInputLabel>
+            <FormSelect name='ownershipType' value={inputValues.ownershipType} onChange={onChange}>
+              <option value='' disabled>Select ownership type..</option>
+              <option value='personal'>personal (osobní)</option>
+              <option value='cooperative'>cooperative (družstevní)</option>
+            </FormSelect>
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Heating</FormInputLabel>
+            <FormInput
+              type='text'
+              name='heating'
+              value={inputValues.heating}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>Flat renovated on</FormInputLabel>
+            <FormInput
+              type='datetime-local'
+              id='renovated'
+              name='renovated'
+              value={inputValues.renovated}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
+            <FormInputLabel>House renovated on</FormInputLabel>
+            <FormInput
+              type='datetime-local'
+              id='houseRenovated'
+              name='houseRenovated'
+              value={inputValues.houseRenovated}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <FullRow>
+            <FormInputLabel>Public transport</FormInputLabel>
+            <FormTextarea
+              name='publicTransport'
+              value={inputValues.publicTransport}
+              onChange={onChange}
+            />
+          </FullRow>
+          <ThirdRow>
+            <FormInputLabel>Lift</FormInputLabel>
+            <ButtonList>
+              <ButtonListItemForm
+                active={inputValues.lift}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  lift: true
+                })}>
+                yes
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={!inputValues.lift && typeof inputValues.lift === 'boolean'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  lift: false
+                })}>
+                no
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={typeof inputValues.lift === 'undefined'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  lift: undefined
+                })}>
+                unknown
+              </ButtonListItemForm>
+            </ButtonList>
           </ThirdRow>
-          {
-            inputValues.priceCZK > 0 && inputValues.squareMeters > 0 &&
-            <ThirdRow>
-                <PricePerMeter>{parseInt((inputValues.priceCZK / inputValues.squareMeters).toFixed(0)).toLocaleString()} CZK / m<sup>2</sup></PricePerMeter>
-            </ThirdRow>
-          }
+          <ThirdRow>
+            <FormInputLabel>Parking</FormInputLabel>
+            <ButtonList>
+              <ButtonListItemForm
+                active={inputValues.parking}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  parking: true
+                })}>
+                yes
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={!inputValues.parking && typeof inputValues.parking === 'boolean'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  parking: false
+                })}>
+                no
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={typeof inputValues.parking === 'undefined'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  parking: undefined
+                })}>
+                unknown
+              </ButtonListItemForm>
+            </ButtonList>
+          </ThirdRow>
+          <ThirdRow>
+            <FormInputLabel>Balcony</FormInputLabel>
+            <ButtonList>
+              <ButtonListItemForm
+                active={inputValues.balcony}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  balcony: true
+                })}>
+                yes
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={!inputValues.balcony && typeof inputValues.balcony === 'boolean'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  balcony: false
+                })}>
+                no
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={typeof inputValues.balcony === 'undefined'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  balcony: undefined
+                })}>
+                unknown
+              </ButtonListItemForm>
+            </ButtonList>
+          </ThirdRow>
+          <ThirdRow>
+            <FormInputLabel>Garden</FormInputLabel>
+            <ButtonList>
+              <ButtonListItemForm
+                active={inputValues.garden}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  garden: true
+                })}>
+                yes
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={!inputValues.garden && typeof inputValues.garden === 'boolean'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  garden: false
+                })}>
+                no
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={typeof inputValues.garden === 'undefined'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  garden: undefined
+                })}>
+                unknown
+              </ButtonListItemForm>
+            </ButtonList>
+          </ThirdRow>
+          <Heading3UnderlineColor>Contact and additional info</Heading3UnderlineColor>
           <HalfRow>
             <FormInputLabel>Listing link</FormInputLabel>
             <FormInput
@@ -248,32 +513,6 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               value={inputValues.contact}
               onChange={onChange}
             />
-          </HalfRow>
-          <HalfRow>
-            <FormInputLabel>Floor</FormInputLabel>
-            <FormInput
-              type='number'
-              id='floor'
-              name='floor'
-              value={inputValues.floor}
-              onChange={onChange}
-            />
-          </HalfRow>
-          <HalfRow>
-            <FormInputLabel>Disposition</FormInputLabel>
-            <FormSelect name='rooms' value={inputValues.rooms} onChange={onChange}>
-              <option value='' disabled>Select dispositions of the flat..</option>
-              <option value='1+kk'>1+kk</option>
-              <option value='1+1'>1+1</option>
-              <option value='2+kk'>2+kk</option>
-              <option value='2+1'>2+1</option>
-              <option value='3+kk'>3+kk</option>
-              <option value='3+1'>3+1</option>
-              <option value='4+kk'>4+kk</option>
-              <option value='4+1'>4+1</option>
-              <option value='5+1'>5+1</option>
-              <option value='Larger than 5 + 1'>Larger than 5+1</option>
-            </FormSelect>
           </HalfRow>
           <HalfRow>
             <FormInputLabel>Visited on</FormInputLabel>

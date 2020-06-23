@@ -30,10 +30,6 @@ const FlatSchema = mongoose.Schema({
   lift: {
     type: Boolean
   },
-  contacted: {
-    type: Boolean,
-    default: false
-  },
   visited: {
     type: Date
   },
@@ -64,10 +60,10 @@ const FlatSchema = mongoose.Schema({
   monthlyExpensesOther: {
     type: Number
   },
-  reconstructed: {
+  renovated: {
     type: Date
   },
-  houseReconstructed: {
+  houseRenovated: {
     type: Date
   },
   parking: {

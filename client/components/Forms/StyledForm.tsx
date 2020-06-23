@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Button } from '../StyledButtons'
+import { ButtonListItem } from './StyledFlatFilter'
 
 interface Props {
   full?: boolean
@@ -46,7 +47,9 @@ export const ThirdRow = styled(FullRow)`
   width: 33.3%;
 `
 
-export const FormInputLabel = styled.label``
+export const FormInputLabel = styled.label`
+  width: 100%;
+`
 
 export const FormInputLabelRequired = styled(FormInputLabel)`
   font-weight: bold;
@@ -60,6 +63,7 @@ export const FormInputLabelRequired = styled(FormInputLabel)`
 export const FormInput = styled.input<Props>`
   border: 1px solid ${props => props.theme.colors.lightGray};
   padding: .25rem;
+  min-height: 2.1rem;
   width: ${props => props.full ? '100%' : '100%'};
   margin-right: ${props => props.full ? '0' : props.last ? '0' : '1rem'};
   font-size: ${props => props.theme.fontSizes.s};
@@ -68,6 +72,15 @@ export const FormInput = styled.input<Props>`
   &::placeholder {
     font-size: ${props => props.theme.fontSizes.s};
   }
+`
+
+export const FormTextarea = styled.textarea`
+  width: 100%;
+  color: ${props => props.theme.colors.main};
+  border: 1px solid ${props => props.theme.colors.lightGray};
+  font-size: ${props => props.theme.fontSizes.s};
+  padding: .25rem;
+  min-height: 5rem;
 `
 
 export const FormInputError = styled.p`
@@ -111,7 +124,7 @@ export const FormErrorMessage = styled(FormSuccessMessage)`
 
 export const FormSelect = styled.select`
   width: 100%;
-  height: 30px;
+  height: 2.1rem;
   font-size: ${props => props.theme.fontSizes.s};
   color: ${props => props.theme.colors.main};
 `
@@ -179,6 +192,7 @@ export const PricePerMeter = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  padding-top: 1rem;
   justify-content: center;
   align-items: center;
 `
@@ -192,4 +206,10 @@ export const UploadButton = styled(Button)`
   width: 200px;
   height: auto;
   padding: .5rem;
+`
+
+export const ButtonListItemForm = styled(ButtonListItem)`
+ width: auto;
+ min-width: 60px;
+ padding: .5rem;
 `
