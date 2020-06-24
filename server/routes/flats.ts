@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express'
 import { Flat } from '../../Types/Flat'
+import { City } from '../../Types/City'
 
 const { check, validationResult } = require('express-validator')
 const router = express.Router()
@@ -281,20 +282,38 @@ router.post('/', [
   }
 
   const {
-    address,
-    squareMeters,
-    priceCZK,
-    mainImage,
-    agency,
-    link,
-    floor,
-    lift,
-    contacted,
-    visited,
-    neighbourhood,
-    addedBy,
-    neighbourhoodNumber,
-    rooms
+  address,
+  contacted,
+  visited,
+  createdAt,
+  squareMeters,
+  priceCZK,
+  agency,
+  mainImage,
+  link,
+  neighbourhood,
+  addedBy,
+  floor,
+  lift,
+  rooms,
+  contact,
+  reasonForSelling,
+  houseOwnershipStructure,
+  ownershipStructure,
+  lastSale,
+  ownershipType,
+  monthlyExpensesAssociation,
+  monthlyExpensesOther,
+  renovated,
+  houseRenovated,
+  garden,
+  parking,
+  balcony,
+  heating,
+  publicTransport,
+  mortgaged,
+  cadastralInfo,
+  notes
   } = req.body
 
   const flatNeighbourhoood = await Neighbourhood.findOne({ _id: neighbourhood })
@@ -309,6 +328,7 @@ router.post('/', [
       squareMeters,
       priceCZK,
       agency,
+      createdAt,
       mainImage,
       pricePerMeter,
       link,
@@ -319,8 +339,25 @@ router.post('/', [
       neighbourhood,
       city,
       addedBy,
-      neighbourhoodNumber,
-      rooms
+      rooms,
+      contact,
+      reasonForSelling,
+      houseOwnershipStructure,
+      ownershipStructure,
+      lastSale,
+      ownershipType,
+      monthlyExpensesAssociation,
+      monthlyExpensesOther,
+      renovated,
+      houseRenovated,
+      garden,
+      parking,
+      balcony,
+      heating,
+      publicTransport,
+      mortgaged,
+      cadastralInfo,
+      notes
     })
 
     const flat = await newFlat.save()

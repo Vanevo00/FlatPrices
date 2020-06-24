@@ -25,35 +25,35 @@ interface Props {
 
 const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) => {
   const [inputValues, setInputValues] = useState({
-    address: '',
+    address: undefined,
     city: 'Select a city...',
     neighbourhood: 'Select a neighbourhood...',
     priceCZK: 0,
     squareMeters: 0,
-    link: '',
-    agency: '',
-    rooms: '',
+    link: undefined,
+    agency: undefined,
+    rooms: undefined,
     floor: undefined,
-    contact: '',
+    contact: undefined,
     visited: undefined,
     lift: undefined,
     parking: undefined,
     balcony: undefined,
-    reasonForSelling: '',
-    ownershipStructure: '',
-    houseOwnershipStructure: '',
+    reasonForSelling: undefined,
+    ownershipStructure: undefined,
+    houseOwnershipStructure: undefined,
     lastSale: undefined,
-    ownershipType: '',
+    ownershipType: undefined,
     monthlyExpensesAssociation: undefined,
     monthlyExpensesOther: undefined,
     renovated: undefined,
     houseRenovated: undefined,
     garden: undefined,
-    heating: '',
-    publicTransport: '',
+    heating: undefined,
+    publicTransport: undefined,
     mortgaged: undefined,
-    cadastralInfo: '',
-    notes: ''
+    cadastralInfo: undefined,
+    notes: undefined
   })
   const [mainImage, setMainImage] = useState<string>()
   const [citiesLoading, setCitiesLoading] = useState(true)
@@ -82,10 +82,6 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
   }
 
   useEffect(() => {
-    console.log("inputValues", inputValues)
-  },[inputValues])
-
-  useEffect(() => {
     if (inputValues.city !== 'Select a city...') {
       fetchNeighbourhoods()
     } else {
@@ -108,15 +104,18 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     setMainImage(path)
   }
 
-  const onSubmitForm = (e: FormEvent) => {
-    e.preventDefault()
+  const onSubmitForm = () => {
     if (authContext.user) {
       onSubmit({
         ...inputValues,
-        addedBy: authContext.user._id
+        addedBy: authContext.user._id,
+        mainImage
       })
     } else {
-      onSubmit(inputValues)
+      onSubmit({
+        ...inputValues,
+        mainImage
+      })
     }
   }
 
@@ -326,7 +325,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
           <HalfRow>
             <FormInputLabel>OwnershipType</FormInputLabel>
             <FormSelect name='ownershipType' value={inputValues.ownershipType} onChange={onChange}>
-              <option value='' disabled>Select ownership type..</option>
+              <option value={undefined} disabled>Select ownership type..</option>
               <option value='personal'>personal (osobní)</option>
               <option value='cooperative'>cooperative (družstevní)</option>
             </FormSelect>
