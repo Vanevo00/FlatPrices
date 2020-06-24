@@ -51,6 +51,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     garden: undefined,
     heating: '',
     publicTransport: '',
+    mortgaged: undefined,
     cadastralInfo: '',
     notes: ''
   })
@@ -483,6 +484,35 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               </ButtonListItemForm>
             </ButtonList>
           </ThirdRow>
+          <ThirdRow>
+            <FormInputLabel>Mortgage</FormInputLabel>
+            <ButtonList>
+              <ButtonListItemForm
+                active={inputValues.mortgaged}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  mortgaged: true
+                })}>
+                yes
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={!inputValues.mortgaged && typeof inputValues.mortgaged === 'boolean'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  mortgaged: false
+                })}>
+                no
+              </ButtonListItemForm>
+              <ButtonListItemForm
+                active={typeof inputValues.mortgaged === 'undefined'}
+                onClick={() => setInputValues({
+                  ...inputValues,
+                  mortgaged: undefined
+                })}>
+                unknown
+              </ButtonListItemForm>
+            </ButtonList>
+          </ThirdRow>
           <Heading3UnderlineColor>Contact and additional info</Heading3UnderlineColor>
           <HalfRow>
             <FormInputLabel>Listing link</FormInputLabel>
@@ -515,6 +545,15 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
             />
           </HalfRow>
           <HalfRow>
+            <FormInputLabel>Cadastral info</FormInputLabel>
+            <FormInput
+              type='text'
+              name='cadastralInfo'
+              value={inputValues.cadastralInfo}
+              onChange={onChange}
+            />
+          </HalfRow>
+          <HalfRow>
             <FormInputLabel>Visited on</FormInputLabel>
             <FormInput
               type='datetime-local'
@@ -524,6 +563,14 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
               onChange={onChange}
             />
           </HalfRow>
+          <FullRow>
+            <FormInputLabel>Additional notes</FormInputLabel>
+            <FormTextarea
+              name='notes'
+              value={inputValues.notes}
+              onChange={onChange}
+            />
+          </FullRow>
           <FormButton onClick={handleSubmit(onSubmitForm)}>{buttonText}</FormButton>
           {
             successMessage && <FormSuccessMessage>{successMessage}</FormSuccessMessage>
