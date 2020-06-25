@@ -24,6 +24,16 @@ const EditFlat = ({ _id }: Props) => {
     setIsLoading(false)
   }
 
+  const onSubmit = async (data) => {
+    try {
+      const editedFlat = await axios.put(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/${_id}`, data)
+      console.log(editedFlat.data)
+      setSuccessMessage('Flat successfully edited')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     fetchFlat()
   }, [])
@@ -37,7 +47,7 @@ const EditFlat = ({ _id }: Props) => {
   return (
     <GeneralContainer>
       <Heading2Centered>Edit Flat{flat && ` - ${flat.address}, ${flat.city.name}`}</Heading2Centered>
-      <FlatForm authContext={authContext} buttonText='Edit Flat' onSubmit={() => console.log('edit')} successMessage={successMessage} flat={flat}/>
+      <FlatForm authContext={authContext} buttonText='Edit Flat' onSubmit={onSubmit} successMessage={successMessage} flat={flat}/>
     </GeneralContainer>
   )
 }
