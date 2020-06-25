@@ -32,6 +32,7 @@ export interface Flat {
   houseRenovated?: string
   parking?: boolean
   balcony?: boolean
+  garden?: boolean
   heating?: string
   publicTransport?: string
   mortgaged?: boolean

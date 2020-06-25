@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import {
   FormButton,
@@ -15,15 +15,17 @@ import Dropzone from './Dropzone'
 import ExternalImageUpload from './ExternalImageUpload'
 import { ButtonList } from './StyledFlatFilter'
 import { Heading3UnderlineColor } from '../StyledHeadings'
+import { Flat } from '../../../Types/Flat'
 
 interface Props {
   buttonText: string
   onSubmit: Function
   authContext: any
   successMessage?: string
+  flat?: Flat
 }
 
-const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) => {
+const FlatForm = ({ buttonText, onSubmit, authContext, successMessage, flat }: Props) => {
   const [inputValues, setInputValues] = useState({
     address: undefined,
     city: 'Select a city...',
@@ -62,7 +64,45 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
   const [neighbourhoods, setNeighbourhoods] = useState([])
   const { register, handleSubmit, errors } = useForm({
     mode: 'onBlur'
-  });
+  })
+
+  useEffect(() => {
+    if (flat) {
+      setInputValues({
+        ...inputValues,
+        address: flat.address || undefined,
+        city: flat.city._id || undefined,
+        neighbourhood: flat.neighbourhood._id || undefined,
+        priceCZK: flat.priceCZK || 0,
+        squareMeters: flat.squareMeters || 0,
+        link: flat.link || undefined,
+        agency: flat.agency || undefined,
+        rooms: flat.rooms || undefined,
+        floor: flat.floor || undefined,
+        contact: flat.contact || undefined,
+        visited: flat.visited || undefined,
+        lift: flat.lift || undefined,
+        parking: flat.parking || undefined,
+        balcony: flat.balcony || undefined,
+        reasonForSelling: flat.reasonForSelling || undefined,
+        ownershipStructure: flat.ownershipStructure || undefined,
+        houseOwnershipStructure: flat.houseOwnershipStructure || undefined,
+        lastSale: flat.lastSale || undefined,
+        ownershipType: flat.ownershipType || undefined,
+        monthlyExpensesAssociation: flat.monthlyExpensesAssociation || undefined,
+        monthlyExpensesOther: flat.monthlyExpensesOther || undefined,
+        renovated: flat.renovated || undefined,
+        houseRenovated: flat.houseRenovated || undefined,
+        garden: flat.garden || undefined,
+        heating: flat.heating || undefined,
+        publicTransport: flat.publicTransport || undefined,
+        mortgaged: flat.mortgaged || undefined,
+        cadastralInfo: flat.cadastralInfo || undefined,
+        notes: flat.notes || undefined
+      })
+      setMainImage(flat.mainImage)
+    }
+  }, [])
 
   const fetchCities = async () => {
     const fetchedCities = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/cities`)
@@ -74,7 +114,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
     setNeighbourhoodsLoading(true)
     setInputValues({
       ...inputValues,
-      neighbourhood: 'Select a neighbourhood...'
+      neighbourhood: flat?.neighbourhood?._id || 'Select a neighbourhood...'
     })
     const fetchedNeighbourhoods = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/neighbourhoods/byCity/${inputValues.city}`)
     setNeighbourhoods(fetchedNeighbourhoods.data)
