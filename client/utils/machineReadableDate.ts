@@ -1,3 +1,6 @@
 export default (date) => {
-  return new Date(date).toISOString().substring(0, 16)
+  if (date) {
+    return new Date(date).toISOString().substring(0, 16)
+  }
+  return null
 }

@@ -9,9 +9,9 @@ import AvgPriceTable from '../../components/Table/AvgPriceTable'
 import { AvgContainer } from '../../components/Table/StyledAveragePriceTable'
 import RentPricesTable from '../../components/Table/RentPricesTable'
 import AuthContext from '../../context/auth/authContext'
-import { EditButton } from '../../components/StyledButtons'
 import { CityTableHeader } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
 import FlatFilter from '../../components/Forms/FlatFilter'
+import EditButton from '../../components/EditButton/EditButton'
 
 interface Props {
   _id: string
@@ -111,14 +111,7 @@ const CityDetail = ({ _id }: Props) => {
               <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name}</Heading2Centered>
             </CityTableHeader>
             <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice} callback={fetchNewPage} count={flatCount} pageLimit={pageLimit} flatsLoading={flatsLoading}/>
-            {
-              isAuthenticated && user.isAdmin &&
-              <Link href={`/edit/city/${_id}`}>
-                <EditButton>
-                  <i className='far fa-edit fa-2x'/>
-                </EditButton>
-              </Link>
-            }
+            { isAuthenticated && user.isAdmin && <EditButton href={`/edit/city/${_id}`}/>}
           </GeneralContainer>
       }
     </>
