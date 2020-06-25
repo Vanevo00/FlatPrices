@@ -6,6 +6,7 @@ import { Heading2Centered } from '../../../components/StyledHeadings'
 import { Flat } from '../../../../Types/Flat'
 import AuthContext from '../../../context/auth/authContext'
 import FlatForm from '../../../components/Forms/FlatForm'
+import Router from 'next/router'
 
 interface Props {
   _id: string
@@ -16,6 +17,17 @@ const EditFlat = ({ _id }: Props) => {
   const [successMessage, setSuccessMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [flat, setFlat] = useState<Flat>()
+
+  const checkIfAuthorised = () => {
+    if (!authContext.userLoading && flat) {
+      if (!authContext.user) {
+        Router.push('/')
+      }
+      if (!authContext.user.isAdmin && authContext.user._id !== flat.addedBy) {
+        Router.push('/')
+      }
+    }
+  }
 
   const fetchFlat = async () => {
     setIsLoading(true)
@@ -33,6 +45,10 @@ const EditFlat = ({ _id }: Props) => {
       console.log(err)
     }
   }
+
+  useEffect(() => {
+    checkIfAuthorised()
+  }, [authContext, flat])
 
   useEffect(() => {
     fetchFlat()

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Spinner from '../../../components/Spinner/Spinner'
 import { GeneralContainer } from '../../../components/StyledContainers'
