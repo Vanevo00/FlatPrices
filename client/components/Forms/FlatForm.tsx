@@ -16,6 +16,7 @@ import ExternalImageUpload from './ExternalImageUpload'
 import { ButtonList } from './StyledFlatFilter'
 import { Heading3UnderlineColor } from '../StyledHeadings'
 import { Flat } from '../../../Types/Flat'
+import machineReadableDate from '../../utils/machineReadableDate'
 
 interface Props {
   buttonText: string
@@ -80,19 +81,19 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage, flat }: P
         rooms: flat.rooms || undefined,
         floor: flat.floor || undefined,
         contact: flat.contact || undefined,
-        visited: flat.visited || undefined,
+        visited: machineReadableDate(flat.visited) || undefined,
         lift: flat.lift || undefined,
         parking: flat.parking || undefined,
         balcony: flat.balcony || undefined,
         reasonForSelling: flat.reasonForSelling || undefined,
         ownershipStructure: flat.ownershipStructure || undefined,
         houseOwnershipStructure: flat.houseOwnershipStructure || undefined,
-        lastSale: flat.lastSale || undefined,
+        lastSale: machineReadableDate(flat.lastSale) || undefined,
         ownershipType: flat.ownershipType || undefined,
         monthlyExpensesAssociation: flat.monthlyExpensesAssociation || undefined,
         monthlyExpensesOther: flat.monthlyExpensesOther || undefined,
-        renovated: flat.renovated || undefined,
-        houseRenovated: flat.houseRenovated || undefined,
+        renovated: machineReadableDate(flat.renovated) || undefined,
+        houseRenovated: machineReadableDate(flat.houseRenovated) || undefined,
         garden: flat.garden || undefined,
         heating: flat.heating || undefined,
         publicTransport: flat.publicTransport || undefined,
