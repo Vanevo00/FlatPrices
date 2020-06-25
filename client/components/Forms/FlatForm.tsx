@@ -281,7 +281,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
           <HalfRow>
             <FormInputLabel>Disposition</FormInputLabel>
             <FormSelect name='rooms' value={inputValues.rooms} onChange={onChange}>
-              <option value='' disabled>Select disposition of the flat..</option>
+              <option>Select disposition of the flat..</option>
               <option value='1+kk'>1+kk</option>
               <option value='1+1'>1+1</option>
               <option value='2+kk'>2+kk</option>
@@ -325,7 +325,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage }: Props) 
           <HalfRow>
             <FormInputLabel>OwnershipType</FormInputLabel>
             <FormSelect name='ownershipType' value={inputValues.ownershipType} onChange={onChange}>
-              <option value={undefined} disabled>Select ownership type..</option>
+              <option>Select ownership type..</option>
               <option value='personal'>personal (osobní)</option>
               <option value='cooperative'>cooperative (družstevní)</option>
             </FormSelect>
