@@ -42,6 +42,18 @@ const EditCity = ({_id}: Props) => {
     setIsLoading(false)
   }
 
+  const onSubmit = async (data) => {
+    try {
+      const cityData = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/edit/${_id}`, data)
+      setSuccessMessage(`${cityData.data.name} successfully edited`)
+      setTimeout(() => {
+        Router.push(`/city/${cityData.data._id}`)
+      }, 3000)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const sendEditCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, realityMatScraper, idnesScraper, rentScraper, externalImageLink, image }: EditCityInputs) => {
     try {
       const formData = new FormData()
@@ -86,7 +98,7 @@ const EditCity = ({_id}: Props) => {
       <>
         <GeneralContainer>
           <Heading2Centered>Edit City: {city.name}</Heading2Centered>
-          <CityForm buttonText='Edit City' onSubmit={sendEditCity} successMessage={successMessage} city={city}/>
+          <CityForm buttonText='Edit City' onSubmit={onSubmit} successMessage={successMessage} city={city}/>
           <DeleteButton name={city.name} callback={deleteCity}/>
         </GeneralContainer>
       </>

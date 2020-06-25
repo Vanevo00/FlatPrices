@@ -23,28 +23,12 @@ interface AddCityInputs {
 const AddCity = () => {
   const [successMessage, setSuccessMessage] = useState('')
 
-  const sendAddCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, realityMatScraper, idnesScraper, rentScraper, externalImageLink, image }: AddCityInputs) => {
+  const onSubmit = async (data) => {
     try {
-      const formData = new FormData()
-      formData.append('image', image)
-      formData.append('name', name)
-      formData.append('srealityScraper', srealityScraper)
-      formData.append('nextRealityScraper', nextRealityScraper)
-      formData.append('remaxScraper', remaxScraper)
-      formData.append('svobodaWilliamsScraper', svobodaWilliamsScraper)
-      formData.append('realityMatScraper', realityMatScraper)
-      formData.append('idnesScraper', idnesScraper)
-      formData.append('rentScraper', rentScraper)
-      formData.append('externalImageLink', externalImageLink)
-      formData.append('country', country)
-      const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/`, formData, {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      })
-      setSuccessMessage(`${data.data.name} successfully added`)
+      const cityData = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/`, data)
+      setSuccessMessage(`${cityData.data.name} successfully added`)
       setTimeout(() => {
-        Router.push(`/city/${data.data._id}`)
+        Router.push(`/city/${cityData.data._id}`)
       }, 3000)
     } catch (err) {
       console.log(err)
@@ -55,7 +39,7 @@ const AddCity = () => {
     <>
       <GeneralContainer>
         <Heading2Centered>Add New City</Heading2Centered>
-        <CityForm buttonText='Add City' onSubmit={sendAddCity} successMessage={successMessage}/>
+        <CityForm buttonText='Add City' onSubmit={onSubmit} successMessage={successMessage}/>
       </GeneralContainer>
     </>
   )
