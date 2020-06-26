@@ -54,34 +54,6 @@ const EditCity = ({_id}: Props) => {
     }
   }
 
-  const sendEditCity = async ({ name, country, srealityScraper, nextRealityScraper, remaxScraper, svobodaWilliamsScraper, realityMatScraper, idnesScraper, rentScraper, externalImageLink, image }: EditCityInputs) => {
-    try {
-      const formData = new FormData()
-      formData.append('image', image)
-      formData.append('name', name)
-      formData.append('srealityScraper', srealityScraper)
-      formData.append('nextRealityScraper', nextRealityScraper)
-      formData.append('remaxScraper', remaxScraper)
-      formData.append('svobodaWilliamsScraper', svobodaWilliamsScraper)
-      formData.append('realityMatScraper', realityMatScraper)
-      formData.append('idnesScraper', idnesScraper)
-      formData.append('rentScraper', rentScraper)
-      formData.append('externalImageLink', externalImageLink)
-      formData.append('country', country)
-      const data = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/edit/${_id}`, formData, {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      })
-      setSuccessMessage(`${data.data.name} successfully edited`)
-      setTimeout(() => {
-        Router.push(`/city/${data.data._id}`)
-      }, 3000)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   const deleteCity = async () => {
     await axios.delete(`${window.location.protocol}//${window.location.hostname}:4000/api/cities/${_id}`)
     Router.push('/')
