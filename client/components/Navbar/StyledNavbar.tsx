@@ -70,7 +70,7 @@ export const UserMenuItem = styled.div<Props>`
   cursor: pointer;
 `
 
-export const NavItemContainer = styled.div`
+export const NavItemsContainer = styled.div`
   position: absolute;
   top: 70px;
   height: 70px;
@@ -79,6 +79,24 @@ export const NavItemContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`
+
+export const NavItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${props => props.theme.colors.main};
+  
+  p {
+    opacity: 0;
+    transition: .4s;
+  }
+  
+  &:hover {
+    p {
+      opacity: 1;
+    }
+  }
 `
 
 export const NavItem = styled.a<Props>`
