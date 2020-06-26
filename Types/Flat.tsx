@@ -28,10 +28,11 @@ export interface Flat {
   ownershipType?: string
   monthlyExpensesAssociation?: number
   monthlyExpensesOther?: number
-  reconstructed?: string
-  houseReconstructed?: string
+  renovated?: string
+  houseRenovated?: string
   parking?: boolean
   balcony?: boolean
+  garden?: boolean
   heating?: string
   publicTransport?: string
   mortgaged?: boolean

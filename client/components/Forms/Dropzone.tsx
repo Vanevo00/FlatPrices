@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { DragNDrop } from './StyledForm'
+import { DragNDrop, DropzoneContainer, ImagePreview, ImagePreviewContainer, UploadContainer } from './StyledForm'
+import axios from 'axios'
 
 interface Props {
   activeDragText: string
@@ -8,11 +9,23 @@ interface Props {
   multipleFiles: boolean
   callback: Function
   maxSize?: number
+  imagePreview?: string
 }
 
-const Dropzone = ({activeDragText, emptyZoneText, multipleFiles, maxSize = 10000000, callback }: Props) => {
-  const onDrop = useCallback(acceptedFiles => {
-    callback(acceptedFiles)
+const Dropzone = ({ activeDragText, emptyZoneText, multipleFiles, maxSize = 10000000, callback, imagePreview }: Props) => {
+  const [imageLoading, setImageLoading] = useState(false)
+
+  const onDrop = useCallback(async (acceptedFiles) => {
+    setImageLoading(true)
+    const formData = new FormData()
+    formData.append('image', acceptedFiles[0])
+    const response = await axios.post(`${window.location.protocol}//${window.location.hostname}:4000/api/images`, formData, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+    callback(response.data)
+    setImageLoading(false)
   }, [])
 
   const {getRootProps, getInputProps, acceptedFiles, isDragActive} = useDropzone({
@@ -39,10 +52,25 @@ const Dropzone = ({activeDragText, emptyZoneText, multipleFiles, maxSize = 10000
   }
 
   return (
-    <DragNDrop {...getRootProps()}>
-      <input {...getInputProps()}/>
-      {renderDropzoneText()}
-    </DragNDrop>
+    <DropzoneContainer>
+      <UploadContainer>
+        <DragNDrop {...getRootProps()}>
+          <input {...getInputProps()}/>
+          {renderDropzoneText()}
+        </DragNDrop>
+      </UploadContainer>
+      <ImagePreviewContainer>
+        {imageLoading && <p>Uploading image...</p>}
+        {
+          imagePreview && !imageLoading &&
+          <ImagePreview src={imagePreview} alt='image preview'/>
+        }
+        {
+          !imagePreview && !imageLoading &&
+          <ImagePreview src='https://www.agora-gallery.com/advice/wp-content/uploads/2015/10/image-placeholder-300x200.png' alt='no image'/>
+        }
+      </ImagePreviewContainer>
+    </DropzoneContainer>
   )
 }
 

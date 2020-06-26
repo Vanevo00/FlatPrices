@@ -4,6 +4,7 @@ import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
 import NeighbourhoodForm from '../../components/Forms/NeighbourhoodForm'
+import { limitToLoggedIn } from '../../utils/limitToLoggedIn'
 
 const AddNeighbourhood = () => {
   const [successMessage, setSuccessMessage] = useState('')
@@ -32,4 +33,4 @@ const AddNeighbourhood = () => {
   )
 }
 
-export default AddNeighbourhood
+export default limitToLoggedIn(AddNeighbourhood)

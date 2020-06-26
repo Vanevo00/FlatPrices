@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { Button } from '../StyledButtons'
+import { ButtonListItem } from './StyledFlatFilter'
 
 interface Props {
   full?: boolean
@@ -15,7 +17,7 @@ interface ConfirmationProps {
 }
 
 export const FormContainer = styled.div`
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
   border: solid 2px ${props => props.theme.colors.main};
   border-radius: 4px;
@@ -25,20 +27,44 @@ export const FormContainer = styled.div`
   flex-wrap: wrap;
 `
 
-export const FormRow = styled.div`
+export const FullRow = styled.div`
   width: 100%;
   margin-bottom: 1rem;
+  padding: 0 .25rem;
   color: ${props => props.theme.colors.main};
+  position: relative;
   
   input:focus {
     outline: none;
   }
 `
 
+export const HalfRow = styled(FullRow)`
+ width: 50%;
+`
+
+export const ThirdRow = styled(FullRow)`
+  width: 33.3%;
+`
+
+export const FormInputLabel = styled.label`
+  width: 100%;
+`
+
+export const FormInputLabelRequired = styled(FormInputLabel)`
+  font-weight: bold;
+  
+  &::after {
+    content: ' *';
+    color: ${props => props.theme.colors.danger};
+  }
+`
+
 export const FormInput = styled.input<Props>`
-  border: none;
-  border-bottom: 1px solid ${props => props.theme.colors.lightGray};
-  width: ${props => props.full ? '100%' : '48%'};
+  border: 1px solid ${props => props.theme.colors.lightGray};
+  padding: .25rem;
+  min-height: 2.1rem;
+  width: ${props => props.full ? '100%' : '100%'};
   margin-right: ${props => props.full ? '0' : props.last ? '0' : '1rem'};
   font-size: ${props => props.theme.fontSizes.s};
   color: ${props => props.theme.colors.main};
@@ -46,6 +72,21 @@ export const FormInput = styled.input<Props>`
   &::placeholder {
     font-size: ${props => props.theme.fontSizes.s};
   }
+`
+
+export const FormTextarea = styled.textarea`
+  width: 100%;
+  color: ${props => props.theme.colors.main};
+  border: 1px solid ${props => props.theme.colors.lightGray};
+  font-size: ${props => props.theme.fontSizes.s};
+  padding: .25rem;
+  min-height: 5rem;
+`
+
+export const FormInputError = styled.p`
+ color: ${props => props.theme.colors.danger};
+ font-size: ${props => props.theme.fontSizes.xs};
+ position: absolute;
 `
 
 export const FormButton = styled.button`
@@ -83,9 +124,29 @@ export const FormErrorMessage = styled(FormSuccessMessage)`
 
 export const FormSelect = styled.select`
   width: 100%;
-  height: 30px;
+  height: 2.1rem;
   font-size: ${props => props.theme.fontSizes.s};
   color: ${props => props.theme.colors.main};
+`
+
+export const DropzoneContainer = styled.div`
+  display: flex;
+`
+
+export const UploadContainer = styled.div`
+  width: 70%;
+`
+
+export const ImagePreviewContainer = styled.div`
+ width: 30%;
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+`
+
+export const ImagePreview = styled.img`
+  max-width: 100%;
+  max-height: 100px;
 `
 
 export const DragNDrop = styled.div`
@@ -125,4 +186,30 @@ export const ConfirmDeleteIcons = styled.div<ConfirmationProps>`
   i {
     margin-right: .5rem;
   }
+`
+
+export const PricePerMeter = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding-top: 1rem;
+  justify-content: center;
+  align-items: center;
+`
+
+export const ExternalImageInputContainer = styled.div`
+ width: 100%;
+ display: flex;
+`
+
+export const UploadButton = styled(Button)`
+  width: 200px;
+  height: auto;
+  padding: .5rem;
+`
+
+export const ButtonListItemForm = styled(ButtonListItem)`
+ width: auto;
+ min-width: 60px;
+ padding: .5rem;
 `

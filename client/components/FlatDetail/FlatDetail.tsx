@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Flat } from '../../../Types/Flat'
 import Spinner from '../Spinner/Spinner'
 import {
@@ -6,6 +6,8 @@ import {
 } from './StyledFlatDetail'
 import FlatMainDescription from './FlatMainDescription'
 import FlatPriceDescription from './FlatPriceDescription'
+import EditButton from '../EditButton/EditButton'
+import AuthContext from '../../context/auth/authContext'
 
 interface Props {
   flat: Flat
@@ -13,6 +15,15 @@ interface Props {
 
 
 const FlatDetail = ({ flat }: Props) => {
+  const {
+    isAuthenticated,
+    user
+  } = useContext(AuthContext)
+
+  const isEntitledToEdit = () => {
+    return user.isAdmin || user._id === flat.addedBy
+  }
+
   if (!flat) {
     return <Spinner/>
   }
@@ -23,6 +34,7 @@ const FlatDetail = ({ flat }: Props) => {
         href={flat.link} target='_blank'>Go to listing</ListingLink>]</FlatHeading>
       <FlatMainDescription flat={flat}/>
       <FlatPriceDescription flat={flat}/>
+      { isAuthenticated && isEntitledToEdit() && <EditButton href={`/edit/flat/${flat._id}`}/>}
     </>
   )
 }

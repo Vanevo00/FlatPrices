@@ -3,22 +3,6 @@ import express, { Request, Response } from 'express'
 const { validationResult, check } = require('express-validator')
 const router = express.Router()
 
-const multer = require('multer')
-const path = require('path')
-
-const cityStorage = multer.diskStorage(
-  {
-    destination: 'client/public/city',
-    filename: ( req, file, cb ) => {
-      //get rid of diacritics, file extension, replace spaces with underscore
-      const normalizedName = file.originalname.split(' ').join('_').normalize("NFD").replace(/[\u0300-\u036f]/g, '').replace(/\.[^/.]+$/, '')
-      cb(null, normalizedName + Date.now() + path.extname(file.originalname));
-    }
-  }
-)
-
-const cityUpload = multer({ storage: cityStorage })
-
 const City = require('../models/City')
 
 
@@ -73,7 +57,6 @@ router.get('/byExactName/:name', async (req: Request, res: Response) => {
 // @route  POST  api/cities
 // @desc   Add new city
 router.post('/', [
-  cityUpload.single('image'),
   check('name', 'city name is required').not().isEmpty(),
   check('country', 'country name is required').not().isEmpty()
 ], async (req: any, res: Response) => {
@@ -92,15 +75,9 @@ router.post('/', [
     realityMatScraper,
     idnesScraper,
     rentScraper,
-    externalImageLink
+    mainImageLink
   } = req.body
 
-  let filename = ''
-  if (req.file) {
-    filename = `/city/${req.file.filename}`
-  } else if (externalImageLink) {
-    filename = externalImageLink
-  }
 
   try {
     const newCity = new City({
@@ -113,7 +90,7 @@ router.post('/', [
       realityMatScraper,
       idnesScraper,
       rentScraper,
-      mainImageLink: filename
+      mainImageLink
     })
 
     const city = await newCity.save()
@@ -128,7 +105,6 @@ router.post('/', [
 // @route  POST  api/cities/edit/:_id
 // @desc   Edit existing city
 router.post('/edit/:_id', [
-  cityUpload.single('image'),
   check('name', 'city name is required').not().isEmpty(),
   check('country', 'country name is required').not().isEmpty()
 ], async (req: any, res: Response) => {
@@ -147,15 +123,8 @@ router.post('/edit/:_id', [
     realityMatScraper,
     idnesScraper,
     rentScraper,
-    externalImageLink
+    mainImageLink
   } = req.body
-
-  let filename = ''
-  if (req.file) {
-    filename = `/city/${req.file.filename}`
-  } else if (externalImageLink) {
-    filename = externalImageLink
-  }
 
   try {
     const editedCity = await City.findOne({ _id: req.params._id })
@@ -163,7 +132,7 @@ router.post('/edit/:_id', [
     editedCity.country = country
     editedCity.srealityScraper = srealityScraper
     editedCity.rentScraper = rentScraper
-    editedCity.mainImageLink = filename
+    editedCity.mainImageLink = mainImageLink
     editedCity.nextRealityScraper = nextRealityScraper
     editedCity.realityMatScraper = realityMatScraper
     editedCity.idnesScraper = idnesScraper
