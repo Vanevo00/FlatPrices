@@ -15,6 +15,8 @@ interface Props {
   flat: Flat
 }
 
+const COSTS_ESTIMATE = 30
+
 const FlatPriceDescription = ( { flat }: Props ) => {
   const [pricesNeighbourhood, setPricesNeighbourhood] = useState<AvgPrice>()
   const [pricesCity, setPricesCity] = useState<AvgPrice>()
@@ -88,26 +90,18 @@ const FlatPriceDescription = ( { flat }: Props ) => {
     } else {
       const medianRent = roomsNotFound || relevantRent.amounts.length < 5 ? rents.medianRentPerMeter * flat.squareMeters : relevantRent.median
       const yearlyReturn = medianRent * 12
-      const estimatedYearlyReturnPercentage = parseFloat((((yearlyReturn - (flat.monthlyExpensesAssociation || 0) - (flat.monthlyExpensesOther || 0)) / flat.priceCZK) * 100).toFixed(1))
+      const monthlyExpensesAssociation = flat.monthlyExpensesAssociation || (COSTS_ESTIMATE * flat.squareMeters)
+      const estimatedYearlyReturnPercentage = parseFloat((((yearlyReturn - monthlyExpensesAssociation - (flat.monthlyExpensesOther || 0)) / flat.priceCZK) * 100).toFixed(1))
       const estimatedReturnInYears = (100 / estimatedYearlyReturnPercentage).toFixed(1)
-      const medianApartmentYearlyReturnPercentage = parseFloat(((yearlyReturn - (flat.monthlyExpensesAssociation || 0) - (flat.monthlyExpensesOther || 0)) / (pricesCity.medianPrice * flat.squareMeters) * 100).toFixed(1))
+      const medianApartmentYearlyReturnPercentage = parseFloat(((yearlyReturn - monthlyExpensesAssociation - (flat.monthlyExpensesOther || 0)) / (pricesCity.medianPrice * flat.squareMeters) * 100).toFixed(1))
       const returnDifference = estimatedYearlyReturnPercentage - medianApartmentYearlyReturnPercentage
-      console.log('medianApartmentYearlyReturnPercentage', medianApartmentYearlyReturnPercentage)
-      console.log('returnDifference', returnDifference)
-      finalText += `Median rent for a ${flat.rooms} flat in ${flat.city.name} is CZK ${parseInt(medianRent).toLocaleString()},- monthly and CZK ${yearlyReturn.toLocaleString()},- yearly. The flat is estimated to return ${estimatedYearlyReturnPercentage}% per year and its purchase price should return in ${estimatedReturnInYears} years.`
+      finalText += `Median rent for a ${flat.rooms} flat in ${flat.city.name} is CZK ${parseInt(medianRent).toLocaleString()},- monthly and CZK ${yearlyReturn.toLocaleString()},- yearly.`
+      finalText += ` The estimated costs amount to CZK ${(monthlyExpensesAssociation + (flat.monthlyExpensesOther || 0)).toLocaleString()} per month${!flat.monthlyExpensesAssociation ? ` (an estimate of CZK ${COSTS_ESTIMATE}/m2 was used as there are no data available)` : ''}.`
+      finalText += ` The flat is estimated to return ${estimatedYearlyReturnPercentage}% per year and its purchase price should return in ${estimatedReturnInYears} years.`
       finalText += ` Compared to a median flat, the yearly return is ${(Math.abs(returnDifference)).toFixed(1)}% ${Math.sign(returnDifference) === 1 ? 'higher' : 'lower'}.`
 
       if (roomsNotFound || relevantRent.amounts.length < 5) {
         finalText +=  ' Please note that median rent per meter was used to analyze the rents as there\'s not enough data available for this disposition. Thus, the analysis may be highly inaccurate.'
-      }
-
-      if (!flat.monthlyExpensesAssociation) {
-        if (roomsNotFound || relevantRent.amounts.length < 5) {
-          finalText += ' Please also note that '
-        } else {
-          finalText += ' Please note that '
-        }
-        finalText += 'there is currently no data about the monthly contribution to the Association of Unit Owners (Sdružení Vlastníků Jednotek) for this flat. Therefore, the overall return will most probably be a litle lower.'
       }
     }
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Flat } from '../../../Types/Flat'
 import Spinner from '../Spinner/Spinner'
 import {
@@ -6,8 +6,8 @@ import {
 } from './StyledFlatDetail'
 import FlatMainDescription from './FlatMainDescription'
 import FlatPriceDescription from './FlatPriceDescription'
-import EditButton from '../EditButton/EditButton'
 import AuthContext from '../../context/auth/authContext'
+import EditButton from '../EditButton/EditButton'
 
 interface Props {
   flat: Flat
