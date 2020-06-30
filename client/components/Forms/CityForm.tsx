@@ -36,7 +36,7 @@ const CityForm = ({ buttonText, onSubmit, successMessage, city }: Props) => {
   const [mainImageLink, setMainImageLink] = useState<string>(city?.mainImageLink || undefined)
 
   const handleImageUpload = (path: string) => {
-    setMainImageLink(path)
+    setMainImageLink(`${window.location.protocol}//${window.location.hostname}:4000/images/${path}`)
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -142,7 +142,7 @@ const FlatForm = ({ buttonText, onSubmit, authContext, successMessage, flat }: P
   }
 
   const handleImageUpload = (path: string) => {
-    setMainImage(path)
+    setMainImage(`${window.location.protocol}//${window.location.hostname}:4000/images/${path}`)
   }
 
   const onSubmitForm = () => {

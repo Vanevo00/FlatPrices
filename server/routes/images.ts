@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { Response } from 'express'
 const router = express.Router()
 const multer = require('multer')
 const sharp = require('sharp')
@@ -18,9 +18,9 @@ router.post('/', [imageUpload.single('image')], async (req: any, res: Response) 
       .resize(640, 450)
       .toFormat("jpeg")
       .jpeg({ quality: 90 })
-      .toFile(`client/public/images/${normalizedName}.jpg`)
+      .toFile(`server/public/images/${normalizedName}.jpg`)
 
-    res.send(`/images/${normalizedName}.jpg`)
+    res.send(`${normalizedName}.jpg`)
   } else {
     res.send('file not present')
   }
@@ -33,7 +33,7 @@ router.post('/external', async (req: any, res: Response) => {
     const imageLinkSplit = req.body.link.split('/')
     const imageNameSplit = imageLinkSplit[imageLinkSplit.length - 1].split('.')
     const imageNameWithTimestamp = `${imageNameSplit[0]}${Date.now()}.${imageNameSplit[1]}`
-    const imagePath = `client/public/images/${imageNameWithTimestamp}`
+    const imagePath = `server/public/images/${imageNameWithTimestamp}`
     const file = await axios.get(req.body.link, {
       responseType: 'arraybuffer'
     })
@@ -44,7 +44,7 @@ router.post('/external', async (req: any, res: Response) => {
       .jpeg({ quality: 90 })
       .toFile(imagePath)
 
-    res.send(`/images/${imageNameWithTimestamp}`)
+    res.send(imageNameWithTimestamp)
   } catch (err) {
     res.send(err)
   }

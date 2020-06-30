@@ -2,6 +2,8 @@ version: '3'
 services:
   web:
     build: .
+    volumes:
+      - ./client/public/images:/usr/src/app/client/public/images
     ports:
     - "3999:3999"
     - "4000:4000"

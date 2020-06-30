@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express'
+import path from 'path'
 const connectDB = require('../config/db')
 const autoScraper = require('./scraper/autoScraper')
 
@@ -24,6 +25,7 @@ app.use('/api/search', require('./routes/search'))
 app.use('/api/users', require('./routes/users'))
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/images', require('./routes/images'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 autoScraper()
 
