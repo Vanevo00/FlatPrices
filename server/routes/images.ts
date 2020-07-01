@@ -3,7 +3,7 @@ const router = express.Router()
 const multer = require('multer')
 const sharp = require('sharp')
 const axios = require ('axios')
-var imageStorage = multer.memoryStorage()
+const imageStorage = multer.memoryStorage()
 
 const imageUpload = multer({ storage: imageStorage })
 
@@ -18,7 +18,7 @@ router.post('/', [imageUpload.single('image')], async (req: any, res: Response) 
       .resize(640, 450)
       .toFormat("jpeg")
       .jpeg({ quality: 90 })
-      .toFile(`server/public/images/${normalizedName}.jpg`)
+      .toFile(`build/server/public/images/${normalizedName}.jpg`)
 
     res.send(`${normalizedName}.jpg`)
   } else {
@@ -33,7 +33,7 @@ router.post('/external', async (req: any, res: Response) => {
     const imageLinkSplit = req.body.link.split('/')
     const imageNameSplit = imageLinkSplit[imageLinkSplit.length - 1].split('.')
     const imageNameWithTimestamp = `${imageNameSplit[0]}${Date.now()}.${imageNameSplit[1]}`
-    const imagePath = `server/public/images/${imageNameWithTimestamp}`
+    const imagePath = `build/server/public/images/${imageNameWithTimestamp}`
     const file = await axios.get(req.body.link, {
       responseType: 'arraybuffer'
     })

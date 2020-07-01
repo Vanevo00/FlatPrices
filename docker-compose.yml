@@ -4,6 +4,7 @@ services:
     build: .
     volumes:
       - ./client/public/images:/usr/src/app/client/public/images
+      - ./server/public:/usr/src/app/build/server/public
     ports:
     - "3999:3999"
     - "4000:4000"
