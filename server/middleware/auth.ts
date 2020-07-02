@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { Response, NextFunction } from 'express'
 
 const jwt = require('jsonwebtoken')
 const config = require('config')

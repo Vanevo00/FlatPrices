@@ -8,6 +8,9 @@ const Flat = require('../models/Flat')
 const Neighbourhood = require('../models/Neighbourhood')
 const sortHighestToLowest = require('../utils/sortHighestToLowest')
 const applyFilters = require('../utils/applyFilters')
+const auth = require('../middleware/auth')
+
+const User = require('../models/User')
 
 // @route  GET api/flats
 // @desc   Get all flats
@@ -382,8 +385,12 @@ router.put('/:_id', async (req: any, res: Response) => {
 
 // @route  DELETE api/flats
 // @desc   Delete Flat
-router.delete('/:_id', async (req: Request, res: Response) => {
+router.delete('/:_id', auth, async (req: any, res: Response) => {
   try {
+    const user = await User.findById(req.user.id).select('-password')
+    if (!user.isAdmin) {
+      return res.send('unauthorised')
+    }
     await Flat.deleteOne({ _id: req.params._id })
     res.send('delete successful')
   } catch (err) {
