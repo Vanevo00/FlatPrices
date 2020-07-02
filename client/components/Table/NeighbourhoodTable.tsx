@@ -13,13 +13,15 @@ import {
   TableRowHeader
 } from './StyledTable'
 import ConfirmDelete from './ConfirmDelete'
+import { User } from '../../../Types/User'
 
 interface Props {
   flats: Flat[]
+  user: User
   medianPrice: number
 }
 
-const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
+const NeighbourhoodTable = ({ flats, user, medianPrice }: Props) => {
   const [selectedForDelete, setSelectedForDelete] = useState('')
 
   const handleDeleteClick = (_id: string) => {
@@ -70,9 +72,12 @@ const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
         <TableItemHeader width={3}>
           <i className="fas fa-globe-europe"/>
         </TableItemHeader>
-        <TableItemHeader width={3} last={true}>
-          <i className="fas fa-trash"/>
-        </TableItemHeader>
+        {
+          user && user.isAdmin &&
+          <TableItemHeader width={3} last={true}>
+            <i className="fas fa-trash"/>
+          </TableItemHeader>
+        }
       </TableRowHeader>
 
       {
@@ -120,10 +125,13 @@ const NeighbourhoodTable = ({ flats, medianPrice }: Props) => {
                   <i className="fas fa-globe-europe"/>
                 </StyledLink>
               </TableItemButton>
-              <TableItemDeleteButton width={3} last={true} onClick={() => handleDeleteClick(flat._id)}>
-                <i className="fas fa-trash"/>
-                <ConfirmDelete address={flat.address} flatId={flat._id} selected={flat._id === selectedForDelete} confirmDelete={confirmDelete}/>
-              </TableItemDeleteButton>
+              {
+                user && user.isAdmin &&
+                <TableItemDeleteButton width={3} last={true} onClick={() => handleDeleteClick(flat._id)}>
+                  <i className="fas fa-trash"/>
+                  <ConfirmDelete address={flat.address} flatId={flat._id} selected={flat._id === selectedForDelete} confirmDelete={confirmDelete}/>
+                </TableItemDeleteButton>
+              }
             </TableRow>
           )
         })

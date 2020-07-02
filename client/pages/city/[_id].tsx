@@ -110,7 +110,16 @@ const CityDetail = ({ _id }: Props) => {
             <CityTableHeader>
               <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name}</Heading2Centered>
             </CityTableHeader>
-            <CityTable isLoading={isCityTableLoading} flats={cityFlats} medianPrice={avgPrice.medianPrice} callback={fetchNewPage} count={flatCount} pageLimit={pageLimit} flatsLoading={flatsLoading}/>
+            <CityTable
+              isLoading={isCityTableLoading}
+              flats={cityFlats}
+              user={user}
+              medianPrice={avgPrice.medianPrice}
+              callback={fetchNewPage}
+              count={flatCount}
+              pageLimit={pageLimit}
+              flatsLoading={flatsLoading}
+            />
             { isAuthenticated && user.isAdmin && <EditButton href={`/edit/city/${_id}`}/>}
           </GeneralContainer>
       }

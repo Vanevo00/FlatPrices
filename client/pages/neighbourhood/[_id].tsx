@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
 import { StyledAvgPriceTable, PriceDescription, PriceNumber } from '../../components/Table/StyledAveragePriceTable'
 import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
 import NeighbourhoodTable from '../../components/Table/NeighbourhoodTable'
 import { GeneralContainer } from '../../components/StyledContainers'
+import AuthContext from '../../context/auth/authContext'
 
 interface Props {
   _id: string
@@ -22,6 +23,10 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
     largeFlatPricesMedian: 0,
     smallFlatPricesMedian: 0
   })
+
+  const {
+    user
+  } = useContext(AuthContext)
 
   const fetchData = async () => {
     setIsLoading(true)
@@ -65,7 +70,11 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
           neighbourhood && neighbourhoodFlats && avgPrice &&
             <>
               <Heading2Centered>{neighbourhoodFlats.length} Flats in {neighbourhood.name}</Heading2Centered>
-              <NeighbourhoodTable flats={neighbourhoodFlats} medianPrice={avgPrice.medianPrice}/>
+              <NeighbourhoodTable
+                flats={neighbourhoodFlats}
+                user={user}
+                medianPrice={avgPrice.medianPrice}
+              />
             </>
         }
       </GeneralContainer>

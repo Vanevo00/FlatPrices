@@ -16,9 +16,11 @@ import ConfirmDelete from './ConfirmDelete'
 import Spinner from '../Spinner/Spinner'
 import Paginator from './Paginator'
 import increasePopularity from '../../utils/icreasePopularity'
+import { User } from '../../../Types/User'
 
 interface Props {
   flats: Flat[]
+  user: User
   medianPrice: number
   isLoading: boolean
   pageLimit: number
@@ -27,7 +29,7 @@ interface Props {
   flatsLoading: boolean
 }
 
-const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, flatsLoading }: Props) => {
+const CityTable = ({ flats, user, medianPrice, isLoading, pageLimit, count, callback, flatsLoading }: Props) => {
   const [selectedForDelete, setSelectedForDelete] = useState('')
 
   const handleDeleteClick = (_id: string) => {
@@ -80,9 +82,12 @@ const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, 
         <TableItemHeader width={3}>
           <i className="fas fa-globe-europe"/>
         </TableItemHeader>
-        <TableItemHeader width={3} last={true}>
-          <i className="fas fa-trash"/>
-        </TableItemHeader>
+        {
+          user && user.isAdmin &&
+          <TableItemHeader width={3} last={true}>
+            <i className="fas fa-trash"/>
+          </TableItemHeader>
+        }
       </TableRowHeader>
 
       {
@@ -135,10 +140,13 @@ const CityTable = ({ flats, medianPrice, isLoading, pageLimit, count, callback, 
                   <i className="fas fa-globe-europe"/>
                 </StyledLink>
               </TableItemButton>
-              <TableItemDeleteButton width={3} last={true} onClick={() => handleDeleteClick(flat._id)}>
-                <i className="fas fa-trash"/>
-                <ConfirmDelete address={flat.address} flatId={flat._id} selected={flat._id === selectedForDelete} confirmDelete={confirmDelete}/>
-              </TableItemDeleteButton>
+              {
+                user && user.isAdmin &&
+                <TableItemDeleteButton width={3} last={true} onClick={() => handleDeleteClick(flat._id)}>
+                  <i className="fas fa-trash"/>
+                  <ConfirmDelete address={flat.address} flatId={flat._id} selected={flat._id === selectedForDelete} confirmDelete={confirmDelete}/>
+                </TableItemDeleteButton>
+              }
             </TableRow>
           )
         })
