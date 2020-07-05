@@ -92,7 +92,7 @@ const FlatMainDescription = ({ flat }: Props) => {
             Created / Scraped
           </Description>
           <Data last={true}>
-            {formatDate(flat.createdAt)}
+            {formatDate(flat.createdAt, true)}
           </Data>
         </Row>
       </FlatInfoContainer>

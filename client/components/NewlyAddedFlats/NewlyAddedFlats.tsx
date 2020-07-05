@@ -111,7 +111,7 @@ const NewlyAddedFlats = () => {
                     {flat.pricePerMeter.toLocaleString()} CZK
                   </TableItem>
                   <TableItem width={16}>
-                    {formatDate(flat.createdAt)}
+                    {formatDate(flat.createdAt, true)}
                   </TableItem>
                   <TableItemButton width={10}>
                     <StyledLink href={`flat/${flat._id}`} target='_blank' onClick={() => increasePopularity(flat.city._id)}>
