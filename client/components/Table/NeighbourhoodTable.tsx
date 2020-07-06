@@ -14,6 +14,7 @@ import {
 } from './StyledTable'
 import ConfirmDelete from './ConfirmDelete'
 import { User } from '../../../Types/User'
+import formatDate from '../../utils/formatDate'
 
 interface Props {
   flats: Flat[]
@@ -63,10 +64,10 @@ const NeighbourhoodTable = ({ flats, user, medianPrice }: Props) => {
           <i className="fas fa-long-arrow-alt-up"/>
           <i className="fas fa-long-arrow-alt-down"></i>
         </TableItemHeader>
-        <TableItemHeader width={10}>
+        <TableItemHeader width={12}>
           Date Added
         </TableItemHeader>
-        <TableItemHeader width={7}>
+        <TableItemHeader width={5}>
           Detail
         </TableItemHeader>
         <TableItemHeader width={3}>
@@ -112,10 +113,10 @@ const NeighbourhoodTable = ({ flats, user, medianPrice }: Props) => {
                   : <ArrowDown className="fas fa-long-arrow-alt-down"/>}
                 {priceComparison.toLocaleString()} CZK
               </TableItem>
-              <TableItem width={10}>
-                {date}
+              <TableItem width={12}>
+                {formatDate(flat.createdAt, true)}
               </TableItem>
-              <TableItemButton width={7}>
+              <TableItemButton width={5}>
                 <StyledLink href={`/flat/${flat._id}`} target='_blank'>
                   Detail
                 </StyledLink>

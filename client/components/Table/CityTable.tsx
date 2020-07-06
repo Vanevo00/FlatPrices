@@ -17,6 +17,7 @@ import Spinner from '../Spinner/Spinner'
 import Paginator from './Paginator'
 import increasePopularity from '../../utils/icreasePopularity'
 import { User } from '../../../Types/User'
+import formatDate from '../../utils/formatDate'
 
 interface Props {
   flats: Flat[]
@@ -73,10 +74,10 @@ const CityTable = ({ flats, user, medianPrice, isLoading, pageLimit, count, call
           <i className="fas fa-long-arrow-alt-up"/>
           <i className="fas fa-long-arrow-alt-down"/>
         </TableItemHeader>
-        <TableItemHeader width={10}>
+        <TableItemHeader width={12}>
           Date Added
         </TableItemHeader>
-        <TableItemHeader width={7}>
+        <TableItemHeader width={5}>
           Detail
         </TableItemHeader>
         <TableItemHeader width={3}>
@@ -92,8 +93,6 @@ const CityTable = ({ flats, user, medianPrice, isLoading, pageLimit, count, call
 
       {
         isLoading || flatsLoading ? <Spinner/> : flats.map((flat) => {
-          const createdAt = new Date(flat.createdAt)
-          const date = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}`
           const priceComparison = Math.ceil(flat.pricePerMeter - medianPrice)
 
           return (
@@ -127,10 +126,10 @@ const CityTable = ({ flats, user, medianPrice, isLoading, pageLimit, count, call
                   : <ArrowDown className="fas fa-long-arrow-alt-down"/>}
                 {priceComparison.toLocaleString()} CZK
               </TableItem>
-              <TableItem width={10}>
-                {date}
+              <TableItem width={12}>
+                {formatDate(flat.createdAt, true)}
               </TableItem>
-              <TableItemButton width={7}>
+              <TableItemButton width={5}>
                 <StyledLink href={`/flat/${flat._id}`} target='_blank'>
                   Detail
                 </StyledLink>
