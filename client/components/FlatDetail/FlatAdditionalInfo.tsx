@@ -27,6 +27,8 @@ const AdditionalDescriptionItemData = styled.p`
 `
 
 const FlatAdditionalInfo = ({ flat }: Props) => {
+  console.log("flat", flat)
+
   return (
     <AdditionalDescriptionContainer>
       <DescriptionHeader>
