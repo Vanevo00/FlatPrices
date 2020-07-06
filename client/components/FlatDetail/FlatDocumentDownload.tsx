@@ -14,7 +14,8 @@ import {
 } from 'docx'
 import { Flat } from '../../../Types/Flat'
 import formatDate from '../../utils/formatDate'
-import usePriceDescription from './usePriceDescription'
+import { WideButton } from '../StyledButtons'
+import styled from 'styled-components'
 
 interface Props {
   flat: Flat
@@ -27,6 +28,10 @@ interface tableRow {
   title: string
   data: string
 }
+
+const DocumentDownloadButton = styled(WideButton)`
+  margin-top: 1rem;
+`
 
 const FlatDocumentDownload = ( { flat, isLoading, rentDescriptionText, priceDescriptionText }: Props ) => {
   const tableRows = [
@@ -232,7 +237,7 @@ const FlatDocumentDownload = ( { flat, isLoading, rentDescriptionText, priceDesc
   }
 
   return (
-    <button onClick={downloadFlatInfo}>Download flat information</button>
+    <DocumentDownloadButton onClick={downloadFlatInfo}>Download flat information</DocumentDownloadButton>
   )
 }
 

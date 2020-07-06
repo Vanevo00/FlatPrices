@@ -15,6 +15,10 @@ export const Button = styled.button`
   }
 `
 
+export const WideButton = styled(Button)`
+  width: 100%;
+`
+
 export const EditButton = styled.button`
   background-color: ${props => props.theme.colors.main};
   color: ${props => props.theme.colors.lightText};
