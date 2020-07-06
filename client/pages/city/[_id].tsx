@@ -106,10 +106,9 @@ const CityDetail = ({ _id }: Props) => {
               setPageLimitCallback={(limit) => setPageLimit(limit)}
               callback={(query) => setFilterQuery(query)}
               pageLimit={pageLimit}
+              flatCount={flatCount}
+              cityName={city.name}
             />
-            <CityTableHeader>
-              <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {city.name}</Heading2Centered>
-            </CityTableHeader>
             <CityTable
               isLoading={isCityTableLoading}
               flats={cityFlats}
