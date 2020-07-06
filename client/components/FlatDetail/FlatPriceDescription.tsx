@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Flat } from '../../../Types/Flat'
-import { AvgPrice } from '../../../Types/AvgPrice'
-import { RentPrices } from '../../../Types/RentPrices'
-import axios from 'axios'
+import React from 'react'
+
 import {
-  PriceDescriptionBody,
-  PriceDescriptionContainer,
-  PriceDescriptionHeader,
-  PriceDescriptionText, RentDescriptionText
+  DescriptionBody,
+  DescriptionContainer,
+  DescriptionHeader, DescriptionText,
+  RentDescriptionText
 } from './StyledFlatDetail'
-import describePriceDifference from '../../utils/describePriceDifference'
-import usePriceDescription from './usePriceDescription'
 
 interface Props {
   isLoading: boolean
@@ -20,21 +15,21 @@ interface Props {
 
 const FlatPriceDescription = ( { isLoading, rentDescriptionText, priceDescriptionText }: Props ) => {
   return (
-    <PriceDescriptionContainer>
-      <PriceDescriptionHeader>
+    <DescriptionContainer>
+      <DescriptionHeader>
         Price Details
-      </PriceDescriptionHeader>
-      <PriceDescriptionBody loading={isLoading}>
+      </DescriptionHeader>
+      <DescriptionBody loading={isLoading}>
         {
           isLoading
             ? <p>Loading Price Information...</p>
             : <>
-              <PriceDescriptionText>{priceDescriptionText}</PriceDescriptionText>
-              <PriceDescriptionText marginTop={1}>{rentDescriptionText}</PriceDescriptionText>
+              <DescriptionText>{priceDescriptionText}</DescriptionText>
+              <RentDescriptionText marginTop={1}>{rentDescriptionText}</RentDescriptionText>
               </>
         }
-      </PriceDescriptionBody>
-    </PriceDescriptionContainer>
+      </DescriptionBody>
+    </DescriptionContainer>
   )
 }
 

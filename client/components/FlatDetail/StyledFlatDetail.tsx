@@ -73,13 +73,13 @@ export const Data = styled.div<RowProps>`
   align-items: center;
 `
 
-export const PriceDescriptionContainer = styled.div`
+export const DescriptionContainer = styled.div`
   width: 100%;
   border: solid 1px ${props => props.theme.colors.main};
   border-radius: 4px;
 `
 
-export const PriceDescriptionHeader = styled.div`
+export const DescriptionHeader = styled.div`
   width: 100%;
   background-color: ${props => props.theme.colors.main};
   color: ${props => props.theme.colors.lightText};
@@ -87,7 +87,7 @@ export const PriceDescriptionHeader = styled.div`
   font-size: ${props => props.theme.fontSizes.m};
 `
 
-export const PriceDescriptionBody = styled.div<PriceDescriptionProps>`
+export const DescriptionBody = styled.div<PriceDescriptionProps>`
   width: 100%;
   padding: 1rem;
   display: flex;
@@ -98,15 +98,22 @@ export const PriceDescriptionBody = styled.div<PriceDescriptionProps>`
   color: ${props => props.theme.colors.main};
 `
 
-interface PriceDescriptionTextProps {
+interface DescriptionTextProps {
   marginTop?: number
 }
 
-export const PriceDescriptionText = styled.p<PriceDescriptionTextProps>`
+export const DescriptionText = styled.p<DescriptionTextProps>`
   text-align: justify;
   margin-top: ${props => props.marginTop ? props.marginTop + 'rem' : 0};
 `
 
-export const RentDescriptionText = styled(PriceDescriptionText)`
+export const DescriptionHalfRow = styled.div`
+  width: 45%;
+  display: flex;
+  border-bottom: solid 1px ${props => props.theme.colors.lightGray};
+  padding: .5rem 0;
+`
+
+export const RentDescriptionText = styled(DescriptionText)`
   margin-top: 1rem;
 `

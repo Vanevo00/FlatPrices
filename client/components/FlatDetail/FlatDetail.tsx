@@ -10,6 +10,7 @@ import AuthContext from '../../context/auth/authContext'
 import EditButton from '../EditButton/EditButton'
 import FlatDocumentDownload from './FlatDocumentDownload'
 import usePriceDescription from './usePriceDescription'
+import FlatAdditionalInfo from './FlatAdditionalInfo'
 
 interface Props {
   flat: Flat
@@ -45,6 +46,9 @@ const FlatDetail = ({ flat }: Props) => {
         isLoading={isLoading}
         priceDescriptionText={priceDescriptionText}
         rentDescriptionText={rentDescriptionText}
+      />
+      <FlatAdditionalInfo
+        flat={flat}
       />
       <FlatDocumentDownload
         flat={flat}
