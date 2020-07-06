@@ -31,6 +31,7 @@ interface tableRow {
 
 const DocumentDownloadButton = styled(WideButton)`
   margin-top: 1rem;
+  margin-bottom: 2rem;
 `
 
 const FlatDocumentDownload = ( { flat, isLoading, rentDescriptionText, priceDescriptionText }: Props ) => {
@@ -237,7 +238,7 @@ const FlatDocumentDownload = ( { flat, isLoading, rentDescriptionText, priceDesc
   }
 
   return (
-    <DocumentDownloadButton onClick={downloadFlatInfo}>Download flat information</DocumentDownloadButton>
+    <DocumentDownloadButton onClick={downloadFlatInfo}>Download flat information as .docx</DocumentDownloadButton>
   )
 }
 

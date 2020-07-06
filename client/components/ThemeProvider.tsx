@@ -12,6 +12,7 @@ const theme = {
     mainBackground: '#fff',
     formBackground: '#fff',
     lightGray: '#bfbfbf',
+    gray: '#828181',
     mainText: '#000',
     lightText: '#fff',
   },
