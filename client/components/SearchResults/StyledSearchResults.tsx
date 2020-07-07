@@ -4,12 +4,12 @@ export const ResultsContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: flex-start;
   margin-top: 1rem;
 `
 
 export const ResultsTable = styled.div`
   width: 30%;
-  min-height: 90px;
   border: solid 2px ${props => props.theme.colors.main};
   border-radius: 8px;
 `
@@ -48,4 +48,12 @@ export const ResultItem = styled.div`
 export const GreySmallText = styled.span`
   color: ${props => props.theme.colors.lightGray};
   font-size: ${props => props.theme.fontSizes.xs};
+`
+
+export const NoResults = styled.p`
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: ${props => props.theme.colors.main};
 `

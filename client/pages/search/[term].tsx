@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Heading1 } from '../../components/StyledHeadings'
+import { Heading1Centered } from '../../components/StyledHeadings'
 import axios from 'axios'
 import {
   GreySmallText,
-  Header,
+  Header, NoResults,
   ResultItem,
   ResultsContainer,
   ResultsTable
@@ -13,6 +13,7 @@ import { City } from '../../../Types/City'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
 import { Flat } from '../../../Types/Flat'
 import Link from 'next/link'
+import formatDate from '../../utils/formatDate'
 
 interface Props {
   term: string
@@ -39,7 +40,7 @@ const Search = ({ term }: Props) => {
 
   return (
     <>
-      <Heading1>Search results for "{term}"</Heading1>
+      <Heading1Centered>Search results for "{term}"</Heading1Centered>
       <ResultsContainer>
         <ResultsTable>
           <Header>Cities {searchResults && `(${searchResults.cities.length} results)`}</Header>
@@ -51,6 +52,9 @@ const Search = ({ term }: Props) => {
               </a>
             </Link>
           )}
+          {
+            !isLoading && searchResults && searchResults.cities.length === 0 && <NoResults>No results</NoResults>
+          }
         </ResultsTable>
 
         <ResultsTable>
@@ -66,6 +70,9 @@ const Search = ({ term }: Props) => {
             </Link>
 
           )}
+          {
+            !isLoading && searchResults && searchResults.neighbourhoods.length === 0 && <NoResults>No results</NoResults>
+          }
         </ResultsTable>
 
         <ResultsTable>
@@ -76,15 +83,18 @@ const Search = ({ term }: Props) => {
               <a>
                 <ResultItem key={flat._id}>
                   <div>
-                    {flat.address}&nbsp;<GreySmallText>{flat.neighbourhood.name}&nbsp;({flat.city.name})</GreySmallText>
+                    {flat.address}&nbsp;<GreySmallText>{flat.city.name}&nbsp;({flat.neighbourhood.name})</GreySmallText>
                   </div>
                   <div>
-                    <GreySmallText>{flat.squareMeters}m2 | {flat.priceCZK.toLocaleString()} CZK | {flat.agency}</GreySmallText>
+                    <GreySmallText>{flat.squareMeters}m2 | {flat.priceCZK.toLocaleString()} CZK | {flat.agency} | {formatDate(flat.createdAt, false)}</GreySmallText>
                   </div>
                 </ResultItem>
               </a>
             </Link>
           )}
+          {
+            !isLoading && searchResults && searchResults.flats.length === 0 && <NoResults>No results</NoResults>
+          }
         </ResultsTable>
       </ResultsContainer>
     </>
