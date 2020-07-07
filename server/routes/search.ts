@@ -11,7 +11,7 @@ router.get('/all/:name/:limit?', async (req: Request, res: Response) => {
     const [neighbourhoodsByName, citiesByName, flatsByAddress] = await Promise.all([
       Neighbourhood.find({ name: new RegExp(req.params.name, 'i') }).populate('city').limit(limit),
       City.find({ name: new RegExp(req.params.name, 'i') }).limit(limit),
-      Flat.find({ address: new RegExp(req.params.name, 'i') }).populate('city').populate('neighbourhood').limit(limit)
+      Flat.find({ address: new RegExp(req.params.name, 'i') }).populate('city').populate('neighbourhood').sort('-createdAt').limit(limit)
     ])
 
     res.json({

@@ -56,6 +56,7 @@ router.get('/search/:_id', async (req: Request, res: Response) => {
       .findById(req.params._id)
       .populate('neighbourhood')
       .populate('city')
+      .populate('addedBy')
     res.json(flat)
   } catch (err) {
     console.error(err.message)

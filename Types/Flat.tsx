@@ -1,5 +1,6 @@
 import { Neighbourhood } from './Neighbourhood'
 import { City } from './City'
+import { User } from './User'
 
 export interface Flat {
   _id: string
@@ -15,7 +16,7 @@ export interface Flat {
   link: string
   neighbourhood: Neighbourhood
   city: City
-  addedBy: string
+  addedBy: string | User
   floor?: number
   lift?: boolean
   rooms?: string
