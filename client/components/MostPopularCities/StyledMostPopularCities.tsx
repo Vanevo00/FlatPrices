@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 interface Props {
-  last?: boolean
   backgroundImage?: string
 }
 
@@ -21,7 +20,6 @@ export const CityListItem = styled.div<Props>`
   min-width: 200px;
   max-width: 200px;
   height: 250px;
-  margin-right: ${props => props.last ? 0 : '50px'};
   margin-bottom: 1rem;
   background-image: url(${props => props.backgroundImage});
   background-position: center;

@@ -35,10 +35,10 @@ const MostPopularCitiesList = () => {
       {
         cities.length > 0 ?
           <CityListContainer>
-            {cities.map((city, index) =>
+            {cities.map((city) =>
               <Link href={`/city/${city._id}`} key={city._id}>
                 <a>
-                  <CityListItem last={index === 4} backgroundImage={city.mainImageLink ? city.mainImageLink : CITY_IMAGE_PLACEHOLDER} onClick={() => increasePopularity(city._id)}>
+                  <CityListItem backgroundImage={city.mainImageLink ? city.mainImageLink : CITY_IMAGE_PLACEHOLDER} onClick={() => increasePopularity(city._id)}>
                     <ItemDescription>
                       <div>
                         <NameText>{city.name}</NameText>
