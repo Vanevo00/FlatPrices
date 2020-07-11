@@ -6,6 +6,7 @@ import theme from '../components/ThemeProvider'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from '../components/GlobalStyle'
 import Navbar from '../components/Navbar/Navbar'
+import NoMobile from '../components/NoMobile'
 
 interface BaseProps {
   title?: string
@@ -25,6 +26,7 @@ class FlatPrices extends App<BaseProps> {
         <AuthState>
           <ThemeProvider theme={theme}>
             <GlobalStyle/>
+            <NoMobile/>
             <Navbar/>
             <Component {...pageProps} />
             <script src="https://kit.fontawesome.com/3bca9cb446.js" crossOrigin="anonymous"/>
