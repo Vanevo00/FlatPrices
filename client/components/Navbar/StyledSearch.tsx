@@ -16,7 +16,7 @@ export const ResultsContainer = styled.div`
   width: 385px;
   min-height: 30px;
   background-color: ${props => props.theme.colors.mainBackground};
-  border: solid 1px ${props => props.theme.colors.lighGray};
+  border-top: solid 1px ${props => props.theme.colors.lightGray};
   position: absolute;
   top: 50px;
   z-index: 2;
@@ -53,10 +53,10 @@ export const ResultItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid 1px ${props => props.theme.colors.lighGray};
+  border-bottom: solid 1px ${props => props.theme.colors.lightGray};
   cursor: pointer;
   
   &:hover {
-    background-color: ${props => props.theme.colors.lighGray};
+    background-color: ${props => props.theme.colors.lightGray};
   }
 `

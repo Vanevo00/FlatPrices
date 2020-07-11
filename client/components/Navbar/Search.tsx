@@ -13,7 +13,7 @@ import {
 } from './StyledSearch'
 import Link from 'next/link'
 
-const searchLimit = 3
+const SEARCH_LIMIT = 3
 
 const Search = () => {
   const router = useRouter()
@@ -64,7 +64,7 @@ const Search = () => {
   const fetchSearchResults = async () => {
     setIsLoading(true)
     setSearchResults([])
-    const data = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/search/all/${searchInput}/${searchLimit}`)
+    const data = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/search/all/${searchInput}/${SEARCH_LIMIT}`)
     setSearchResults(data.data)
     setIsLoading(false)
     setShowSearchResults(true)
