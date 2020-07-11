@@ -5,6 +5,7 @@ import { GeneralContainer } from '../../components/StyledContainers'
 import { Heading2Centered } from '../../components/StyledHeadings'
 import CityForm from '../../components/Forms/CityForm'
 import { limitToLoggedIn } from '../../utils/limitToLoggedIn'
+import Title from '../../components/Title'
 
 interface AddCityInputs {
   name: string
@@ -37,6 +38,7 @@ const AddCity = () => {
 
   return (
     <>
+      <Title text={'Add City'}/>
       <GeneralContainer>
         <Heading2Centered>Add New City</Heading2Centered>
         <CityForm buttonText='Add City' onSubmit={onSubmit} successMessage={successMessage}/>

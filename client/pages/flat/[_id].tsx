@@ -4,6 +4,7 @@ import Spinner from '../../components/Spinner/Spinner'
 import { DetailContainer } from '../../components/StyledContainers'
 import FlatDetail from '../../components/FlatDetail/FlatDetail'
 import { Flat as FlatTypes } from '../../../Types/Flat'
+import Title from '../../components/Title'
 
 const Flat = ({ _id }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -27,9 +28,12 @@ const Flat = ({ _id }) => {
   }
 
   return (
-    <DetailContainer>
-      <FlatDetail flat={flat}/>
-    </DetailContainer>
+    <>
+      <Title text={flat.address}/>
+      <DetailContainer>
+        <FlatDetail flat={flat}/>
+      </DetailContainer>
+    </>
   )
 }
 

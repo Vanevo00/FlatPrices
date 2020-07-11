@@ -12,6 +12,7 @@ import AuthContext from '../../context/auth/authContext'
 import { CityTableHeader } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
 import FlatFilter from '../../components/Forms/FlatFilter'
 import EditButton from '../../components/EditButton/EditButton'
+import Title from '../../components/Title'
 
 interface Props {
   _id: string
@@ -82,6 +83,7 @@ const CityDetail = ({ _id }: Props) => {
 
   return (
     <>
+      <Title text={city.name}/>
       {
         isLoading
           ?

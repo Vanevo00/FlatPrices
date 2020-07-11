@@ -5,6 +5,7 @@ import { Heading2Centered } from '../../components/StyledHeadings'
 import { Neighbourhood } from '../../../Types/Neighbourhood'
 import NeighbourhoodForm from '../../components/Forms/NeighbourhoodForm'
 import { limitToLoggedIn } from '../../utils/limitToLoggedIn'
+import Title from '../../components/Title'
 
 const AddNeighbourhood = () => {
   const [successMessage, setSuccessMessage] = useState('')
@@ -25,6 +26,7 @@ const AddNeighbourhood = () => {
 
   return (
     <>
+      <Title text={'Add Neighbourhood'}/>
       <GeneralContainer>
         <Heading2Centered>Add New Neighbourhood</Heading2Centered>
         <NeighbourhoodForm buttonText='Add Neighbourhood' onSubmit={sendAddNeighbourhood} successMessage={successMessage}/>

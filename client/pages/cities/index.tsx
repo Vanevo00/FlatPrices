@@ -5,6 +5,7 @@ import { Heading1Centered } from '../../components/StyledHeadings'
 import { CityContainer } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
 import { City } from '../../../Types/City'
 import CitiesAndNeighbourhoods from '../../components/CityDetail/CitiesAndNeighbourhoods'
+import Title from '../../components/Title'
 
 const Cities = () => {
   const [cities, setCities] = useState([])
@@ -30,6 +31,7 @@ const Cities = () => {
 
   return (
     <>
+      <Title text={'Cities'}/>
       <Heading1Centered>Cities & Neighbourhoods</Heading1Centered>
       {isLoading && <Spinner/>}
       {

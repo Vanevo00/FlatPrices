@@ -6,6 +6,7 @@ import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
 import NeighbourhoodTable from '../../components/Table/NeighbourhoodTable'
 import { GeneralContainer } from '../../components/StyledContainers'
 import AuthContext from '../../context/auth/authContext'
+import Title from '../../components/Title'
 
 interface Props {
   _id: string
@@ -47,6 +48,7 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
 
   return (
     <>
+      <Title text={neighbourhood.name}/>
       <GeneralContainer>
         {isLoading && <Spinner/>}
         {

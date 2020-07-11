@@ -7,6 +7,7 @@ import FlatForm from '../../components/Forms/FlatForm'
 import AuthContext from '../../context/auth/authContext'
 import { limitToLoggedIn } from '../../utils/limitToLoggedIn'
 import { useRouter } from 'next/router'
+import Title from '../../components/Title'
 
 const AddFlat = () => {
   const authContext = useContext(AuthContext)
@@ -27,6 +28,7 @@ const AddFlat = () => {
 
   return (
     <>
+      <Title text={'Add Flat'}/>
       <GeneralContainer>
         <Heading2Centered>Add New Flat</Heading2Centered>
         <FlatForm authContext={authContext} buttonText='Add Flat' onSubmit={onSubmit} successMessage={successMessage}/>
