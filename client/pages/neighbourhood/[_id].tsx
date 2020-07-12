@@ -7,10 +7,14 @@ import NeighbourhoodTable from '../../components/Table/NeighbourhoodTable'
 import { GeneralContainer } from '../../components/StyledContainers'
 import AuthContext from '../../context/auth/authContext'
 import Title from '../../components/Title'
+import FlatFilter from '../../components/Forms/FlatFilter'
+import CityTable from '../../components/Table/CityTable'
 
 interface Props {
   _id: string
 }
+
+const FLATS_PER_PAGE = 50
 
 const NeighbourhoodDetail = ({ _id }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -18,12 +22,17 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
     name: ''
   })
   const [neighbourhoodFlats, setNeighbourhoodFlats] = useState([])
+  const [flatCount, setFlatCount] = useState(0)
   const [avgPrice, setAvgPrice] = useState({
     avgPrice: 0,
     medianPrice: 0,
     largeFlatPricesMedian: 0,
     smallFlatPricesMedian: 0
   })
+  const [isNeighbourhoodTableLoading, setIsNeighbourhoodTableLoading] = useState(false)
+  const [filterQuery, setFilterQuery] = useState('')
+  const [pageLimit, setPageLimit] = useState(FLATS_PER_PAGE)
+  const [flatsLoading, setFlatsLoading] = useState(false)
 
   const {
     user
@@ -37,14 +46,34 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
       axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/avgPriceNeighbourhood/${_id}`)
     ])
     setNeighbourhood(neighbourhood.data)
-    setNeighbourhoodFlats(flats.data)
+    setNeighbourhoodFlats(flats.data.flatsByNeighbourhood)
+    setFlatCount(flats.data.count)
     setAvgPrice(averagePrice.data)
     setIsLoading(false)
+  }
+
+  const fetchFilteredData = async () => {
+    setIsNeighbourhoodTableLoading(true)
+    const flats = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byNeighbourhood/${_id}?${filterQuery}`)
+    setNeighbourhoodFlats(flats.data.flatsByNeighbourhood)
+    setFlatCount(flats.data.count)
+    setIsNeighbourhoodTableLoading(false)
+  }
+
+  const fetchNewPage = async (page) => {
+    setFlatsLoading(true)
+    const fetchedFlatsPage = await axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/byNeighbourhood/${_id}?${filterQuery}&page=${page}`)
+    setNeighbourhoodFlats(fetchedFlatsPage.data.flatsByNeighbourhood)
+    setFlatsLoading(false)
   }
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    fetchFilteredData()
+  }, [filterQuery])
 
   return (
     <>
@@ -71,11 +100,22 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
         {
           neighbourhood && neighbourhoodFlats && avgPrice && !isLoading &&
             <>
-              <Heading2Centered>{neighbourhoodFlats.length} Flats in {neighbourhood.name}</Heading2Centered>
+              <FlatFilter
+                setPageLimitCallback={(limit) => setPageLimit(limit)}
+                callback={(query) => setFilterQuery(query)}
+                pageLimit={pageLimit}
+                flatCount={flatCount}
+                name={neighbourhood.name}
+              />
               <NeighbourhoodTable
+                isLoading={isNeighbourhoodTableLoading}
                 flats={neighbourhoodFlats}
                 user={user}
                 medianPrice={avgPrice.medianPrice}
+                callback={fetchNewPage}
+                flatsLoading={flatsLoading}
+                count={flatCount}
+                pageLimit={pageLimit}
               />
             </>
         }

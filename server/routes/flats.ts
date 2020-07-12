@@ -148,14 +148,39 @@ router.get('/byCity/:_id', async (req: Request, res: Response) => {
 // @desc   Get flats by neighbourhood
 router.get('/byNeighbourhood/:_id', async (req: Request, res: Response) => {
   const page = parseInt(<string>req.query.page) - 1 || 0
-  const pageLimit = parseInt(<string>req.query.pageLimit) || 5000
+  const pageLimit = parseInt(<string>req.query.pageLimit) || 50
+
+  const filters = {
+    timeLimit: req.query.timeLimit,
+    minMeters: req.query.minMeters,
+    maxMeters: req.query.maxMeters,
+    minPrice: req.query.minPrice,
+    maxPrice: req.query.maxPrice,
+    minPricePerMeter: req.query.minPricePerMeter,
+    maxPricePerMeter: req.query.maxPricePerMeter,
+    rooms: req.query.rooms,
+    agency: req.query.agency,
+    address: req.query.address
+  }
+
+  const sortBy = req.query.sort || '-createdAt'
 
   try {
-    const flatsByNeighbourhood = await Flat.find({ neighbourhood: req.params._id })
+    const flatCount = await Flat.countDocuments({
+      neighbourhood: req.params._id,
+      ...applyFilters(filters)
+    })
+    const flatsByNeighbourhood = await Flat.find({
+      neighbourhood: req.params._id,
+      ...applyFilters(filters)
+    })
       .limit(pageLimit)
       .skip(page * pageLimit)
-      .sort('-createdAt')
-    res.json(flatsByNeighbourhood)
+      .sort(`${sortBy}`)
+    res.json({
+      count: flatCount,
+      flatsByNeighbourhood
+    })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')

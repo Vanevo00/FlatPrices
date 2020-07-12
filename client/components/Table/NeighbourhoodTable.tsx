@@ -15,14 +15,21 @@ import {
 import ConfirmDelete from './ConfirmDelete'
 import { User } from '../../../Types/User'
 import formatDate from '../../utils/formatDate'
+import Spinner from '../Spinner/Spinner'
+import Paginator from './Paginator'
 
 interface Props {
   flats: Flat[]
   user: User
   medianPrice: number
+  isLoading: boolean
+  flatsLoading: boolean
+  callback: Function
+  pageLimit: number
+  count: number
 }
 
-const NeighbourhoodTable = ({ flats, user, medianPrice }: Props) => {
+const NeighbourhoodTable = ({ flats, user, medianPrice, isLoading, flatsLoading, callback, count, pageLimit }: Props) => {
   const [selectedForDelete, setSelectedForDelete] = useState('')
 
   const handleDeleteClick = (_id: string) => {
@@ -82,9 +89,7 @@ const NeighbourhoodTable = ({ flats, user, medianPrice }: Props) => {
       </TableRowHeader>
 
       {
-        flats.map((flat) => {
-          const createdAt = new Date(flat.createdAt)
-          const date = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}`
+        isLoading || flatsLoading ? <Spinner/> : flats.map((flat) => {
           const priceComparison = Math.ceil(flat.pricePerMeter - medianPrice)
 
           return (
@@ -137,6 +142,13 @@ const NeighbourhoodTable = ({ flats, user, medianPrice }: Props) => {
           )
         })
       }
+      <Paginator
+        pageLimit={pageLimit}
+        count={count}
+        maxPages={12}
+        loading={flatsLoading}
+        callback={callback}
+      />
     </TableContainerFull>
   )
 }

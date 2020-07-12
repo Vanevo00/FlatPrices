@@ -14,10 +14,10 @@ interface Props {
   callback: Function
   pageLimit: number
   flatCount: number
-  cityName: string
+  name: string
 }
 
-const FlatFilter = ({ setPageLimitCallback, callback, pageLimit, flatCount, cityName }: Props) => {
+const FlatFilter = ({ setPageLimitCallback, callback, pageLimit, flatCount, name }: Props) => {
   const [filterExpanded, setFilterExpanded] = useState(false)
   const [activeLimitPeriod, setActiveLimitPeriod] = useState('week')
   const [currentlyFilteredLimitPeriod, setCurrentlyFilteredLimitPeriod] = useState('week')
@@ -197,7 +197,7 @@ const FlatFilter = ({ setPageLimitCallback, callback, pageLimit, flatCount, city
         </FilterButtons>
       </FilterContainer>
       <CityTableHeader>
-        <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {cityName}{activeLimitPeriod !== 'all' && ` (last ${currentlyFilteredLimitPeriod})`}</Heading2Centered>
+        <Heading2Centered>{flatCount} Flat{flatCount !== 1 && 's'} in {name}{activeLimitPeriod !== 'all' && ` (last ${currentlyFilteredLimitPeriod})`}</Heading2Centered>
       </CityTableHeader>
     </>
   )

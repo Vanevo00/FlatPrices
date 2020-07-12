@@ -110,7 +110,7 @@ const CityDetail = ({ _id }: Props) => {
               callback={(query) => setFilterQuery(query)}
               pageLimit={pageLimit}
               flatCount={flatCount}
-              cityName={city.name}
+              name={city.name}
             />
             <CityTable
               isLoading={isCityTableLoading}
