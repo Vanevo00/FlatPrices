@@ -8,7 +8,7 @@ interface Props {
 const Title = ({ text }: Props) => {
   return (
     <Head>
-      <title>Flat Prices - {text}</title>
+      <title>Flat Prices{text ? ` - ${text}` : ''}</title>
     </Head>
   )
 }
