@@ -52,11 +52,11 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
       <GeneralContainer>
         {isLoading && <Spinner/>}
         {
-          neighbourhood &&
+          neighbourhood && !isLoading &&
             <Heading2>{neighbourhood.name}</Heading2>
         }
         {
-          avgPrice &&
+          avgPrice && !isLoading &&
             <StyledAvgPriceTable>
               <PriceDescription>Average price</PriceDescription>
               <PriceNumber>{avgPrice.avgPrice.toLocaleString()} CZK per m<sup>2</sup></PriceNumber>
@@ -69,7 +69,7 @@ const NeighbourhoodDetail = ({ _id }: Props) => {
             </StyledAvgPriceTable>
         }
         {
-          neighbourhood && neighbourhoodFlats && avgPrice &&
+          neighbourhood && neighbourhoodFlats && avgPrice && !isLoading &&
             <>
               <Heading2Centered>{neighbourhoodFlats.length} Flats in {neighbourhood.name}</Heading2Centered>
               <NeighbourhoodTable
