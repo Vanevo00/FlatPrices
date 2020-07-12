@@ -9,7 +9,6 @@ import AvgPriceTable from '../../components/Table/AvgPriceTable'
 import { AvgContainer } from '../../components/Table/StyledAveragePriceTable'
 import RentPricesTable from '../../components/Table/RentPricesTable'
 import AuthContext from '../../context/auth/authContext'
-import { CityTableHeader } from '../../components/CityDetail/StyledCitiesAndNeighbourhoods'
 import FlatFilter from '../../components/Forms/FlatFilter'
 import EditButton from '../../components/EditButton/EditButton'
 import Title from '../../components/Title'
@@ -17,6 +16,8 @@ import Title from '../../components/Title'
 interface Props {
   _id: string
 }
+
+const FLATS_PER_PAGE = 50
 
 const CityDetail = ({ _id }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -32,7 +33,7 @@ const CityDetail = ({ _id }: Props) => {
   const [flatCount, setFlatCount] = useState(0)
   const [flatsLoading, setFlatsLoading] = useState(false)
   const [filterQuery, setFilterQuery] = useState('')
-  const [pageLimit, setPageLimit] = useState(50)
+  const [pageLimit, setPageLimit] = useState(FLATS_PER_PAGE)
 
   const {
     isAuthenticated,
