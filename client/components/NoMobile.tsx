@@ -5,7 +5,7 @@ const Container = styled.div`
   position: fixed;
   padding: 2rem;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: ${props => props.theme.colors.main};
   color: ${props => props.theme.colors.lightText};
   font-size: ${props => props.theme.fontSizes.m};
