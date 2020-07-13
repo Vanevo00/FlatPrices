@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Link from 'next/link'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
-import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
+import { Heading2 } from '../../components/StyledHeadings'
 import { GeneralContainer } from '../../components/StyledContainers'
 import CityTable from '../../components/Table/CityTable'
 import AvgPriceTable from '../../components/Table/AvgPriceTable'
@@ -122,7 +121,7 @@ const CityDetail = ({ _id }: Props) => {
               pageLimit={pageLimit}
               flatsLoading={flatsLoading}
             />
-            { isAuthenticated && user.isAdmin && <EditButton href={`/edit/city/${_id}`}/>}
+            { isAuthenticated && user?.isAdmin && <EditButton href={`/edit/city/${_id}`}/>}
           </GeneralContainer>
       }
     </>
