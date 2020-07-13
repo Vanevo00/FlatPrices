@@ -29,8 +29,8 @@ const Flat = ({ _id }) => {
 
   return (
     <>
+      {flat?.address && <Title text={flat.address}/>}
       <DetailContainer>
-        {flat?.address && <Title text={flat.address}/>}<Title text={flat.address}/>
         <FlatDetail flat={flat}/>
       </DetailContainer>
     </>
