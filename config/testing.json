@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://anyone:FlatPricesTesting58@testing.jui5x.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "jwtSecret": "secret",
+  "dbAddress": "http://localhost:4000",
+  "staticImagesPath": "http://localhost:4000/images/"
+}
