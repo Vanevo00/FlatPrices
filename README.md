@@ -3,12 +3,12 @@ This application scrapes some of the largest real estate websites in the Czech R
 
 The application does not have its own domain but its live version is available at http://161.35.23.18:3999/. Please note that it is running on a $5 cloud setup and since the scraper (which is running automatically at certain times) requires a lot of memory, it often crashes and stops sraping. I try to check the app at least once a day and reset if necessary, but the flat data may be outdated because of this.
 
-###Notes
+### Notes
 - This is an internal application that is not optimised for mobile devices.
 - Although Styled Components is used throughout the application, I am not a coder and my primary focus is not the visual design of the page but rather the functionality. Thus, I am sure you can find a lot of design flaws and css glitches.
 - One of the main goals of this application was for me to learn new technologies and programming concepts. Because of this, you can find a lot of inconsistencies and mistakes in the code (e.g. component reusability, db design). I did some refactoring here and there but I am aware that it is far from perfect.
 
-###Tech Stack
+### Tech Stack
 This is a TypeScript [__MERN stack application__](https://wikitia.com/index.php?title=MERN_(solution_stack)&mobileaction=toggle_view_desktop). Other important technologies used include __Docker__ for containerizing the application, __Mongoose__ as ODM, __Nextjs__ for server side rendered React, __Cheerio__ and __Puppeteer__ for web scraping.
 
 ## Local
