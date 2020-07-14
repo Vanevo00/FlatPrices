@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Spinner from '../../components/Spinner/Spinner'
 import { StyledAvgPriceTable, PriceDescription, PriceNumber } from '../../components/Table/StyledAveragePriceTable'
-import { Heading2, Heading2Centered } from '../../components/StyledHeadings'
+import { Heading2 } from '../../components/StyledHeadings'
 import NeighbourhoodTable from '../../components/Table/NeighbourhoodTable'
 import { GeneralContainer } from '../../components/StyledContainers'
 import AuthContext from '../../context/auth/authContext'
 import Title from '../../components/Title'
 import FlatFilter from '../../components/Forms/FlatFilter'
-import CityTable from '../../components/Table/CityTable'
 
 interface Props {
   _id: string

@@ -4,6 +4,8 @@ import { AvgPrice } from '../../../Types/AvgPrice'
 import { RentPrices } from '../../../Types/RentPrices'
 import axios from 'axios'
 import describePriceDifference from '../../utils/describePriceDifference'
+import getReasData from '../../utils/getReasData'
+import { ReasData } from '../../../Types/ReasData'
 
 interface Props {
   flat: Flat
@@ -18,17 +20,20 @@ const usePriceDescription = ({ flat }: Props) => {
   const [priceDescriptionText, setPriceDescriptionText] = useState<string>('loading price description...')
   const [rentDescriptionText, setRentDescriptionText] = useState<string>('loading rent description...')
   const [isLoading, setIsLoading] = useState(true)
+  const [realPrices, setRealPrices] = useState<ReasData>()
 
   const fetchPriceInfo = async () => {
-    const [priceDataNeighbourhood, priceDataCity, rentData] = await Promise.all([
+    const [priceDataNeighbourhood, priceDataCity, rentData, reasData] = await Promise.all([
       axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/avgPriceNeighbourhood/${flat.neighbourhood._id}`),
       axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/avgPriceCity/${flat.city._id}`),
       axios.get(`${window.location.protocol}//${window.location.hostname}:4000/api/rents/avgRentCity/${flat.city._id}`),
+      getReasData(flat.address, flat.city.name, flat.squareMeters)
     ])
 
     setPricesNeighbourhood(priceDataNeighbourhood.data)
     setPricesCity(priceDataCity.data)
     setRents(rentData.data)
+    setRealPrices(reasData)
     setIsLoading(false)
   }
 

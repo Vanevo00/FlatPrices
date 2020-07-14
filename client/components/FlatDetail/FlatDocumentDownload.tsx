@@ -231,8 +231,6 @@ const FlatDocumentDownload = ( { flat, isLoading, rentDescriptionText, priceDesc
     window.location.replace(blobUrl)
   }
 
-  console.log(isLoading)
-
   if (isLoading) {
     return null
   }
