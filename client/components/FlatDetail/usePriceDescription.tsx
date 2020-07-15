@@ -41,7 +41,7 @@ const usePriceDescription = ({ flat }: Props) => {
     if (pricesNeighbourhood && pricesCity) {
       setPriceDescriptionText(generatePriceDescriptionText())
     }
-  }, [pricesNeighbourhood, pricesCity])
+  }, [pricesNeighbourhood, pricesCity, realPrices])
 
   useEffect(() => {
     if (rents) {
@@ -53,7 +53,9 @@ const usePriceDescription = ({ flat }: Props) => {
     let finalText = `The price per square meter of the flat located at ${flat.address} (CZK ${parseInt(flat.pricePerMeter.toFixed(0)).toLocaleString()},-) is `
     let neighbourhoodDescribed = false
 
-    if (pricesNeighbourhood.flatPrices.length <= 10 && pricesCity.flatPrices.length <= 10) {
+    console.log('realPrices', realPrices)
+
+    if (pricesNeighbourhood.flatPrices.length <= 10 && pricesCity.flatPrices.length <= 10 && !realPrices.medianPricePerMeter) {
       return 'Not enough data to analyze the price.'
     }
     if (pricesNeighbourhood.flatPrices.length >= 10) {
@@ -61,9 +63,12 @@ const usePriceDescription = ({ flat }: Props) => {
       neighbourhoodDescribed = true
     }
     if (neighbourhoodDescribed) {
-      finalText += ` Compared to all prices in ${flat.city.name}, the price is ${describePriceDifference(flat.pricePerMeter, pricesCity.medianPrice)}.`
+      finalText += ` Compared to all real estate agency prices in ${flat.city.name}, the price is ${describePriceDifference(flat.pricePerMeter, pricesCity.medianPrice)}.`
     } else {
       finalText += `${describePriceDifference(flat.pricePerMeter, pricesCity.medianPrice)} in ${flat.city.name}.`
+    }
+    if (realPrices?.medianPricePerMeter) {
+      finalText += ` The median price of flat purchases ${flat.squareMeters < 61 ? 'below' : 'above'} 60m2 close to ${flat.address} amounts to CZK ${parseInt(realPrices.medianPricePerMeter.toFixed(0)).toLocaleString()},-, which makes the flat price ${describePriceDifference(flat.pricePerMeter, realPrices.medianPricePerMeter, false)}.`
     }
 
     return finalText

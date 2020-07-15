@@ -1,4 +1,4 @@
-export default (flatPrice, medianPrice) => {
+export default (flatPrice, medianPrice, showMedianPrice = true) => {
   const priceCoefficient =  parseFloat(((1 - (flatPrice / medianPrice)) * 100).toFixed(2))
 
   if (priceCoefficient === 0) {
@@ -13,5 +13,5 @@ export default (flatPrice, medianPrice) => {
   if (Math.abs(priceCoefficient) <= 10) {
     return `${Math.abs(priceCoefficient)}% ${Math.sign(priceCoefficient) === 1 ? 'below' : 'above'} the median price (CZK ${parseInt(medianPrice).toLocaleString()},-)`
   }
-  return `significantly ${Math.sign(priceCoefficient) === 1 ? 'below' : 'above'} (${Math.abs(priceCoefficient)}%) the median price (CZK ${parseInt(medianPrice).toLocaleString()},-)`
+  return `significantly ${Math.sign(priceCoefficient) === 1 ? 'below' : 'above'} (${Math.abs(priceCoefficient)}%) the median price${showMedianPrice ? ` (CZK ${parseInt(medianPrice).toLocaleString()},-)` : ''}`
 }

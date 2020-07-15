@@ -6,7 +6,7 @@ export default async (searchName, cityName, squareMeters): Promise<ReasData> => 
   const sizeSearch = squareMeters < 61 ? '[null, 60]' : '[60, null]'
 
   const suggestionSearch = await axios.get(`https://apis.reas.cz/atlas/suggestion?query=${searchName}, ${cityName}`)
-  const correctArea = suggestionSearch.data.data.find((suggestion) => suggestion.city.toLowerCase() === cityName.toLowerCase())
+  const correctArea = suggestionSearch.data.data.find((suggestion) => suggestion.city.toLowerCase().includes(cityName.toLowerCase()))
   if (!correctArea) {
     return undefined
   }
