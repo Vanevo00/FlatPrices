@@ -15,12 +15,16 @@ const realityMat = async () => {
       console.log(`Scraping ${city.name}`)
 
       const getPages = async () => {
-        const fetchedPage = await axios.get(city.realityMatScraper)
-        const $ = await cheerio.load(fetchedPage.data)
-        let foundNumberOfFlats = ($('.text-right.text-muted.mb-2').text().split('z ')[1].split(' ')[0]).replace(/\s/g,'')
-        let numberOfPages = Math.ceil(parseInt(foundNumberOfFlats) / 10)
-        console.log(`${numberOfPages} pages successfully loaded, getting links..`)
-        return numberOfPages
+        try {
+          const fetchedPage = await axios.get(city.realityMatScraper)
+          const $ = await cheerio.load(fetchedPage.data)
+          let foundNumberOfFlats = ($('.text-right.text-muted.mb-2').text().split('z ')[1].split(' ')[0]).replace(/\s/g,'')
+          let numberOfPages = Math.ceil(parseInt(foundNumberOfFlats) / 10)
+          console.log(`${numberOfPages} pages successfully loaded, getting links..`)
+          return numberOfPages
+        } catch (err) {
+          console.log(err)
+        }
       }
 
       const getLinks = async () => {
