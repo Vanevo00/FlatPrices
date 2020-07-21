@@ -32,8 +32,8 @@ router.post('/external', async (req: any, res: Response) => {
   try {
     const imageLinkSplit = req.body.link.split('/')
     const imageNameSplit = imageLinkSplit[imageLinkSplit.length - 1].split('.')
-    const imageNameWithTimestamp = `${imageNameSplit[0]}${Date.now()}`
-    const imagePath = `build/server/public/images/${imageNameWithTimestamp}.jpg`
+    const imageNameWithTimestamp = `${imageNameSplit[0]}${Date.now()}.jpg`
+    const imagePath = `build/server/public/images/${imageNameWithTimestamp}`
     const file = await axios.get(req.body.link, {
       responseType: 'arraybuffer'
     })
