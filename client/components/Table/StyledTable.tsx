@@ -81,18 +81,18 @@ export const ConfirmDeleteContainer = styled.div<ConfirmDeleteProps>`
   background-color: ${props => props.theme.colors.formBackground};
   color: ${props => props.theme.colors.mainText};
   display: flex;
-  transition: .75s;
+  transition: .5s;
   border-left: solid 1px ${props => props.theme.colors.mainText};
   padding: 0 .5rem;
-  z-index: 2;
   position: absolute;
   right: 100%;
   top: 0;
-  width: ${props => props.selected ? '250px' : '0'};
+  width: 270px;
   opacity: ${props => props.selected ? '1' : '0'};
+  z-index: ${props => props.selected ? '2' : '-1'};
   align-items: center;
   height: 100%;
-  box-shadow: 0px 2px 16px rgba(45, 45, 45, 0.188374);
+  box-shadow: 0 2px 16px rgba(45, 45, 45, 0.188374);
 `
 
 export const ConfirmButton = styled.button`
