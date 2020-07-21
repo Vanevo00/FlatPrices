@@ -43,7 +43,8 @@ This is a TypeScript [__MERN stack application__](https://wikitia.com/index.php?
 ### App Features
 
 some features worth checking out include:
-- User auth done with the help of JWT token, React Context and Local Storage
+- User auth done with the help of JWT token, React Context and Local Storage.
+- Scraper that runs automatically at given times but can also be run manually by npm run manualScraper.
 - Image upload (add/edit city or flat) can be done either by uploading a local file or by providing an external link. The app resizes the image and saves it (only working in the live app).
 - Every flat detail can be downloaded as a .docx file with all available information prefilled.
 - Every flat detail fetches information about real property transactions in the area, compares them to the flat's price and lists the closest transactions (if available).
