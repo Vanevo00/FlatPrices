@@ -15,7 +15,6 @@ import {
 import ConfirmDelete from './ConfirmDelete'
 import Spinner from '../Spinner/Spinner'
 import Paginator from './Paginator'
-import increasePopularity from '../../utils/icreasePopularity'
 import { User } from '../../../Types/User'
 import formatDate from '../../utils/formatDate'
 

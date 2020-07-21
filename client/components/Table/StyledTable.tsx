@@ -23,11 +23,11 @@ export const TableContainerFull = styled(TableContainer)`
   width: 100%;
 `
 
-export const TableRow = styled.div`
+export const TableRow = styled.div<{ last?: boolean }>`
   width: 100%;
   min-height: 40px;
   display: flex;
-  border-bottom: solid 1px ${props => props.theme.colors.main};
+  border-bottom: ${props => props.last ? 'none' : `solid 1px ${props.theme.colors.main}`};
 `
 
 export const TableRowHeader = styled(TableRow)`

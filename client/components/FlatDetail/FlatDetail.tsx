@@ -11,6 +11,7 @@ import EditButton from '../EditButton/EditButton'
 import FlatDocumentDownload from './FlatDocumentDownload'
 import usePriceDescription from './usePriceDescription'
 import FlatAdditionalInfo from './FlatAdditionalInfo'
+import FlatNearbySales from './FlatNearbySales'
 
 interface Props {
   flat: Flat
@@ -21,7 +22,8 @@ const FlatDetail = ({ flat }: Props) => {
   const {
     isLoading,
     rentDescriptionText,
-    priceDescriptionText
+    priceDescriptionText,
+    nearbySales
   } = usePriceDescription({ flat })
 
   const {
@@ -46,6 +48,10 @@ const FlatDetail = ({ flat }: Props) => {
         isLoading={isLoading}
         priceDescriptionText={priceDescriptionText}
         rentDescriptionText={rentDescriptionText}
+      />
+      <FlatNearbySales
+        nearbySales={nearbySales}
+        isLoading={isLoading}
       />
       <FlatAdditionalInfo
         flat={flat}

@@ -135,7 +135,8 @@ const usePriceDescription = ({ flat }: Props) => {
   return {
     isLoading,
     priceDescriptionText,
-    rentDescriptionText
+    rentDescriptionText,
+    nearbySales: realPrices?.nearbySales
   }
 }
 

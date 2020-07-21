@@ -73,10 +73,11 @@ export const Data = styled.div<RowProps>`
   align-items: center;
 `
 
-export const DescriptionContainer = styled.div`
+export const DescriptionContainer = styled.div<{mt?: number}>`
   width: 100%;
   border: solid 1px ${props => props.theme.colors.main};
   border-radius: 4px;
+  ${props => props.mt ? `margin-top: ${props.mt}rem` : ''};
 `
 
 export const DescriptionHeader = styled.div`
