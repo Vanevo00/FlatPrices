@@ -53,8 +53,6 @@ const usePriceDescription = ({ flat }: Props) => {
     let finalText = `The price per square meter of the flat located at ${flat.address} (CZK ${parseInt(flat.pricePerMeter.toFixed(0)).toLocaleString()},-) is `
     let neighbourhoodDescribed = false
 
-    console.log('realPrices', realPrices)
-
     if (pricesNeighbourhood.flatPrices.length <= 10 && pricesCity.flatPrices.length <= 10 && !realPrices.medianPricePerMeter) {
       return 'Not enough data to analyze the price.'
     }
