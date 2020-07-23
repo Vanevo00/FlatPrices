@@ -32,18 +32,19 @@ docker-compose up
 ```
 db setup is necessary beforehand (see Local)
 
-### Notes
+## Notes
 - This is an internal application that is not optimised for mobile devices.
 - Although Styled Components is used throughout the application, I am not a coder and my primary focus is not the visual design of the page but rather the functionality. Thus, I am sure you can find a lot of design flaws and css glitches.
 - One of the main goals of this application was for me to learn new technologies and programming concepts. Because of this, you can find a lot of inconsistencies and mistakes in the code (e.g. component reusability, db design). I did some refactoring here and there but I am aware that it is far from perfect.
 
-### Tech Stack
+## Tech Stack
 This is a TypeScript [__MERN stack application__](https://wikitia.com/index.php?title=MERN_(solution_stack)&mobileaction=toggle_view_desktop). Other important technologies used include __Docker__ for containerizing the application, __Mongoose__ as ODM, __Nextjs__ for server side rendered React, __Cheerio__ and __Puppeteer__ for web scraping.
 
-### App Features
+## App Features
 
 some features worth checking out include:
-- User auth done with the help of JWT token, React Context and Local Storage
+- User auth done with the help of JWT token, React Context and Local Storage.
+- Scraper that runs automatically at given times but can also be run manually by npm run manualScraper.
 - Image upload (add/edit city or flat) can be done either by uploading a local file or by providing an external link. The app resizes the image and saves it (only working in the live app).
 - Every flat detail can be downloaded as a .docx file with all available information prefilled.
 - Every flat detail fetches information about real property transactions in the area, compares them to the flat's price and lists the closest transactions (if available).
@@ -51,7 +52,7 @@ some features worth checking out include:
 - Universally applicable paginator.
 - Navbar search returns found flats, neighbourhoods and cities, either in the suggestion bar or all results after clicking search button.
 
-### Coming up next
+## Coming up next
 
 some features planned for the future include:
 - Docker is currently used only to make sure the app runs on any device. I plan to separate the app to microservices - FE, API, Scraper. Image upload either as a microservice or rewritten to AWS lambda.
