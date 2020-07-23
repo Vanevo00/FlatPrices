@@ -12,7 +12,8 @@
     "build": "rm -rf ./build && tsc",
     "eslint": "eslint \"./**\"",
     "eslint:fix": "eslint --fix \"./**\"",
-    "manualScraper": "node server/scraper/manualScraper.js"
+    "manualScraper": "node server/scraper/manualScraper.js",
+    "feedBezrealitkyScraperData": "node server/scraper/feedBezrealitkyScraperData.js"
   },
   "keywords": [],
   "author": "Vojtech Vanek",

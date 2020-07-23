@@ -5,6 +5,7 @@ const remax = require('./remax')
 const svobodaWilliams = require('./svobodaWilliams')
 const realityMat = require('./realityMat')
 const realityIdnes = require('./realityIdnes')
+const bezrealitky = require('./bezrealitky')
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
@@ -36,6 +37,9 @@ const scrapeServer = async (userInput) => {
     case('realityIdnes'):
       realityIdnes()
       break
+    case('bezrealitky'):
+      bezrealitky()
+      break
     case('all'):
       await nextReality()
       await remax()
@@ -50,7 +54,7 @@ const scrapeServer = async (userInput) => {
   }
 }
 
-readline.question('What do you want to scrape?\nsreality, rents, nextReality, remax, svobodaWilliams, realityMat, realityIdnes, all\n', (userInput) => {
+readline.question('What do you want to scrape?\nsreality, rents, nextReality, remax, svobodaWilliams, realityMat, realityIdnes, bezrealitky, all\n', (userInput) => {
   scrapeServer(userInput)
   readline.close()
 })

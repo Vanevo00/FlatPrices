@@ -123,6 +123,7 @@ router.post('/edit/:_id', [
     realityMatScraper,
     idnesScraper,
     rentScraper,
+    bezrealitkyScraper,
     mainImageLink
   } = req.body
 
@@ -138,6 +139,7 @@ router.post('/edit/:_id', [
     editedCity.idnesScraper = idnesScraper
     editedCity.remaxScraper = remaxScraper
     editedCity.svobodaWilliamsScraper = svobodaWilliamsScraper
+    editedCity.bezrealitkyScraper = bezrealitkyScraper
 
     const city = await editedCity.save()
 

@@ -37,6 +37,12 @@ const CitySchema = mongoose.Schema({
   },
   rentScraper: {
     type: String
+  },
+  bezrealitkyScraper: {
+    type: {
+      locationInput: String,
+      boundary: Array
+    }
   }
 })
 
