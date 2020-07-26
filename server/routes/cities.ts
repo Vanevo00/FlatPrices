@@ -139,7 +139,7 @@ router.post('/edit/:_id', [
     editedCity.idnesScraper = idnesScraper
     editedCity.remaxScraper = remaxScraper
     editedCity.svobodaWilliamsScraper = svobodaWilliamsScraper
-    editedCity.bezrealitkyScraper = bezrealitkyScraper
+    editedCity.bezrealitkyScraper = bezrealitkyScraper || editedCity.bezrealitkyScraper
 
     const city = await editedCity.save()
 
