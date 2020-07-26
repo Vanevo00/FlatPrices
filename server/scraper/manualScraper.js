@@ -28,9 +28,6 @@ const scrapeServer = async (userInput) => {
     case('svobodaWilliams'):
       svobodaWilliams()
       break
-    case('nextReality'):
-      nextReality()
-      break
     case('realityMat'):
       realityMat()
       break
@@ -41,6 +38,7 @@ const scrapeServer = async (userInput) => {
       bezrealitky()
       break
     case('all'):
+      await bezrealitky()
       await nextReality()
       await remax()
       await svobodaWilliams()

@@ -6,20 +6,22 @@ const remax = require('./remax')
 const svobodaWilliams = require('./svobodaWilliams')
 const realityMat = require('./realityMat')
 const realityIdnes = require('./realityIdnes')
+const bezrealitky = require('./bezrealitky')
 
 const autoScraper = () => {
-  cron.schedule('0 8,12,14,17,22 * * *', async() => {
+  cron.schedule('0 12,17,22 * * *', async() => {
     await sreality()
     await realityIdnes()
   },{
     timezone: "Europe/Prague"
   })
 
-  cron.schedule('0 13 * * *', async () => {
+  cron.schedule('0 14 * * *', async () => {
     await nextReality()
     await remax()
     await svobodaWilliams()
     await realityMat()
+    await bezrealitky()
   }, {
     timezone: "Europe/Prague"
   })
