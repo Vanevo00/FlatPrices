@@ -66,6 +66,7 @@ const bezrealitky = async () => {
           }
 
           flat.squareMeters = parseInt($('th:contains("Plocha:")').next().text().trim().split(' ')[0])
+          if (!flat.squareMeters) continue
 
           flat.priceCZK = parseInt($('th:contains("Cena:")').next().text().trim().split(' ')[0].split('.').join(''))
 
@@ -80,7 +81,7 @@ const bezrealitky = async () => {
           flat.rooms = rooms.substr(0, rooms.length/3)
 
           const mainImage = $('a.carousel__item.b-gallery__img-lg__item').attr('href')
-          if (mainImage.includes('.jpg') || mainImage.includes('.png')) {
+          if (mainImage && mainImage.includes('.jpg') || mainImage.includes('.png')) {
             flat.mainImage = mainImage
           }
 

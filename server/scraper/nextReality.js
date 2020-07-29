@@ -76,7 +76,7 @@ const nextReality = async () => {
         }
 
         flat.neighbourhood = location.split(',')[1].trim()
-        flat.address = address
+        flat.address = address ? address : 'unknown'
         flat.neighbourhoodNumber = neighbourhoodNumber
 
         const size = $('.info div:contains("Užitná plocha") > .col-xs-7').text()
