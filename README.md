@@ -1,7 +1,7 @@
 # FLAT_PRICES
 This application scrapes some of the largest real estate websites in the Czech Republic and analyses the prices of flats. Its primary focus to find flats in selected cities or neighbourhoods that are suitable for renting.
 
-The application does not have its own domain but its live version is available at http://161.35.23.18:3999/. Please note that it is running on a $5 cloud setup and since the scraper (which is running automatically at certain times) requires a lot of memory, it often crashes and stops sraping. I try to check the app at least once a day and reset if necessary, but the flat data may be outdated because of this.
+The application does not have its own domain but its live version is available at http://ec2-18-158-175-71.eu-central-1.compute.amazonaws.com:3999/. Please note that it is running on an AWS free tier setup and since the scraper (which is running automatically at certain times) requires a lot of memory, it sometimes crashes and stops sraping. I try to check the app at least once a day and reset if necessary, but the data may be outdated because of this.
 
 ## Local
 
