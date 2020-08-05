@@ -27,7 +27,7 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/images', require('./routes/images'))
 app.use(express.static(path.join(__dirname, 'public')))
 
-autoScraper()
+// autoScraper()
 
 app.get('/', (req: Request, res: Response) => res.send('Welcome to flat prices API'))
 
