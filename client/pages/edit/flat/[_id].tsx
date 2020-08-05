@@ -37,8 +37,13 @@ const EditFlat = ({ _id }: Props) => {
   }
 
   const onSubmit = async (data) => {
+    const dataWithPricePerMeter = {
+      ...data,
+      pricePerMeter: parseInt((data.priceCZK / data.squareMeters).toFixed(2))
+    }
+
     try {
-      const editedFlat = await axios.put(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/${_id}`, data)
+      const editedFlat = await axios.put(`${window.location.protocol}//${window.location.hostname}:4000/api/flats/${_id}`, dataWithPricePerMeter)
       console.log(editedFlat.data)
       setSuccessMessage('Flat successfully edited')
     } catch (err) {
